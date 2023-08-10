@@ -1,0 +1,40 @@
+/* Styling file for the client form */
+.client-form-container {
+  margin: 10px;
+}
+.client-submission {
+  background-color: #F0F0F0;
+  width: 500px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+label {
+  color: #007FFF;
+  text-align: left;
+  font-size: 14px;
+}
+input[type="text"] {
+  padding: 5px;
+  height: 18px;
+}
+input[type="date"] {
+  padding: 5px;
+  width: 100px;
+  margin-right: 15px;
+  margin-top: 10px;
+}
+.service-dates {
+  text-align: left;
+}
+.new-client-submit {
+  margin-top: 15px;
+  width: 100px;
+  padding: 10px;
+  background-color: #008000;
+  color: #ffffff;
+}
+.title-post-form {
+  color: #008000;
+  font-size: 20px;
+}
