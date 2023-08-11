@@ -6,6 +6,9 @@
 .pnp.js
 .env
 PERSONALIZEREADME.md
+server/package-lock.json
+server/package.json
+server/node_modules
 
 # testing
 /coverage
