@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 .env
+PERSONALIZEREADME.md
 
 # testing
 /coverage
