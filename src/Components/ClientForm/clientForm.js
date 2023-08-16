@@ -1,5 +1,4 @@
 import React, { useContext, useState, useRef } from 'react';
-import { AIRTABLE_API_KEY, AIRTABLE_BASEID, AIRTABLE_TABLENAME } from '../../utils/api';
 import { ClientContext } from '../../context/ClientProvider';
 import '../ClientForm/clientForm.css';
 
@@ -42,11 +41,8 @@ const ClientForm = () => {
       const imageFormData = new FormData();
       imageFormData.append('file', image, image.name);
 
-      const imageResponse = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASEID}/${AIRTABLE_TABLENAME}`, {
+      const imageResponse = await fetch(`/api/clients/upload-image`, {
         method: 'POST',
-        headers: {
-          Authorization: `Bearer ${AIRTABLE_API_KEY}`,
-        },
         body: imageFormData,
       });
 
@@ -107,13 +103,12 @@ const ClientForm = () => {
           },
         };
   
-        const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASEID}/${AIRTABLE_TABLENAME}`, {
+        const response = await fetch(`/api/clients/create`, {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${AIRTABLE_API_KEY}`,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ records: [formDataObject] }), // Wrap formDataObject inside 'records' array
+          body: JSON.stringify(formDataObject), // Wrap formDataObject inside 'records' array
         });
   
         if (!response.ok) {

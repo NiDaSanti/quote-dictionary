@@ -14,7 +14,7 @@ const ClientInformation = ({client, onClose}) => {
         <div>Service (Job) Type: {client.fields.serviceType}</div>
         <div>Job Description: {client.fields.request}</div>
         <div>Snapshots of Proof:</div>
-        <img src={client.fields.image[0].thumbnails.large.url} alt='picture-of-job' />
+        <img src={client.fields.image[0].thumbnails.large.url} alt='job' />
         <button onClick={onClose}>Close</button>
       </div>
     </div>
