@@ -8,9 +8,10 @@ const ClientProvider = ({ children }) => {
 
   useEffect(() => {
     // You can call your API endpoint here to fetch the client data from the server
-    fetch('/api/clients')
+    fetch('/api/clients')  // Use the full URL here
       .then(response => response.json())
       .then(data => {
+        console.log('In ClientProvider:', data);
         setClients(data);
       })
       .catch(error => {
