@@ -1,6 +1,6 @@
-export const AIRTABLE_API_KEY = process.env.REACT_APP_AIRTABLE_API_KEY
-export const AIRTABLE_BASEID = process.env.REACT_APP_AIRTABLE_BASEID
-export const AIRTABLE_TABLENAME = process.env.REACT_APP_AIRTABLE_TABLENAME
+// export const AIRTABLE_API_KEY = process.env.REACT_APP_AIRTABLE_API_KEY
+// export const AIRTABLE_BASEID = process.env.REACT_APP_AIRTABLE_BASEID
+// export const AIRTABLE_TABLENAME = process.env.REACT_APP_AIRTABLE_TABLENAME
 
 // async function sendRequest(url, options) {
 //   try {

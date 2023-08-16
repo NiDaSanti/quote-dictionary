@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
 import { ClientContext } from '../../context/ClientProvider'
-import { AIRTABLE_API_KEY, AIRTABLE_BASEID, AIRTABLE_TABLENAME } from '../../utils/api'
 import ClientInformation from '../ClientInformation/clientInformation'
 import '../ClientList/clientList.css'
 
@@ -16,11 +15,8 @@ const ClientList = () => {
   const convertToStr = totalOfAllQuotes.toString()
   const handleRemoveClient = async (clientId) => {
     try {
-      const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASEID}/${AIRTABLE_TABLENAME}/${clientId}`, {
+      const response = await fetch(`/api/clients/${clientId}`, {
         method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${AIRTABLE_API_KEY}`,
-        },
       })
       if (!response.ok) {
         throw new Error('Request failed with status ' + response.status)
@@ -38,7 +34,7 @@ const ClientList = () => {
   }
 
   const renderImage = (client) => {
-    const imageObject = client.fields.image?.[0]
+    const imageObject = client.fields.image[0]
     if(imageObject) {
       return(
         <img src={imageObject.url} alt={'Snapshot'} width='50' height='50' />
@@ -85,11 +81,8 @@ const ClientList = () => {
           {clients.map((client) => {
             const dateObj = new Date(client.createdTime)
             const dateAndTimeConvert = dateObj.toLocaleString()
-            const picId = client.fields.image?.[0]
-            console.log(picId)
-            // const imageUrl = picId ? `https://api.airtable.com/v0/${AIRTABLE_BASEID}/${AIRTABLE_TABLENAME}/${picId.filename}` : null;
+            // const picId = client.fields.image[0]
 
-            console.log(picId)
             return(
               <tr key={client.id} onClick={() => handleRowClick(client)}>
                 <td>
