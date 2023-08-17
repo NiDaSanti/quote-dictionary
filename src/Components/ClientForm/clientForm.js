@@ -17,6 +17,7 @@ const ClientForm = () => {
     image: null,
     totalQuote: '',
   });
+  const [isUploadingImage, setIsUploadingImage] = useState(false)
 
   const imageInputRef = useRef(null);
 
@@ -44,7 +45,7 @@ const ClientForm = () => {
       const imageResponse = await fetch(`/api/clients/upload-image`, {
         method: 'POST',
         body: imageFormData,
-      });
+      })
 
       if (!imageResponse.ok) {
         const errorData = await imageResponse.json();
@@ -60,19 +61,19 @@ const ClientForm = () => {
       console.error('Failed to upload image to Airtable', error);
       throw error;
     }
-  };
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (
-        formData.image &&
         formData.fullName &&
         formData.email &&
         formData.phone &&
         formData.address
       ) {
         // Step 1: Upload the image and get the image ID
+        setIsUploadingImage(true)
         const uploadedImageId = await uploadImageToAirtable(formData.image);
   
         // Step 2: Create the main record with the linked image
@@ -136,6 +137,7 @@ const ClientForm = () => {
       }
     } catch (error) {
       console.error('Failed to create record', error);
+      setIsUploadingImage(false)
     }
   };
   if (clients === undefined) {
@@ -170,7 +172,7 @@ const ClientForm = () => {
         <input type="file" accept='image/*' name="image" onChange={handleImageChange} ref={imageInputRef} />
         <label>Quote Total:</label>
         <input type="text" name="totalQuote" value={formData.totalQuote} onChange={handleChange} />
-        <button className='new-client-submit' type="submit">Create Client</button>
+        <button className='new-client-submit' type="submit" disabled={isUploadingImage}>{isUploadingImage ? 'Creating...' : 'Create Client'}</button>
       </form>
     </div>
   );

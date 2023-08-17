@@ -1,5 +1,5 @@
 require('dotenv').config()
-
+const FormData = require('form-data')
 const fetch = require('node-fetch')
 
 const API_KEY = process.env.AIRTABLE_API_KEY
@@ -32,33 +32,36 @@ const uploadImage = async (image) => {
   try {
     const imageFormData = new FormData()
     imageFormData.append('file', image, image.name)
-
+    
     const imageResponse = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${API_KEY}`,
       },
       body: imageFormData,
-    })
-    if(!imageResponse.ok) {
+    });
+    
+    if (!imageResponse.ok) {
       const errorData = await imageResponse.json()
       console.error('Failed to upload image:', errorData)
       throw new Error('Failed to upload image')
     }
-
-    const imageData = await imageResponse.json()
-    const uploadImageId = image.id
     
+    const imageData = await imageResponse.json()
+    const uploadImageId = imageData.id
+    
+    console.log('Image Data:', imageFormData)
     return uploadImageId
-  } catch(error) {
+  } catch (error) {
     console.error('Failed to upload image to Airtable', error)
     throw error
   }
 }
+
 const createClient = async (req, res) => {
   try {
     const formData = req.body
-    const uploadedImageId = await uploadImage(formData.image)
+    const uploadedImageId = await uploadImage(formData.image. createdRecordId)
 
     const formDataObject = {
       fields: {
@@ -75,7 +78,7 @@ const createClient = async (req, res) => {
             fileName: formData.image.name,
             size: formData.image.size,
             type: formData.image.type,
-            thumnails: {
+            thumbnails: {
               small: {},
               large: {}
             },
@@ -85,25 +88,31 @@ const createClient = async (req, res) => {
       }
     }
     const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}`, {
-      method: 'POST',
+      method: 'POST', // Use POST to create a new record
       headers: {
         Authorization: `Bearer ${API_KEY}`,
-        'Content-Type' :'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({records: [formDataObject]})
-    })
-    if(!response.ok) {
-      throw new Error('Failed to create client.')
-    }
-    const responseData = await response.json()
-    console.log(responseData.message)
-    res.status(201).json({message: 'Client created succesfully'})
+      body: JSON.stringify({ records: [formDataObject] }),
+    });
 
-  } catch(error) {
-    console.error('Error when attempting to create a client.')
-    res.status(500).json({error: 'Failed to create client.'})
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Failed to create client', errorData);
+      throw new Error('Failed to create client.');
+    }
+
+    const responseData = await response.json();
+    const createdRecordId = responseData.records[0].id;
+    console.log(responseData.message);
+    console.log('Image Data:', formData.image);
+
+    res.status(201).json({ message: 'Client created successfully' });
+  } catch (error) {
+    console.error('Error when attempting to create a client.', error);
+    res.status(500).json({ error: 'Failed to create client.' });
   }
-}
+};
 
 const removeClient = async(req, res) => {
   try {
