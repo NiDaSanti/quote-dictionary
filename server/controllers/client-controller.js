@@ -1,6 +1,9 @@
 require('dotenv').config()
 const FormData = require('form-data')
 const fetch = require('node-fetch')
+const multer = require('multer')
+const storage = multer.memoryStorage()
+const upload = multer({storage: storage}).single('image')
 
 const API_KEY = process.env.AIRTABLE_API_KEY
 const BASEID = process.env.AIRTABLE_BASEID
@@ -28,33 +31,42 @@ const getClientsData = async (req, res) => {
   }
 }
 
-const uploadImage = async (image) => {
+const uploadImage = async (req, res) => {
   try {
-    const imageFormData = new FormData()
-    imageFormData.append('file', image, image.name)
-    
-    const imageResponse = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${API_KEY}`,
-      },
-      body: imageFormData,
+    upload(req, res, async function (err) {
+      if (err) {
+        console.error('Failed to upload image:', err);
+        return res.status(500).json({ error: 'Failed to upload image' });
+      }
+
+      if (!req.file) {
+        console.error('No image uploaded');
+        return res.status(400).json({ error: 'No image uploaded' });
+      }
+
+      const imageResponse = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+        },
+        body: req.file.buffer,
+      });
+
+      if (!imageResponse.ok) {
+        const errorData = await imageResponse.json();
+        console.error('Failed to upload image:', errorData);
+        return res.status(500).json({ ok: false, error: 'Failed to upload image.'});
+      }
+
+      const imageData = await imageResponse.json();
+      const uploadImageId = imageData.id;
+
+      console.log('Image uploaded:', uploadImageId);
+      return res.status(200).json({ ok: true, uploadImageId });
     });
-    
-    if (!imageResponse.ok) {
-      const errorData = await imageResponse.json()
-      console.error('Failed to upload image:', errorData)
-      throw new Error('Failed to upload image')
-    }
-    
-    const imageData = await imageResponse.json()
-    const uploadImageId = imageData.id
-    
-    console.log('Image Data:', imageFormData)
-    return uploadImageId
   } catch (error) {
-    console.error('Failed to upload image to Airtable', error)
-    throw error
+    console.error('Failed to upload image to Airtable', error);
+    res.status(500).json({ error: 'Failed to upload image' });
   }
 }
 

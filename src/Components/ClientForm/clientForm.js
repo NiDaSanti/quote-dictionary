@@ -41,12 +41,12 @@ const ClientForm = () => {
     try {
       const imageFormData = new FormData();
       imageFormData.append('file', image, image.name);
-
+      console.log('Request URL:', `/api/clients/upload-image`);
       const imageResponse = await fetch(`/api/clients/upload-image`, {
         method: 'POST',
         body: imageFormData,
       })
-
+      console.log('Image Response:', imageResponse);
       if (!imageResponse.ok) {
         const errorData = await imageResponse.json();
         console.error('Failed to upload image:', errorData);
