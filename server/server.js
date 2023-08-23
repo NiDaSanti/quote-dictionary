@@ -2,13 +2,23 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
-const clientsRoutes = require('./routes/clients')
 const cors = require('cors')
+const clientsRoutes = require('./routes/clients')
+const allowedOrigins = ['http://localhost:3001']
 
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if(allowedOrigins.includes(origin) || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}))
 app.use(bodyParser.json())
 app.use(express.json())
 app.use('/api/clients', clientsRoutes)
-app.use(cors())
 
 
 

@@ -52,6 +52,7 @@ const ClientList = () => {
   const handleCloseModal = () => {
     setSelectClient(null)
   }
+  console.log(clients)
   return(
     <>
       <div className='table-title'>Client List</div>

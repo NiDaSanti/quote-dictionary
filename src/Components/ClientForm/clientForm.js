@@ -40,12 +40,25 @@ const ClientForm = () => {
   const uploadImageToAirtable = async (image) => {
     try {
       const imageFormData = new FormData();
-      imageFormData.append('file', image, image.name);
-      console.log('Request URL:', `/api/clients/upload-image`);
-      const imageResponse = await fetch(`/api/clients/upload-image`, {
+      const imageAttachements = [
+        {
+          filename: image,
+        },
+      ]
+
+      const recordFields = {
+        fields: {
+          image: imageAttachements,
+        }
+      }
+      imageFormData.append('records', JSON.stringify([recordFields]))
+      imageFormData.append('image', image);
+
+      const imageResponse = await fetch(`http://localhost:3000/api/clients/upload-image`, {
         method: 'POST',
         body: imageFormData,
       })
+      console.log('Request URL:', `/api/clients/upload-image`);
       console.log('Image Response:', imageResponse);
       if (!imageResponse.ok) {
         const errorData = await imageResponse.json();
@@ -54,7 +67,7 @@ const ClientForm = () => {
       }
 
       const imageData = await imageResponse.json();
-      const uploadedImageId = imageData.id;
+      const uploadedImageId = imageData.uploadImageId;
 
       return uploadedImageId;
     } catch (error) {
@@ -70,7 +83,13 @@ const ClientForm = () => {
         formData.fullName &&
         formData.email &&
         formData.phone &&
-        formData.address
+        formData.address && 
+        formData.startDate &&
+        formData.endDate &&
+        formData.priority &&
+        formData.serviceType &&
+        formData.request &&
+        formData.totalQuote
       ) {
         // Step 1: Upload the image and get the image ID
         setIsUploadingImage(true)
@@ -91,25 +110,26 @@ const ClientForm = () => {
             image: [
               {
                 id: uploadedImageId,
-                filename: formData.image.name, // Use the filename from the uploaded image
-                size: formData.image.size, // Use the size from the uploaded image
-                type: formData.image.type, // Use the type from the uploaded image
+                filename: formData.image ? formData.image.name : null, // Use the filename from the uploaded image
+                size: formData.image ? formData.image.size : null, // Use the size from the uploaded image
+                type: formData.image ? formData.image.type : null, // Use the type from the uploaded image
                 thumbnails: {
                   small: {}, // You can leave the thumbnails empty if not available
                   large: {},
                 },
               },
             ],
-            totalQuote: formData.totalQuote,
+            totalQuote: formData.totalQuote
           },
-        };
+        }
+          
   
-        const response = await fetch(`/api/clients/create`, {
+        const response = await fetch(`http://localhost:3000/api/clients/create`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formDataObject), // Wrap formDataObject inside 'records' array
+          body: JSON.stringify({records: [formDataObject]}), // Wrap formDataObject inside 'records' array
         });
   
         if (!response.ok) {
