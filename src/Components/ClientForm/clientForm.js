@@ -39,13 +39,14 @@ const ClientForm = () => {
 
   const uploadImageToAirtable = async (image) => {
     try {
-      const imageFormData = new FormData();
+      const imageFormData = new FormData()
       const imageAttachements = [
         {
-          filename: image,
+          // filename: formData.image.name,
+          url: `http://localhost:3000/uploads/${formData.image.name}`
         },
       ]
-
+      console.log(imageAttachements)
       const recordFields = {
         fields: {
           image: imageAttachements,
@@ -58,21 +59,21 @@ const ClientForm = () => {
         method: 'POST',
         body: imageFormData,
       })
-      console.log('Request URL:', `/api/clients/upload-image`);
-      console.log('Image Response:', imageResponse);
+      console.log('Request URL:', `/api/clients/upload-image`)
+      console.log('Image Response:', imageResponse)
       if (!imageResponse.ok) {
-        const errorData = await imageResponse.json();
-        console.error('Failed to upload image:', errorData);
-        throw new Error('Failed to upload image');
+        const errorData = await imageResponse.json()
+        console.error('Failed to upload image:', errorData)
+        throw new Error('Failed to upload image')
       }
 
       const imageData = await imageResponse.json();
-      const uploadedImageId = imageData.uploadImageId;
+      const uploadedImageId = imageData.uploadImageId
 
       return uploadedImageId;
     } catch (error) {
-      console.error('Failed to upload image to Airtable', error);
-      throw error;
+      console.error('Failed to upload image to Airtable', error)
+      throw error
     }
   }
 
@@ -93,7 +94,7 @@ const ClientForm = () => {
       ) {
         // Step 1: Upload the image and get the image ID
         setIsUploadingImage(true)
-        const uploadedImageId = await uploadImageToAirtable(formData.image);
+        const uploadedImageId = await uploadImageToAirtable(formData.image)
   
         // Step 2: Create the main record with the linked image
         const formDataObject = {
@@ -130,14 +131,14 @@ const ClientForm = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({records: [formDataObject]}), // Wrap formDataObject inside 'records' array
-        });
+        })
   
         if (!response.ok) {
-          throw new Error('Failed to create record');
+          throw new Error('Failed to create record')
         }
   
-        const responseData = await response.json();
-        setClients((prevClients) => [...prevClients, responseData.records[0]]);
+        const responseData = await response.json()
+        setClients((prevClients) => [...prevClients, responseData.records[0]])
         setFormData({
           fullName: '',
           email: '',
@@ -150,18 +151,18 @@ const ClientForm = () => {
           request: '',
           image: null,
           totalQuote: '',
-        });
-        console.log('Record created successfully!');
+        })
+        console.log('Record created successfully!')
       } else {
-        console.error('Please fill in all required fields and add an image.');
+        console.error('Please fill in all required fields and add an image.')
       }
     } catch (error) {
-      console.error('Failed to create record', error);
+      console.error('Failed to create record', error)
       setIsUploadingImage(false)
     }
-  };
+  }
   if (clients === undefined) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
