@@ -34,13 +34,13 @@ const ClientList = () => {
   }
 
   const renderImage = (client) => {
-    const imageObject = client.fields.image[0]
-    if(imageObject) {
-      return(
+    if (client.fields.image && client.fields.image[0]) {
+      const imageObject = client.fields.image[0];
+      return (
         <img src={imageObject.url} alt={'Snapshot'} width='50' height='50' />
-      )
+      );
     } else {
-      return <div>No image available.</div>
+      return <div>No image available.</div>;
     }
   }
 

@@ -16,46 +16,34 @@ const ClientForm = () => {
     request: '',
     image: null,
     totalQuote: '',
-  });
+  })
   const [isUploadingImage, setIsUploadingImage] = useState(false)
 
-  const imageInputRef = useRef(null);
+  const imageInputRef = useRef(null)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setFormData((prevData) => ({
       ...prevData,
       image: file,
-    }));
-  };
+    }))
+  }
 
   const uploadImageToAirtable = async (image) => {
     try {
       const imageFormData = new FormData()
-      const imageAttachements = [
-        {
-          // filename: formData.image.name,
-          url: `http://localhost:3000/uploads/${formData.image.name}`
-        },
-      ]
-      console.log(imageAttachements)
-      const recordFields = {
-        fields: {
-          image: imageAttachements,
-        }
-      }
-      imageFormData.append('records', JSON.stringify([recordFields]))
-      imageFormData.append('image', image);
+      imageFormData.append('image', image)
+  
 
-      const imageResponse = await fetch(`http://localhost:3000/api/clients/upload-image`, {
+      const imageResponse = await fetch(`/api/clients/upload-image`, {
         method: 'POST',
         body: imageFormData,
       })
@@ -80,11 +68,12 @@ const ClientForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log('Form Data:', formData)
       if (
         formData.fullName &&
         formData.email &&
         formData.phone &&
-        formData.address && 
+        formData.address &&
         formData.startDate &&
         formData.endDate &&
         formData.priority &&
@@ -92,53 +81,47 @@ const ClientForm = () => {
         formData.request &&
         formData.totalQuote
       ) {
-        // Step 1: Upload the image and get the image ID
-        setIsUploadingImage(true)
-        const uploadedImageId = await uploadImageToAirtable(formData.image)
-  
+        // Step 1: Upload the image and get the image URL
+        setIsUploadingImage(true);
+        const uploadedImageUrl = await uploadImageToAirtable(formData.image)
+        
         // Step 2: Create the main record with the linked image
         const formDataObject = {
-          fields: {
-            fullName: formData.fullName,
-            email: formData.email,
-            phone: formData.phone,
-            address: formData.address,
-            startDate: formData.startDate,
-            endDate: formData.endDate,
-            priority: formData.priority,
-            serviceType: formData.serviceType,
-            request: formData.request,
-            image: [
-              {
-                id: uploadedImageId,
-                filename: formData.image ? formData.image.name : null, // Use the filename from the uploaded image
-                size: formData.image ? formData.image.size : null, // Use the size from the uploaded image
-                type: formData.image ? formData.image.type : null, // Use the type from the uploaded image
-                thumbnails: {
-                  small: {}, // You can leave the thumbnails empty if not available
-                  large: {},
-                },
-              },
-            ],
-            totalQuote: formData.totalQuote
-          },
-        }
-          
-  
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          address: formData.address,
+          startDate: formData.startDate,
+          endDate: formData.endDate,
+          priority: formData.priority,
+          serviceType: formData.serviceType,
+          request: formData.request,
+          image: [
+            {
+              url: uploadedImageUrl,
+              filename: formData.image ? formData.image.name : null,
+              size: formData.image ? formData.image.size : null,
+              type: formData.image ? formData.image.type : null,
+            },
+          ],
+          totalQuote: formData.totalQuote,
+        };
+        formDataObject.image[0].url = uploadedImageUrl
+        console.log('formDataObject:', formDataObject)
         const response = await fetch(`http://localhost:3000/api/clients/create`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({records: [formDataObject]}), // Wrap formDataObject inside 'records' array
-        })
+          body: JSON.stringify(formDataObject), // Remove 'fields: [formDataObject]' and send formDataObject directly
+        });
   
         if (!response.ok) {
-          throw new Error('Failed to create record')
+          throw new Error('Failed to create record');
         }
   
-        const responseData = await response.json()
-        setClients((prevClients) => [...prevClients, responseData.records[0]])
+        const responseData = await response.json();
+        setClients((prevClients) => [...prevClients, responseData.records[0]]);
         setFormData({
           fullName: '',
           email: '',
@@ -151,18 +134,19 @@ const ClientForm = () => {
           request: '',
           image: null,
           totalQuote: '',
-        })
-        console.log('Record created successfully!')
+        });
+        console.log('Record created successfully!');
       } else {
-        console.error('Please fill in all required fields and add an image.')
+        console.error('Please fill in all required fields and add an image.');
       }
     } catch (error) {
-      console.error('Failed to create record', error)
-      setIsUploadingImage(false)
+      console.error('Failed to create record', error);
+      setIsUploadingImage(false);
     }
-  }
+  };
+  
   if (clients === undefined) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   return (
@@ -199,4 +183,4 @@ const ClientForm = () => {
   );
 };
 
-export default ClientForm;
+export default ClientForm
