@@ -17,13 +17,17 @@ const ClientProvider = ({ children }) => {
       .catch(error => {
         setError(error);
       });
-  }, []);
+  }, [])
+
+  const handleAddClient = (newClientRecords) => {
+    setClients((prevClients) => [...prevClients, ...newClientRecords])
+  }
 
   if (error) {
     return <div>Error: {error.message}</div>;
   }
 
-  return <ClientContext.Provider value={{ clients, setClients }}>{children}</ClientContext.Provider>;
+  return <ClientContext.Provider value={{ clients, setClients, handleAddClient }}>{children}</ClientContext.Provider>;
 };
 
 export { ClientContext, ClientProvider };

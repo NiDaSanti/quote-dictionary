@@ -1,9 +1,12 @@
-import React, { useContext, useState, useRef } from 'react';
-import { ClientContext } from '../../context/ClientProvider';
-import '../ClientForm/clientForm.css';
+import React, { useContext, useState, useRef } from 'react'
+import { ClientContext } from '../../context/ClientProvider'
+import '../ClientForm/clientForm.css'
 
 const ClientForm = () => {
-  const { clients, setClients } = useContext(ClientContext);
+  // Use the client context to access clients and setClients
+  const { clients, setClients, handleAddClient } = useContext(ClientContext)
+
+  // State to hold form data
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -14,61 +17,50 @@ const ClientForm = () => {
     priority: '',
     serviceType: '',
     request: '',
-    image: null,
+    // Removed the 'image' state as it's not needed now
     totalQuote: '',
-  })
-  const [isUploadingImage, setIsUploadingImage] = useState(false)
+  });
 
-  const imageInputRef = useRef(null)
+  // State to track image uploading (removed)
+  // const [isUploadingImage, setIsUploadingImage] = useState(false);
 
+  // State for error messages
+  // const [errorMessage, setErrorMessage] = useState('');
+
+  // Ref to the file input element (removed)
+  // const imageInputRef = useRef(null);
+
+  // Handle form input changes
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }))
-  }
+  };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setFormData((prevData) => ({
-      ...prevData,
-      image: file,
-    }))
-  }
+  // Handle image file selection (removed)
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     image: file,
+  //   }));
+  // };
 
-  const uploadImageToAirtable = async (image) => {
-    try {
-      const imageFormData = new FormData()
-      imageFormData.append('image', image)
-  
+  // Function to upload the image to Airtable (removed)
+  // const uploadImageToAirtable = async (image) => {
+  //   try {
+  //     // ... (removed)
+  //   } catch (error) {
+  //     // ... (removed)
+  //   }
+  // }
 
-      const imageResponse = await fetch(`/api/clients/upload-image`, {
-        method: 'POST',
-        body: imageFormData,
-      })
-      console.log('Request URL:', `/api/clients/upload-image`)
-      console.log('Image Response:', imageResponse)
-      if (!imageResponse.ok) {
-        const errorData = await imageResponse.json()
-        console.error('Failed to upload image:', errorData)
-        throw new Error('Failed to upload image')
-      }
-
-      const imageData = await imageResponse.json();
-      const uploadedImageId = imageData.uploadImageId
-
-      return uploadedImageId;
-    } catch (error) {
-      console.error('Failed to upload image to Airtable', error)
-      throw error
-    }
-  }
-
+  // Handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      console.log('Form Data:', formData)
       if (
         formData.fullName &&
         formData.email &&
@@ -81,11 +73,6 @@ const ClientForm = () => {
         formData.request &&
         formData.totalQuote
       ) {
-        // Step 1: Upload the image and get the image URL
-        setIsUploadingImage(true);
-        const uploadedImageUrl = await uploadImageToAirtable(formData.image)
-        
-        // Step 2: Create the main record with the linked image
         const formDataObject = {
           fullName: formData.fullName,
           email: formData.email,
@@ -96,32 +83,28 @@ const ClientForm = () => {
           priority: formData.priority,
           serviceType: formData.serviceType,
           request: formData.request,
-          image: [
-            {
-              url: uploadedImageUrl,
-              filename: formData.image ? formData.image.name : null,
-              size: formData.image ? formData.image.size : null,
-              type: formData.image ? formData.image.type : null,
-            },
-          ],
           totalQuote: formData.totalQuote,
-        };
-        formDataObject.image[0].url = uploadedImageUrl
-        console.log('formDataObject:', formDataObject)
-        const response = await fetch(`http://localhost:3000/api/clients/create`, {
+        }
+
+        const response = await fetch(`/api/clients/create`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formDataObject), // Remove 'fields: [formDataObject]' and send formDataObject directly
-        });
-  
+          body: JSON.stringify(formDataObject),
+        })
+
+        console.log('FORMDATAOBJECT', formDataObject)
+
         if (!response.ok) {
-          throw new Error('Failed to create record');
+          const errorData = await response.json()
+          throw new Error(`Failed to create record: ${errorData.error}`)
         }
-  
-        const responseData = await response.json();
-        setClients((prevClients) => [...prevClients, responseData.records[0]]);
+
+        const responseData = await response.json()
+        console.log('Response:', responseData)
+
+        // Only clear the form data if the request was successful
         setFormData({
           fullName: '',
           email: '',
@@ -132,21 +115,27 @@ const ClientForm = () => {
           priority: '',
           serviceType: '',
           request: '',
-          image: null,
           totalQuote: '',
-        });
-        console.log('Record created successfully!');
+        })
+
+        // Check if responseData.records is an array and has at least one item
+        if (responseData.records && Array.isArray(responseData.records) && responseData.records.length > 0) {
+          handleAddClient(responseData.records)
+          console.log('Record created successfully!')
+        } else {
+          console.error('Invalid responseData.records:', responseData.records)
+        }
       } else {
-        console.error('Please fill in all required fields and add an image.');
+        console.error('Form validation failed. Please fill in all required fields.')
       }
     } catch (error) {
-      console.error('Failed to create record', error);
-      setIsUploadingImage(false);
+      console.error('Failed to create record', error)
     }
-  };
-  
+  }
+
+  // If clients are undefined, display a loading message
   if (clients === undefined) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
@@ -173,11 +162,13 @@ const ClientForm = () => {
         <input type="text" name="serviceType" value={formData.serviceType} onChange={handleChange} />
         <label>Request:</label>
         <textarea name="request" value={formData.request} onChange={handleChange} rows="4" cols="50" />
-        <label>Upload Image:</label>
-        <input type="file" accept='image/*' name="image" onChange={handleImageChange} ref={imageInputRef} />
+        {/* Removed the 'Upload Image' input */}
         <label>Quote Total:</label>
         <input type="text" name="totalQuote" value={formData.totalQuote} onChange={handleChange} />
-        <button className='new-client-submit' type="submit" disabled={isUploadingImage}>{isUploadingImage ? 'Creating...' : 'Create Client'}</button>
+        <button className='new-client-submit' type="submit">
+          {/* Removed 'disabled' attribute */}
+          Create Client
+        </button>
       </form>
     </div>
   );

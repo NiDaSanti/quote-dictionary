@@ -1,59 +1,50 @@
-import React, { useContext, useState } from 'react'
-import { ClientContext } from '../../context/ClientProvider'
-import ClientInformation from '../ClientInformation/clientInformation'
-import '../ClientList/clientList.css'
+import React, { useContext, useState } from 'react';
+import { ClientContext } from '../../context/ClientProvider';
+import ClientInformation from '../ClientInformation/clientInformation';
+import '../ClientList/clientList.css';
 
 const ClientList = () => {
-  const {clients, setClients} = useContext(ClientContext)
-  const  [selectClient, setSelectClient] = useState(null)
-  let totalOfAllQuotes = 0
-
-  for(let i = 0; i < clients.length; i++) {
-    let convertToNum = Number(clients[i].fields.totalQuote)
-    totalOfAllQuotes += convertToNum
+  const { clients, setClients } = useContext(ClientContext);
+  const [selectClient, setSelectClient] = useState(null);
+  let totalOfAllQuotes = 0;
+  console.log('check the clients:jajajaja: ', clients)
+  for (let i = 0; i < clients.length; i++) {
+    let convertToNum = Number(clients[i].fields.totalQuote);
+    console.log(convertToNum)
+    totalOfAllQuotes += convertToNum;
   }
-  const convertToStr = totalOfAllQuotes.toString()
+  const convertToStr = totalOfAllQuotes.toString();
+
   const handleRemoveClient = async (clientId) => {
     try {
       const response = await fetch(`/api/clients/${clientId}`, {
         method: 'DELETE',
-      })
+      });
       if (!response.ok) {
-        throw new Error('Request failed with status ' + response.status)
+        throw new Error('Request failed with status ' + response.status);
       }
       // After successful deletion, update the state to remove the client
-      setClients((prevClients) => prevClients.filter((client) => client.id !== clientId))
-      console.log('Client removed successfully!')
+      setClients((prevClients) => prevClients.filter((client) => client.id !== clientId));
+      console.log('Client removed successfully!');
     } catch (error) {
-      console.error('Failed to remove client: ' + error)
+      console.error('Failed to remove client: ' + error);
     }
-  }
+  };  
 
-  if(!clients || clients.length === 0) {
-    return<div>Loading...</div>
-  }
-
-  const renderImage = (client) => {
-    if (client.fields.image && client.fields.image[0]) {
-      const imageObject = client.fields.image[0];
-      return (
-        <img src={imageObject.url} alt={'Snapshot'} width='50' height='50' />
-      );
-    } else {
-      return <div>No image available.</div>;
-    }
+  if (!clients || clients.length === 0) {
+    return <div>Loading...</div>;
   }
 
   const handleRowClick = (client) => {
-    console.log('Selected Client', client)
-    setSelectClient(client)
-  }
+    console.log('Selected Client', client);
+    setSelectClient(client);
+  };
 
   const handleCloseModal = () => {
-    setSelectClient(null)
-  }
-  console.log(clients)
-  return(
+    setSelectClient(null);
+  };
+
+  return (
     <>
       <div className='table-title'>Client List</div>
       <div className='client-amount'>
@@ -74,20 +65,21 @@ const ClientList = () => {
             <th>Priority</th>
             <th>Service Type</th>
             <th>Request</th>
-            <th>Image upload</th>
+            {/* Removed the 'Image upload' header */}
             <th>Quote Total</th>
           </tr>
         </thead>
         <tbody>
           {clients.map((client) => {
-            const dateObj = new Date(client.createdTime)
-            const dateAndTimeConvert = dateObj.toLocaleString()
-            // const picId = client.fields.image[0]
+            const dateObj = new Date(client.createdTime);
+            const dateAndTimeConvert = dateObj.toLocaleString();
 
-            return(
+            return (
               <tr key={client.id} onClick={() => handleRowClick(client)}>
                 <td>
-                  <button className='remove-client-submit' onClick={() => handleRemoveClient(client.id)}>Delete</button>
+                  <button className='remove-client-submit' onClick={() => handleRemoveClient(client.id)}>
+                    Delete
+                  </button>
                 </td>
                 <td>{dateAndTimeConvert}</td>
                 <td>{client.fields.fullName}</td>
@@ -99,18 +91,16 @@ const ClientList = () => {
                 <td>{client.fields.priority}</td>
                 <td>{client.fields.serviceType}</td>
                 <td>{client.fields.request}</td>
-                <td>{renderImage(client)}</td>
+                {/* Removed the image rendering */}
                 <td>${client.fields.totalQuote}</td>
               </tr>
-            )
+            );
           })}
         </tbody>
       </table>
-      {selectClient && (
-        <ClientInformation client={selectClient} onClose={handleCloseModal} />
-      )}
+      {selectClient && <ClientInformation client={selectClient} onClose={handleCloseModal} />}
     </>
-  )
-}
+  );
+};
 
-export default ClientList
+export default ClientList;
