@@ -7,16 +7,14 @@ const ClientProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // You can call your API endpoint here to fetch the client data from the server
-    fetch('/api/clients')  // Use the full URL here
+    fetch('/api/clients')  
       .then(response => response.json())
       .then(data => {
-        console.log('In ClientProvider:', data);
         setClients(data);
       })
       .catch(error => {
         setError(error);
-      });
+      })
   }, [])
 
   const handleAddClient = (newClientRecords) => {
@@ -27,10 +25,10 @@ const ClientProvider = ({ children }) => {
     return <div>Error: {error.message}</div>;
   }
 
-  return <ClientContext.Provider value={{ clients, setClients, handleAddClient }}>{children}</ClientContext.Provider>;
+  return <ClientContext.Provider value={{ clients, setClients, handleAddClient }}>{children}</ClientContext.Provider>
 };
 
-export { ClientContext, ClientProvider };
+export { ClientContext, ClientProvider }
 
 
 
