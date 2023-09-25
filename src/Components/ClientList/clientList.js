@@ -1,47 +1,60 @@
-import React, { useContext, useState } from 'react';
-import { ClientContext } from '../../context/ClientProvider';
-import ClientInformation from '../ClientInformation/clientInformation';
-import '../ClientList/clientList.css';
+import React, { useContext, useState } from 'react'
+import { ClientContext } from '../../context/ClientProvider'
+import ClientInformation from '../ClientInformation/clientInformation'
+import UpdateClient from '../UpdateClient/updateClient'
+import '../ClientList/clientList.css'
 
 const ClientList = () => {
-  const { clients, setClients } = useContext(ClientContext);
-  const [selectClient, setSelectClient] = useState(null);
+  const { clients, setClients } = useContext(ClientContext)
+  const [selectClient, setSelectClient] = useState(null)
   let totalOfAllQuotes = 0;
-  console.log('check the clients:jajajaja: ', clients)
   for (let i = 0; i < clients.length; i++) {
-    let convertToNum = Number(clients[i].fields.totalQuote);
-    console.log(convertToNum)
-    totalOfAllQuotes += convertToNum;
+    let convertToNum = Number(clients[i].fields.totalQuote)
+    totalOfAllQuotes += convertToNum
   }
-  const convertToStr = totalOfAllQuotes.toString();
+  const convertToStr = totalOfAllQuotes.toString()
 
   const handleRemoveClient = async (clientId) => {
     try {
       const response = await fetch(`/api/clients/${clientId}`, {
         method: 'DELETE',
-      });
+      })
       if (!response.ok) {
-        throw new Error('Request failed with status ' + response.status);
+        throw new Error('Request failed with status ' + response.status)
       }
       // After successful deletion, update the state to remove the client
-      setClients((prevClients) => prevClients.filter((client) => client.id !== clientId));
+      setClients((prevClients) => prevClients.filter((client) => client.id !== clientId))
       console.log('Client removed successfully!');
     } catch (error) {
-      console.error('Failed to remove client: ' + error);
+      console.error('Failed to remove client: ' + error)
     }
-  };  
+  }
+
+  const handleClientItemClick = (client) => {
+    setSelectClient(client)
+  }
+
+  const handleUpdateClient = (updatedClient) => {
+    const updatedIndex = clients.findIndex((client) => client.id === updatedClient.id)
+
+    if(updatedIndex !== -1) {
+      const updatedClients = [...clients]
+      updatedClients[updatedIndex] = updatedClient
+      setClients(updatedClients)
+    }
+    setSelectClient(null)
+  }
 
   if (!clients || clients.length === 0) {
     return <div>Loading...</div>;
   }
 
   const handleRowClick = (client) => {
-    console.log('Selected Client', client);
     setSelectClient(client);
   };
 
   const handleCloseModal = () => {
-    setSelectClient(null);
+    setSelectClient(null)
   };
 
   return (
@@ -55,6 +68,7 @@ const ClientList = () => {
         <thead>
           <tr>
             <th>Remove Client</th>
+            <th>Edit Client</th>
             <th>Date of Client Entry</th>
             <th>Name</th>
             <th>Email</th>
@@ -71,8 +85,8 @@ const ClientList = () => {
         </thead>
         <tbody>
           {clients.map((client) => {
-            const dateObj = new Date(client.createdTime);
-            const dateAndTimeConvert = dateObj.toLocaleString();
+            const dateObj = new Date(client.createdTime)
+            const dateAndTimeConvert = dateObj.toLocaleString()
 
             return (
               <tr key={client.id} onClick={() => handleRowClick(client)}>
@@ -80,6 +94,9 @@ const ClientList = () => {
                   <button className='remove-client-submit' onClick={() => handleRemoveClient(client.id)}>
                     Delete
                   </button>
+                </td>
+                <td>
+                  <button className='edit-client-submit' onClick={() => handleClientItemClick(client)}></button>
                 </td>
                 <td>{dateAndTimeConvert}</td>
                 <td>{client.fields.fullName}</td>
@@ -98,9 +115,10 @@ const ClientList = () => {
           })}
         </tbody>
       </table>
-      {selectClient && <ClientInformation client={selectClient} onClose={handleCloseModal} />}
+      {selectClient && (<ClientInformation client={selectClient} onClose={handleCloseModal} />)}
+      {selectClient && (<UpdateClient clientId={selectClient.id} onUpdate={handleUpdateClient} />)}
     </>
   );
 };
 
-export default ClientList;
+export default ClientList

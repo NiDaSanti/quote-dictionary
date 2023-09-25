@@ -1,0 +1,72 @@
+:root {
+  --form-radius: 8px;
+  --form-background: #F0F0F0;
+  --form-font-style: 'DM Sans', sans-serif;
+  --form-text-size: 18px;
+  --form-label-size: 16px;
+}
+
+.update-form-container {
+  width: 800px;
+  background: var(--form-background);
+  margin: 10px;
+  padding: 10px;
+  border-radius: var(--form-radius);
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.form > section {
+  flex-direction: column;
+  justify-content: center;
+  width: 375px;
+}
+
+.form > label {
+  margin-top: 10px;
+}
+
+.client-update-btn {
+  background: #FF0000;
+  height: 35px;
+  width: 100px;
+  color: #fff;
+  margin-top: 10px;
+  position: relative;
+  font-size: 18px;
+  left: 19em;
+  border-radius: var(--form-radius);
+}
+
+.form > input, textarea {
+  font-size: var(--form-text-size);
+}
+
+.form > label {
+  font-size: 16px;
+  color: #000000;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+}
+
+.left-side {
+  position: relative;
+  top: -1.9em;
+  left: -1.2em;
+}
+
+.right-side {
+  position: relative;
+  right: -1.2em;
+}
+.update-form-container > h2 {
+  font-weight: 500;
+  color: #FF0000;
+}
