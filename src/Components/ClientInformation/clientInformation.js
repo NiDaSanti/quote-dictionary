@@ -1,7 +1,8 @@
 import React from "react"
 import '../ClientInformation/clientInformation.css'
+
 const ClientInformation = ({client, onClose}) => {
-  return(
+  return (
     <div className='modal'>
       <div className='modal-content'>
         <h2>Client Information</h2>
@@ -13,8 +14,9 @@ const ClientInformation = ({client, onClose}) => {
         <div>Date of End: {client.fields.endDate}</div>
         <div>Service (Job) Type: {client.fields.serviceType}</div>
         <div>Job Description: {client.fields.request}</div>
-        <div>Snapshots of Proof:</div>
-        <img src={client.fields.image[0].thumbnails.large.url} alt='job' />
+        {/* Commented out the image rendering */}
+        {/* <div>Snapshots of Proof:</div>
+        <img src={client.fields.image[0].thumbnails.large.url} alt='job' /> */}
         <button onClick={onClose}>Close</button>
       </div>
     </div>
