@@ -1,11 +1,15 @@
+/*
+Do not remove the commented code as it will be utilized 
+for continued creation for uploading images.
+*/ 
 require('dotenv').config()
 const fetch = require('node-fetch')
-const multer = require('multer')
-const path = require('path')
-const fs = require('fs').promises
-const admin = require('firebase-admin')
-const serviceAccount = require('../../firebase/quote-dictionary-dd591-firebase-adminsdk-oryow-de78f66265.json')
-
+// const multer = require('multer')
+// const path = require('path')
+// const fs = require('fs').promises
+// const admin = require('firebase-admin')
+// const serviceAccount = require('../../firebase/quote-dictionary-dd591-firebase-adminsdk-oryow-de78f66265.json')
+// Firebase storage init for image storage
 // admin.initializeApp({
 //   credential: admin.credential.cert(serviceAccount),
 //   storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
@@ -15,7 +19,7 @@ const API_KEY = process.env.AIRTABLE_API_KEY
 const BASEID = process.env.AIRTABLE_BASEID
 const TABLENAME = process.env.AIRTABLE_TABLENAME
 // const MAX_MB = 10
-
+// Middleware to handle images
 // const storage = multer.diskStorage({
 //   async destination(req, file, cb) {
 //     const uploadDir = path.join(__dirname, '..', 'uploads')
@@ -37,7 +41,7 @@ const TABLENAME = process.env.AIRTABLE_TABLENAME
 //   storage,
 //   limits: { fileSize: MAX_MB * 1024 * 1024 },
 // }).single('image')
-
+// Function of to upload image into firebase storage. Then it returns the image url once uploaded in firebase storage
 // const uploadImage = async (req, res) => {
 //   try {
 //     console.log('Request received at /upload-image')
@@ -82,7 +86,6 @@ const TABLENAME = process.env.AIRTABLE_TABLENAME
 //   }
 // }
 
-
 const createClient = async (req, res) => {
   try {
     console.log('Received POST request to create client:', req.body)
@@ -109,7 +112,7 @@ const createClient = async (req, res) => {
         Authorization: `Bearer ${API_KEY}`,
         'Content-Type': 'application/json',
       },
-      booy: JSON.stringify(formDataObject),
+      body: JSON.stringify(formDataObject),
     })
 
     console.log('Response:', response);
@@ -130,10 +133,8 @@ const createClient = async (req, res) => {
 
     const responseData = await response.json()
     console.log('RESPONSE DATA:', responseData)
-
     // Assuming your Airtable table has an 'ID' field
     const airtableId = responseData.id; // Adjust this based on your Airtable schema
-
     // Fetch the newly created client using the airtableId
     const fetchResponse = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}/${airtableId}`, {
       headers: {
@@ -155,10 +156,40 @@ const createClient = async (req, res) => {
   }
 }
 
+const editClient = async (req, res) => {
+  try {
+    const {id} = req.params
+    const updatedClient = req.body
+    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}/${id}`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${API_KEY}`,
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify({fields: updatedClient})
+    })
+    if(!response.ok) {
+      const errorData = await response.json()
+      const errorMessage = `Failed to update client - Status: ${response.status}, Status Text: ${response.statusText}. Airtable Error: ${JSON.stringify(errorData)}`
+      console.error(errorMessage)
+      res.status(500).json({error: 'Failed to update client.'})
+      return
+    }
+
+    const responseData = await response.json()
+    console.log('Response Data:', responseData)
+
+    res.status(200).json({message: 'Client updated succesfully'})
+
+  } catch(error) {
+    console.error('Error when attempting to update client. ', error)
+    res.status(500).json({error: 'Failed to update client'})
+  }
+}
 
 const removeClient = async (req, res) => {
   try {
-    const { clientId } = req.params;
+    const { clientId } = req.params
     const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}/${clientId}`, {
       method: 'DELETE',
       headers: {
@@ -200,4 +231,4 @@ const getClientsData = async (req, res) => {
   }
 }
 
-module.exports = { createClient, removeClient, getClientsData }
+module.exports = { createClient, editClient, removeClient, getClientsData }
