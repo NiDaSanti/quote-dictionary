@@ -30,10 +30,6 @@ const ClientList = () => {
     }
   }
 
-  const handleClientItemClick = (client) => {
-    setSelectClient(client)
-  }
-
   // const handleUpdateClient = (updatedClient) => {
   //   const updatedIndex = clients.findIndex((client) => client.id === updatedClient.id)
 
@@ -50,6 +46,7 @@ const ClientList = () => {
   }
 
   const handleRowClick = (client) => {
+    console.log('click', client)
     setSelectClient(client);
   };
 
@@ -59,10 +56,9 @@ const ClientList = () => {
 
   return (
     <>
-      <div className='table-title'>Client List</div>
       <div className='client-amount'>
         <p>Client count: {clients.length}</p>
-        <p>Total in dollars: ${convertToStr}</p>
+        <p className="number">Total in dollars: $<i>{convertToStr}</i></p>
       </div>
       <table>
         <thead>
@@ -107,14 +103,13 @@ const ClientList = () => {
                   <div>{client.fields.request}</div>
                 </td>
                 {/* Removed the image rendering */}
-                <td className="quote-total">${client.fields.totalQuote}</td>
+                <td className="quote-total"><i>${client.fields.totalQuote}</i></td>
               </tr>
             );
           })}
         </tbody>
       </table>
       {selectClient && (<ClientInformation client={selectClient} onClose={handleCloseModal} />)}
-      {/* {selectClient && (<UpdateClient clientId={selectClient.id} onUpdate={handleUpdateClient} />)} */}
     </>
   );
 };

@@ -67,7 +67,7 @@ const UpdateClient = ({clientId, onUpdate, onUpdateClose}) => {
       <h2>Update Client Data</h2>
       <div className="form">
         <section className="left-side">
-          <label><strong>Name:</strong></label>
+          <label>Name:</label>
           <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} />
           <label>Email:</label>
           <input type="text" name="email" value={formData.email} onChange={handleInputChange} />

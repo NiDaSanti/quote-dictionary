@@ -1,16 +1,20 @@
 :root {
   --form-radius: 8px;
-  --form-background: #F0F0F0;
+  --form-background: #fff;
   --form-font-style: 'DM Sans', sans-serif;
   --form-text-size: 18px;
   --form-label-size: 16px;
 }
 
 .update-form-container {
+  width: 65%;
   background: var(--form-background);
   margin: 10px;
-  padding: 10px;
+  padding: 20px; /* Increase padding for more height */
   border-radius: var(--form-radius);
+  width: 45%; /* Increase width */
+  height: 45%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a soft shadow */
 }
 
 .form {
@@ -29,24 +33,42 @@
   margin-top: 10px;
 }
 
+/* Styles for the update button */
 .client-update-btn {
-  background: #FF0000;
-  height: 35px;
-  width: 100px;
-  color: #fff;
-  margin-top: 10px;
-  position: relative;
-  font-size: 18px;
-  left: 19em;
-  border-radius: var(--form-radius);
+  background-color: #4CAF50; /* Green color for update button */
+  color: white; /* Text color */
+  border: none; /* Remove borders */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Padding for the button */
+  cursor: pointer; /* Cursor style on hover */
+  font-size: 16px; /* Font size */
+  margin-top: 10px; /* Add some top margin */
+  transition: background-color 0.3s; /* Smooth background color transition */
+  width: 120px; /* Set a fixed width */
 }
 
-.form > input, textarea {
+/* Hover Effect */
+.client-update-btn:hover {
+  background-color: #45a049; /* Darker green color on hover */
+  /* You can add more styles for the hover effect, like changing text color */
+}
+
+/* Active/Focus Effect (optional) */
+.client-update-btn:active,
+.client-update-btn:focus {
+  outline: none; /* Remove default focus outline */
+  /* You can add additional styles for the active/focus state if needed */
+}
+
+
+.form > input,
+.form > textarea {
   font-size: var(--form-text-size);
+  padding: 10px; /* Increase padding for input elements */
 }
 
 .form > label {
-  font-size: 16px;
+  font-size: var(--form-label-size);
   color: #000000;
 }
 
@@ -55,17 +77,39 @@ section {
   flex-direction: column;
 }
 
-.left-side {
-  position: relative;
-  top: -1.9em;
-  left: -1.2em;
-}
-
 .right-side {
   position: relative;
   right: -1.2em;
 }
+
 .update-form-container > h2 {
   font-weight: 500;
   color: #FF0000;
 }
+
+/* Styles for the close button */
+.close-update-form-btn {
+  background-color: #f44336; /* Red background color */
+  color: white; /* Text color */
+  border: none; /* Remove borders */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Padding for the button */
+  cursor: pointer; /* Cursor style on hover */
+  font-size: 16px; /* Font size */
+  margin-top: 10px; /* Add some top margin */
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+/* Hover Effect */
+.close-update-form-btn:hover {
+  background-color: #d32f2f; /* Darker red color on hover */
+  /* You can add more styles for the hover effect, like changing text color */
+}
+
+/* Active/Focus Effect (optional) */
+.close-update-form-btn:active,
+.close-update-form-btn:focus {
+  outline: none; /* Remove default focus outline */
+  /* You can add additional styles for the active/focus state if needed */
+}
+

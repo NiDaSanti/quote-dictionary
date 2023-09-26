@@ -13,10 +13,9 @@ const ClientInformation = ({client, onClose}) => {
     setIsSelected(null)
   }
   return (
-    <div className='modal'>
-      <h2>Client Information</h2>
-      <div className="info-and-update-form-content">
+    <div className={`modal ${isSelected ? 'open' : ''}`}>
         <div className='modal-content'>
+          <h2>Client Information</h2>
           <p><strong>Name:</strong> {client.fields.fullName}</p>
           <p><strong>Address:</strong> {client.fields.address}</p>
           <p><strong>Email:</strong> {client.fields.email}</p>
@@ -29,13 +28,14 @@ const ClientInformation = ({client, onClose}) => {
           {/* Commented out the image rendering */}
           {/* <div>Snapshots of Proof:</div>
           <img src={client.fields.image[0].thumbnails.large.url} alt='job' /> */}
-          <button onClick={onClose}>Close</button>
-          <button onClick={handleClientUpdateClick}>Update</button>
+          <button className="close-button" onClick={onClose}>X</button>
+          <button className="update-btn" onClick={handleClientUpdateClick}>Update</button>
         </div>
+        {isSelected && (
         <div className="update-form-container">
-          {isSelected && (<UpdateClient onUpdate={handleClientUpdateClick} onUpdateClose={handleCloseUpdateForm}/>)}
+          <UpdateClient onUpdate={handleClientUpdateClick} onUpdateClose={handleCloseUpdateForm} />
         </div>
-      </div>
+      )}
     </div>
   )
 }
