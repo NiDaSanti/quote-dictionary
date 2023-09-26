@@ -34,16 +34,16 @@ const ClientList = () => {
     setSelectClient(client)
   }
 
-  const handleUpdateClient = (updatedClient) => {
-    const updatedIndex = clients.findIndex((client) => client.id === updatedClient.id)
+  // const handleUpdateClient = (updatedClient) => {
+  //   const updatedIndex = clients.findIndex((client) => client.id === updatedClient.id)
 
-    if(updatedIndex !== -1) {
-      const updatedClients = [...clients]
-      updatedClients[updatedIndex] = updatedClient
-      setClients(updatedClients)
-    }
-    setSelectClient(null)
-  }
+  //   if(updatedIndex !== -1) {
+  //     const updatedClients = [...clients]
+  //     updatedClients[updatedIndex] = updatedClient
+  //     setClients(updatedClients)
+  //   }
+  //   setSelectClient(null)
+  // }
 
   if (!clients || clients.length === 0) {
     return <div>Loading...</div>;
@@ -68,7 +68,6 @@ const ClientList = () => {
         <thead>
           <tr>
             <th>Remove Client</th>
-            <th>Edit Client</th>
             <th>Date of Client Entry</th>
             <th>Name</th>
             <th>Email</th>
@@ -95,9 +94,6 @@ const ClientList = () => {
                     Delete
                   </button>
                 </td>
-                <td>
-                  <button className='edit-client-submit' onClick={() => handleClientItemClick(client)}></button>
-                </td>
                 <td>{dateAndTimeConvert}</td>
                 <td>{client.fields.fullName}</td>
                 <td>{client.fields.email}</td>
@@ -107,16 +103,18 @@ const ClientList = () => {
                 <td>{client.fields.endDate}</td>
                 <td>{client.fields.priority}</td>
                 <td>{client.fields.serviceType}</td>
-                <td>{client.fields.request}</td>
+                <td>
+                  <div>{client.fields.request}</div>
+                </td>
                 {/* Removed the image rendering */}
-                <td>${client.fields.totalQuote}</td>
+                <td className="quote-total">${client.fields.totalQuote}</td>
               </tr>
             );
           })}
         </tbody>
       </table>
       {selectClient && (<ClientInformation client={selectClient} onClose={handleCloseModal} />)}
-      {selectClient && (<UpdateClient clientId={selectClient.id} onUpdate={handleUpdateClient} />)}
+      {/* {selectClient && (<UpdateClient clientId={selectClient.id} onUpdate={handleUpdateClient} />)} */}
     </>
   );
 };

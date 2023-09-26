@@ -2,11 +2,22 @@
   font-size: 20px;
 }
 .remove-client-submit {
+  font-size: 16px;
   background: #FF0000;
   color: #ffffff;
   width: 70px;
   padding: 7px;
 }
+
+.edit-client-submit {
+  width: 70px;
+  padding: 7px;
+  /* height: 2.6em; */
+  font-size: 16px;
+  background: #007FFF;
+  color: #fff;
+}
+
 table{
   background: #f2f2f2;
   width: 100%;
@@ -45,3 +56,11 @@ table tr:hover {
     font-size: 20px;
     color: #007FFF;
   }
+.quote-total {
+  color: #008000;
+  font-weight: 900;
+}
+td > div {
+  max-height: 35px;
+  overflow-y: auto;
+}

@@ -167,7 +167,7 @@ const ClientForm = () => {
         <input type="text" name="totalQuote" value={formData.totalQuote} onChange={handleChange} />
         <button className='new-client-submit' type="submit">
           {/* Removed 'disabled' attribute */}
-          Create Client
+          Create
         </button>
       </form>
     </div>

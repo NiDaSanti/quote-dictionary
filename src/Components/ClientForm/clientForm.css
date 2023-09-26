@@ -28,6 +28,7 @@ input[type="date"] {
   text-align: left;
 }
 .new-client-submit {
+  font-size: 18px;
   margin-top: 15px;
   width: 100px;
   padding: 10px;
