@@ -1,26 +1,44 @@
-import React from "react"
+import React, {useState} from "react"
+import UpdateClient from '../UpdateClient/updateClient'
 import '../ClientInformation/clientInformation.css'
 
 const ClientInformation = ({client, onClose}) => {
+  const [isSelected, setIsSelected] = useState(null)
+
+  const handleClientUpdateClick = () => {
+    setIsSelected(client)
+  }
+
+  const handleCloseUpdateForm = () => {
+    setIsSelected(null)
+  }
   return (
-    <div className='modal'>
-      <div className='modal-content'>
-        <h2>Client Information</h2>
-        <div>Name: {client.fields.fullName}</div>
-        <div>Address: {client.fields.address}</div>
-        <div>Email: {client.fields.email}</div>
-        <div>Phone Number: {client.fields.phone}</div>
-        <div>Date of Start: {client.fields.startDate}</div>
-        <div>Date of End: {client.fields.endDate}</div>
-        <div>Service (Job) Type: {client.fields.serviceType}</div>
-        <div>Job Description: {client.fields.request}</div>
-        {/* Commented out the image rendering */}
-        {/* <div>Snapshots of Proof:</div>
-        <img src={client.fields.image[0].thumbnails.large.url} alt='job' /> */}
-        <button onClick={onClose}>Close</button>
-      </div>
+    <div className={`modal ${isSelected ? 'open' : ''}`}>
+        <div className='modal-content'>
+          <h2>Client Information</h2>
+          <p><strong>Name:</strong> {client.fields.fullName}</p>
+          <p><strong>Address:</strong> {client.fields.address}</p>
+          <p><strong>Email:</strong> {client.fields.email}</p>
+          <p><strong>Phone Number:</strong> {client.fields.phone}</p>
+          <p><strong>Date of Start:</strong> {client.fields.startDate}</p>
+          <p><strong>Date of End:</strong> {client.fields.endDate}</p>
+          <p><strong>Service (Job) Type:</strong> {client.fields.serviceType}</p>
+          <p><strong>Job Description:</strong> {client.fields.request}</p>
+          <p><strong>Total Amount: $<i className="price">{client.fields.totalQuote}</i></strong></p>
+          {/* Commented out the image rendering */}
+          {/* <div>Snapshots of Proof:</div>
+          <img src={client.fields.image[0].thumbnails.large.url} alt='job' /> */}
+          <button className="close-button" onClick={onClose}>X</button>
+          <button className="update-btn" onClick={handleClientUpdateClick}>Update</button>
+        </div>
+        {isSelected && (
+        <div className="update-form-container">
+          <UpdateClient onUpdate={handleClientUpdateClick} onUpdateClose={handleCloseUpdateForm} />
+        </div>
+      )}
     </div>
   )
 }
 
 export default ClientInformation
+

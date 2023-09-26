@@ -1,47 +1,96 @@
-.table-title {
-  font-size: 20px;
+.client-amount {
+  background-color: #f0f0f0; /* Construction color background */
+  padding: 20px; /* Add padding for spacing */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  margin-top: 20px; /* Add margin to separate from other content */
 }
-.remove-client-submit {
-  background: #FF0000;
-  color: #ffffff;
-  width: 70px;
-  padding: 7px;
+
+.client-amount p {
+  font-size: 20px; /* Increase the font size */
+  font-weight: 700; /* Make it bold */
+  color: #008000; /* Green color */
 }
-table{
+
+
+
+/* Table Styles */
+table {
   background: #f2f2f2;
   width: 100%;
   border-collapse: collapse;
-  padding: 10px;
   text-align: left;
+  font-size: 16px; /* Keep the font size the same */
 }
+
 table th {
   background: #808080;
-  padding: 10px;
+  padding: 8px; /* Slightly reduce padding */
   text-align: left;
   font-weight: bold;
   color: #ffffff;
 }
+
 table tr {
   border-bottom: 1px solid #ccc;
 }
+
 /* Table cell (td) styles */
 table td {
-  padding: 10px;
+  padding: 8px; /* Slightly reduce padding */
 }
+
 /* Alternate row background color for better readability */
 table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
+
 /* Hover effect on rows */
 table tr:hover {
   background-color: #e2e2e2;
 }
-.client-amount {
-  text-align: right;
+
+/* Truncate long text in table cells */
+td > div {
+  max-width: 200px; /* Reduce max width to truncate text */
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis (...) for overflowed text */
 }
-.client-amount > p {
-    line-height: 0.8;
-    margin-right: 15px;
-    font-size: 20px;
-    color: #007FFF;
-  }
+
+/* Basic Delete Button Styles */
+.remove-client-submit {
+  background-color: #f44336; /* Red background color */
+  color: white; /* Text color */
+  border: none; /* Remove borders */
+  border-radius: 5px; /* Rounded corners */
+  padding: 6px 12px; /* Smaller padding for the button */
+  cursor: pointer; /* Cursor style on hover */
+}
+
+/* Hover Effect */
+.remove-client-submit:hover {
+  background-color: #d32f2f; /* Darker red color on hover */
+  /* You can add more styles for the hover effect, like changing text color */
+}
+
+/* Active/Focus Effect (optional) */
+.remove-client-submit:active,
+.remove-client-submit:focus {
+  outline: none; /* Remove default focus outline */
+  /* You can add additional styles for the active/focus state if needed */
+}
+
+/* Edit Button Styles */
+.edit-client-submit {
+  width: 70px;
+  padding: 6px 12px; /* Smaller padding for the button */
+  font-size: 16px; /* Font size */
+  background: #007FFF;
+  color: #fff;
+}
+
+.quote-total {
+  color: #008000;
+  font-weight: 900;
+}
