@@ -4,6 +4,7 @@
   border-radius: 5px; /* Rounded corners */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
   margin-top: 20px; /* Add margin to separate from other content */
+  line-height: 0.5; /*Decreased distance between phrases.
 }
 
 .client-amount p {
