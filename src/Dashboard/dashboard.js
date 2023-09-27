@@ -1,7 +1,6 @@
 import React from 'react'
 import ClientForm from '../Components/ClientForm/clientForm'
 import ClientList from '../Components/ClientList/clientList'
-import UpdateClient from '../Components/UpdateClient/updateClient'
 import { ClientProvider } from '../context/ClientProvider'
 
 const Dashboard = () => {

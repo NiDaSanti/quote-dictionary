@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { ClientContext } from '../../context/ClientProvider'
 import ClientInformation from '../ClientInformation/clientInformation'
-import UpdateClient from '../UpdateClient/updateClient'
 import '../ClientList/clientList.css'
 
 const ClientList = () => {

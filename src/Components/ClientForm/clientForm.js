@@ -1,10 +1,10 @@
-import React, { useContext, useState, useRef } from 'react'
+import React, { useContext, useState } from 'react'
 import { ClientContext } from '../../context/ClientProvider'
 import '../ClientForm/clientForm.css'
 
 const ClientForm = () => {
   // Use the client context to access clients and setClients
-  const { clients, setClients, handleAddClient } = useContext(ClientContext)
+  const { clients, handleAddClient } = useContext(ClientContext)
 
   // State to hold form data
   const [formData, setFormData] = useState({

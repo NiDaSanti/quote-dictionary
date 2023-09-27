@@ -4,7 +4,6 @@ import './updateClient.css'
 
 const UpdateClient = ({clientId, onUpdate, onUpdateClose}) => {
   const {clients} = useContext(ClientContext)
-  const [selected, setSelected] = useState(true)
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -38,9 +37,6 @@ const UpdateClient = ({clientId, onUpdate, onUpdateClose}) => {
     setFormData({...formData, [name]: value,})
   }
 
-  const handleOnClose = () => {
-    setSelected(false)
-  }
   const handleUpdate = async () => {
     try {
       const response = await fetch(`/api/update-client/${clientId}`, {
