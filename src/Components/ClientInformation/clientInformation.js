@@ -23,6 +23,7 @@ const ClientInformation = ({client, onClose}) => {
           <p><strong>Date of Start:</strong> {client.fields.startDate}</p>
           <p><strong>Date of End:</strong> {client.fields.endDate}</p>
           <p><strong>Service (Job) Type:</strong> {client.fields.serviceType}</p>
+          <p><strong>Importance:</strong>{client.fields.priority}</p>
           <p><strong>Job Description:</strong> {client.fields.request}</p>
           <p><strong>Total Amount: $<i className="price">{client.fields.totalQuote}</i></strong></p>
           {/* Commented out the image rendering */}
@@ -33,7 +34,11 @@ const ClientInformation = ({client, onClose}) => {
         </div>
         {isSelected && (
         <div className="update-form-container">
-          <UpdateClient onUpdate={handleClientUpdateClick} onUpdateClose={handleCloseUpdateForm} />
+          <UpdateClient 
+            clientId={client.id} 
+            onUpdate={handleClientUpdateClick} 
+            onUpdateClose={handleCloseUpdateForm} 
+          />
         </div>
       )}
     </div>

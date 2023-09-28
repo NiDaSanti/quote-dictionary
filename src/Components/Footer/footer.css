@@ -1,0 +1,28 @@
+/* CSS for the footer */
+footer {
+  background-color: #008000; /* Background color for the footer */
+  color: #fff; /* Text color for the footer */
+  padding: 10px 0; /* Add some padding for spacing */
+  text-align: center; /* Center-align text */
+  position: absolute; /* Position the footer */
+  bottom: 0; /* Place it at the bottom */
+  width: 100%; /* Full width */
+}
+
+/* Optional: Style the link color inside the footer */
+footer a {
+  color: #fff; /* Link color */
+  text-decoration: none; /* Remove underlines */
+}
+
+/* Optional: Style the link color on hover */
+footer a:hover {
+  color: #00a000; /* Link color on hover */
+}
+
+/* Ensure that content pushes the footer down */
+.wrapper {
+  min-height: 100vh; /* Set a minimum height for the wrapper */
+  position: relative; /* Set the wrapper as a relative position container */
+  padding-bottom:/* Height of the footer */;
+}
