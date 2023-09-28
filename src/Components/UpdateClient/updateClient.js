@@ -16,6 +16,7 @@ const UpdateClient = ({clientId, onUpdate, onUpdateClose}) => {
   })
 
   useEffect(() => {
+    console.log("Recievd clientId:", clientId)
     const clientData = clients.find((client) => client.id === clientId)
     
     if(clientData) {
@@ -39,6 +40,7 @@ const UpdateClient = ({clientId, onUpdate, onUpdateClose}) => {
 
   const handleUpdate = async () => {
     try {
+    console.log(clientId)
       const response = await fetch(`/api/update-client/${clientId}`, {
         method: 'PUT',
         headers: {

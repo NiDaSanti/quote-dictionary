@@ -142,29 +142,49 @@ const ClientForm = () => {
     <div className='client-form-container'>
       <form className='client-submission' onSubmit={handleSubmit}>
         <div className='title-post-form'>Client Service Request Form</div>
-        <label>Name:</label>
-        <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} />
-        <label>Email:</label>
-        <input type="text" name="email" value={formData.email} onChange={handleChange} />
-        <label>Phone:</label>
-        <input type="text" name="phone" value={formData.phone} onChange={handleChange} />
-        <label>Address:</label>
-        <input type="text" name="address" value={formData.address} onChange={handleChange} />
-        <div className='service-dates'>
-          <label>Start Date:</label>
-          <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} />
-          <label>End Date:</label>
-          <input type="date" name="endDate" value={formData.endDate} onChange={handleChange} />
+        <div className='input-container'>
+          <label>Name:</label>
+          <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} />
         </div>
-        <label>Priority:</label>
-        <input type="text" name="priority" value={formData.priority} onChange={handleChange} />
-        <label>Service Type:</label>
-        <input type="text" name="serviceType" value={formData.serviceType} onChange={handleChange} />
-        <label>Request:</label>
-        <textarea name="request" value={formData.request} onChange={handleChange} rows="4" cols="50" />
+        <div className='input-container'>
+          <label>Email:</label>
+          <input type="text" name="email" value={formData.email} onChange={handleChange} />
+        </div>
+        <div className='input-container'>
+          <label>Phone:</label>
+          <input type="text" name="phone" value={formData.phone} onChange={handleChange} />
+        </div>
+        <div className='input-container'>
+          <label>Address:</label>
+          <input type="text" name="address" value={formData.address} onChange={handleChange} />
+        </div>
+        <div className='service-dates'>
+          <div className='input-container'>
+            <label>Start Date:</label>
+            <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} />
+          </div>
+          <div className='input-container'>
+            <label>End Date:</label>
+            <input type="date" name="endDate" value={formData.endDate} onChange={handleChange} />
+          </div>
+        </div>
+        <div className='input-container'>
+          <label>Priority:</label>
+          <input type="text" name="priority" value={formData.priority} onChange={handleChange} />
+        </div>
+        <div className='input-container'>
+          <label>Service Type:</label>
+          <input type="text" name="serviceType" value={formData.serviceType} onChange={handleChange} />
+        </div>
+        <div className='input-container'>
+          <label>Request:</label>
+          <textarea name="request" value={formData.request} onChange={handleChange} rows="4" cols="50" />
+        </div>
         {/* Removed the 'Upload Image' input */}
-        <label>Quote Total:</label>
-        <input type="text" name="totalQuote" value={formData.totalQuote} onChange={handleChange} />
+        <div className='input-container'>
+          <label>Quote Total:</label>
+          <input type="text" name="totalQuote" value={formData.totalQuote} onChange={handleChange} />
+        </div>
         <button className='new-client-submit' type="submit">
           {/* Removed 'disabled' attribute */}
           Create
@@ -172,6 +192,6 @@ const ClientForm = () => {
       </form>
     </div>
   );
-};
+}
 
 export default ClientForm

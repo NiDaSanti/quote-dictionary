@@ -33,33 +33,30 @@ label {
 .input-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px; /* Reduce spacing between input containers */
+  margin-bottom: 5px; /* Reduce spacing between input containers */
 }
 
 .service-dates {
   display: flex;
-  padding-top: 20px;
+  padding-top: 10px;
 }
 input[type="text"],
-input[type="date"] {
+input[type="date"],
+textarea {
   flex: 1; /* Make inputs flexible to share available space */
-  padding: 8px; /* Reduce padding */
+  padding: 5px; /* Reduce padding */
   border: 1px solid #ddd; /* Add borders to inputs */
   border-radius: 3px;
   font-size: 12px; /* Smaller font size */
-  height: 28px; /* Reduce input height */
-}
-
-input[type="date"] {
-  margin-right: 10px; /* Add space between date inputs */
-  width: auto;
+  height: 24px; /* Reduce input height */
+  margin-right: 5px; /* Add space between inputs */
 }
 
 /* Submit Button Styles */
 .new-client-submit {
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 14px; /* Smaller font size */
-  padding: 8px 16px; /* Reduce padding */
+  padding: 5px 10px; /* Reduce padding */
   background-color: #008000;
   color: #ffffff;
   border: none;
@@ -73,4 +70,46 @@ input[type="date"] {
 
 .new-client-submit:hover {
   background-color: #006400; /* Darken button color on hover */
+}
+
+@media screen and (max-width: 768px) {
+  .client-form-container {
+    margin: 0; /* Remove margin to utilize full screen width */
+    padding: 0;
+  }
+
+  .client-submission {
+    max-width: 100%; /* Allow form to take full screen width */
+    padding: 10px;
+    border: none; /* Remove border on smaller screens */
+  }
+
+  /* Adjust the title font size for smaller screens */
+  .title-post-form {
+    font-size: 18px;
+  }
+
+  /* Adjust label font size for smaller screens */
+  label {
+    font-size: 14px;
+  }
+
+  /* Adjust input font size for smaller screens */
+  input[type="text"],
+  input[type="date"],
+  textarea {
+    font-size: 12px;
+  }
+
+  /* Adjust input and textarea padding for smaller screens */
+  input[type="text"],
+  input[type="date"],
+  textarea {
+    padding: 8px;
+  }
+
+  /* Adjust button padding for smaller screens */
+  .new-client-submit {
+    padding: 8px 16px;
+  }
 }
