@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { ClientContext } from '../../context/ClientProvider'
 import ClientInformation from '../ClientInformation/clientInformation'
-import ClientClickableRow from '../ClientClickableRow/clientClickableRow'
 import '../ClientList/clientList.css'
 import { setSelectionRange } from '@testing-library/user-event/dist/utils'
 

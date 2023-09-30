@@ -6,15 +6,8 @@
   --form-label-size: 16px;
 }
 
-.update-form-container {
-  width: 65%;
-  background: var(--form-background);
-  margin: 10px;
-  padding: 20px; /* Increase padding for more height */
-  border-radius: var(--form-radius);
-  width: 45%; /* Increase width */
-  height: 498px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a soft shadow */
+.form-field {
+  margin-bottom: 20px;
 }
 
 .form {
@@ -26,13 +19,20 @@
 .form > section {
   flex-direction: column;
   justify-content: center;
-  width: 375px;
+  width: 100%;
 }
 
 .form > label {
   margin-top: 10px;
 }
 
+input[type="text"] {
+  width: 95%;
+}
+
+textarea[type="text"] {
+  width: 95%;
+}
 /* Styles for the update button */
 .client-update-btn {
   background-color: #4CAF50; /* Green color for update button */
@@ -77,10 +77,10 @@ section {
   flex-direction: column;
 }
 
-.right-side {
+/* .right-side {
   position: relative;
   right: -1.2em;
-}
+} */
 
 .update-form-container > h2 {
   font-weight: 500;
@@ -113,3 +113,17 @@ section {
   /* You can add additional styles for the active/focus state if needed */
 }
 
+@media screen and (max-width: 768px) {
+  .update-form-container {
+    margin: 10px;
+    width: 93%;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-field {
+    margin-bottom: 3px;
+  }
+}

@@ -85,11 +85,6 @@ h2 {
     overflow-y: auto;
   }
 
-  .update-form-container {
-    width: 99%;
-    overflow-y: auto;
-  }
-
   /* Close button styles */
   .close-button {
     top: 5px;
