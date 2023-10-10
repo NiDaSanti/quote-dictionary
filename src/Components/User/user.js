@@ -19,8 +19,6 @@ const User = ({setAuthenticated}) => {
         },
         body: JSON.stringify(requestBody)
       })
-      console.log('check for', password)
-      console.log('Server Response:', response)
 
       if(response.ok) {
         const data = await response.json()
