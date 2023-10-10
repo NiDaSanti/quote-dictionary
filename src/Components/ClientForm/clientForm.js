@@ -19,16 +19,16 @@ const ClientForm = () => {
     request: '',
     // Removed the 'image' state as it's not needed now
     totalQuote: '',
-  });
+  })
 
   // State to track image uploading (removed)
-  // const [isUploadingImage, setIsUploadingImage] = useState(false);
+  // const [isUploadingImage, setIsUploadingImage] = useState(false)
 
   // State for error messages
-  // const [errorMessage, setErrorMessage] = useState('');
+  // const [errorMessage, setErrorMessage] = useState('')
 
   // Ref to the file input element (removed)
-  // const imageInputRef = useRef(null);
+  // const imageInputRef = useRef(null)
 
   // Handle form input changes
   const handleChange = (e) => {
@@ -37,16 +37,16 @@ const ClientForm = () => {
       ...prevData,
       [name]: value,
     }))
-  };
+  }
 
   // Handle image file selection (removed)
   // const handleImageChange = (e) => {
-  //   const file = e.target.files[0];
+  //   const file = e.target.files[0]
   //   setFormData((prevData) => ({
   //     ...prevData,
   //     image: file,
-  //   }));
-  // };
+  //   }))
+  // }
 
   // Function to upload the image to Airtable (removed)
   // const uploadImageToAirtable = async (image) => {
