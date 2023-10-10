@@ -86,6 +86,16 @@ const TABLENAME = process.env.AIRTABLE_TABLENAME
 //   }
 // }
 
+const authenticateUser = async (req, res, next) => {
+  const userPass = req.body.userPass
+  const correctPass = process.env.APP_AUTHENTICATION
+
+  if(!userPass || userPass !== correctPass) {
+    return res.status(401).json({message: 'Authentication failed'})
+  }
+  next()
+}
+
 const createClient = async (req, res) => {
   try {
     console.log('Received POST request to create client:', req.body)
@@ -231,4 +241,4 @@ const getClientsData = async (req, res) => {
   }
 }
 
-module.exports = { createClient, editClient, removeClient, getClientsData }
+module.exports = { authenticateUser, createClient, editClient, removeClient, getClientsData }
