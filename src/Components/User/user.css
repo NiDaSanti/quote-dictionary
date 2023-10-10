@@ -1,23 +1,20 @@
 /* The position property is set to relative in the App.css file in this project */
-
 .login-container {
-  position: absolute;
   background: #008000;
   color: #ffffff;
   border-style: none;
   border-radius: 5px;
   padding: 75px;
-  left: 50%;
-  -ms-transform: translate(-50%, 100%);
-  transform: translate(-50%, 100%);
-  margin: 25px;
+  margin: auto;
+  width: 60%;
+  max-width: 800px;
 }
 
 .quote-dictionary {
-  position: absolute;
-  left: 50%;
-  -ms-transform: translate(-50%, 0%);
-  transform: translate(-50%, 0%);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
 }
 
 h2 {
@@ -53,23 +50,24 @@ input[type="password"] {
 /* Mobile View Styles */
 @media (max-width: 768px) {
   .login-container {
-    position: absolute;
     width: 85%;
     padding: 25px; /* Reduce padding for smaller screens */
-    left: 44%;
   }
 
+  .quote-dictionary {
+    width: 75%;
+  }
   h2 {
     font-size: 20px; /* Adjust the font size for smaller screens */
   }
 
   input[type="password"] {
-    width: 100%; /* Make the input full width on mobile */
+    width: 80%; /* Make the input full width on mobile */
     text-align: center;
   }
 
   .login-button {
-    width: 100%; /* Make the button full width on mobile */
+    width: 50%; /* Make the button full width on mobile */
     font-size: 16px; /* Adjust the font size for smaller screens */
   }
 }
