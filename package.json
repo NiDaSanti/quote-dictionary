@@ -1,21 +1,30 @@
 {
-  "name": "server",
+  "name": "node-quote-dictionary-proto",
   "version": "1.0.0",
-  "description": "",
+  "description": "A prototype to manage and keep record of user clients.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "engines": {
     "node": "14.x",
     "npm": "6.x"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "quote-dictionary-proto",
+    "heroku"
+  ],
+  "author": "Nicholas Santiago",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
     "cor": "^0.0.0",
     "express": "^4.18.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "server.js"
   }
 }
