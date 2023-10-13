@@ -41,7 +41,7 @@ const User = ({setAuthenticated}) => {
         />
       <div className="login-container">
 
-        <h2><i>Login to Quote Dictionary</i></h2>
+        <h2><i>Login to prototype</i></h2>
         <input
           type="password"
           placeholder="Password"

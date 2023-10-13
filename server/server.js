@@ -2,7 +2,7 @@ const bodyParser = require('body-parser')
 const express = require('express')
 // const path = require('path')
 const app = express()
-const port = process.env.PORT || 3000
+let port = process.env.PORT
 const cors = require('cors')
 const clientsRoutes = require('./routes/clients')
 const authRoute = require('./routes/clients')
@@ -33,6 +33,9 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something went wrong')
 })
 
+if(port == null || port == '') {
+  port = 3000
+}
 app.listen(port, () => {
   console.log(`Hello, Welcome to Quote Dictionary and I'm in port ${port}`)
 })

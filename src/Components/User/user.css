@@ -4,7 +4,7 @@
   color: #ffffff;
   border-style: none;
   border-radius: 5px;
-  padding: 75px;
+  padding: 50px;
   margin: auto;
   width: 60%;
   max-width: 800px;
@@ -19,6 +19,7 @@
 
 h2 {
   font-size: 25px;
+  font-weight: 400;
 }
 
 input[type="password"] {
