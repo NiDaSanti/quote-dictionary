@@ -1,8 +1,8 @@
 const bodyParser = require('body-parser')
 const express = require('express')
-// const path = require('path')
+const path = require('path')
 const app = express()
-let port = process.env.PORT
+const port = process.env.PORT || 3000
 const cors = require('cors')
 const clientsRoutes = require('./routes/clients')
 const authRoute = require('./routes/clients')
@@ -17,6 +17,7 @@ app.use(cors({
     }
   }
 }))
+app.use(express.static(path.join(__dirname, 'build')))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(express.json())
@@ -33,9 +34,10 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something went wrong')
 })
 
-if(port == null || port == '') {
-  port = 3000
-}
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
+
 app.listen(port, () => {
   console.log(`Hello, Welcome to Quote Dictionary and I'm in port ${port}`)
 })
