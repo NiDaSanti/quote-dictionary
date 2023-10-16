@@ -29,7 +29,7 @@
       "start-client": "node server/server.js" ,
       "build": "npm run build --prefix server",
       "test": "react-scripts test",
-      "heroku-postbuild": "npm install --prefix server",
+      "heroku-postbuild": "node server/server.js --prefix server",
       "eject": "react-scripts eject"
     },
     "engines": {
