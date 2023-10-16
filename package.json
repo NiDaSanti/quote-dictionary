@@ -5,7 +5,8 @@
   "private": true,
   "proxy": "http://localhost:3000",
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.17.0"
+    "@testing-library/jest-dom": "^5.17.0",
+    "package-name": "^0.1.0"
   },
   "dependencies": {
     "@testing-library/react": "^13.4.0",
@@ -26,33 +27,33 @@
     "react-scripts": "^5.0.0",
     "web-vitals": "^2.1.4"
   },
-    "scripts": {
-      "start": "react-scripts start" ,
-      "build": "react-scripts build",
-      "test": "react-scripts test",
-      "heroku-postbuild": "node server/server.js --prefix server",
-      "eject": "react-scripts eject"
-    },
-    "engines": {
-      "node": "14.x",
-      "npm": "6.x"
-    },
-    "eslintConfig": {
-      "extends": [
-        "react-app",
-        "react-app/jest"
-      ]
-    },
-    "browserslist": {
-      "production": [
-        ">0.2%",
-        "not dead",
-        "not op_mini all"
-      ],
-      "development": [
-        "last 1 chrome version",
-        "last 1 firefox version",
-        "last 1 safari version"
-      ]
-    }
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "heroku-postbuild": "node server/server.js --prefix server",
+    "eject": "react-scripts eject"
+  },
+  "engines": {
+    "node": "14.x",
+    "npm": "6.x"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
+}
