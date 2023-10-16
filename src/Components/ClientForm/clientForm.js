@@ -94,15 +94,12 @@ const ClientForm = () => {
           body: JSON.stringify(formDataObject),
         })
 
-        console.log('FORMDATAOBJECT', formDataObject)
-
         if (!response.ok) {
           const errorData = await response.json()
           throw new Error(`Failed to create record: ${errorData.error}`)
         }
 
         const responseData = await response.json()
-        console.log('Response:', responseData)
 
         // Only clear the form data if the request was successful
         setFormData({
@@ -121,7 +118,6 @@ const ClientForm = () => {
         // Check if responseData.records is an array and has at least one item
         if (responseData.records && Array.isArray(responseData.records) && responseData.records.length > 0) {
           handleAddClient(responseData.records)
-          console.log('Record created successfully!')
         } else {
           console.error('Invalid responseData.records:', responseData.records)
         }
