@@ -28,7 +28,6 @@ const User = ({setAuthenticated}) => {
         setMessage('Authentication failed')
       }
     } catch(error) {
-      console.error('Error occurred during login:', error)
       setMessage('Error occurred during login')
     }
   }

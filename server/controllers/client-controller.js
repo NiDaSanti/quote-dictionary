@@ -98,7 +98,6 @@ const authenticateUser = async (req, res, next) => {
 
 const createClient = async (req, res) => {
   try {
-    console.log('Received POST request to create client:', req.body)
     const formData = req.body
 
     const formDataObject = {
@@ -125,12 +124,6 @@ const createClient = async (req, res) => {
       body: JSON.stringify(formDataObject),
     })
 
-    console.log('Response:', response);
-    console.log('Response from Airtable API:', {
-      status: response.status,
-      statusText: response.statusText,
-    })
-
     if (!response.ok) {
       const errorData = await response.json();
       const errorMessage = `Failed to create client - Status: ${response.status}, Status Text: ${response.statusText}. Airtable Error: ${JSON.stringify(
@@ -142,7 +135,6 @@ const createClient = async (req, res) => {
     }
 
     const responseData = await response.json()
-    console.log('RESPONSE DATA:', responseData)
     // Assuming your Airtable table has an 'ID' field
     const airtableId = responseData.id; // Adjust this based on your Airtable schema
     // Fetch the newly created client using the airtableId
@@ -187,8 +179,6 @@ const editClient = async (req, res) => {
     }
 
     const responseData = await response.json()
-    console.log('Response Data:', responseData)
-
     res.status(200).json({message: 'Client updated succesfully'})
 
   } catch(error) {
@@ -230,9 +220,7 @@ const getClientsData = async (req, res) => {
       throw new Error(`Request failed with status ${response.status}`)
     }
 
-    console.log('Response Status:', response.status)
     const responseData = await response.json()
-    console.log('Response Data:', responseData.records)
     const clients = responseData.records
     res.json(clients)
   } catch (error) {

@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react'
 import { ClientContext } from '../../context/ClientProvider'
 import ClientInformation from '../ClientInformation/clientInformation'
 import '../ClientList/clientList.css'
-import { setSelectionRange } from '@testing-library/user-event/dist/utils'
 
 const ClientList = () => {
   const { clients, setClients } = useContext(ClientContext)
@@ -24,7 +23,6 @@ const ClientList = () => {
       }
       // After successful deletion, update the state to remove the client
       setClients((prevClients) => prevClients.filter((client) => client.id !== clientId))
-      console.log('Client removed successfully!');
     } catch (error) {
       console.error('Failed to remove client: ' + error)
     }
