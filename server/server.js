@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000
 const cors = require('cors')
 const clientsRoutes = require('./routes/clients')
 const authRoute = require('./routes/clients')
-const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001']
+const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001', 'https://quote-proto-63aa678465cd.herokuapp.com']
 
 app.use(cors({
   origin: (origin, callback) => {
