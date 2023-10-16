@@ -22,36 +22,36 @@
     "node-fetch": "^2.6.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "^2.1.3",
     "web-vitals": "^2.1.4"
   },
-  "scripts": {
-    "start": "node server/server.js",
-    "build": "npm run build --prefix server",
-    "test": "react-scripts test",
-    "heroku-postbuild": "npm install --prefix server",
-    "eject": "react-scripts eject"
-  },
-  "engines": {
-    "node": "14.x",
-    "npm": "6.x"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "scripts": {
+      "start-client": "node server/server.js" ,
+      "build": "npm run build --prefix server",
+      "test": "react-scripts test",
+      "heroku-postbuild": "node server/server.js --prefix server",
+      "eject": "react-scripts eject"
+    },
+    "engines": {
+      "node": "14.x",
+      "npm": "6.x"
+    },
+    "eslintConfig": {
+      "extends": [
+        "react-app",
+        "react-app/jest"
+      ]
+    },
+    "browserslist": {
+      "production": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+      ],
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
+    }
   }
-}
