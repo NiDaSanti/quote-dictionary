@@ -1,6 +1,7 @@
 /* Styling file for the client form */
 .client-form-container {
   margin: 10px;
+  margin-top: 9rem;
 }
 
 .client-submission {
@@ -40,11 +41,10 @@ label {
   display: flex;
   padding-top: 10px;
 }
-input[type="text"],
+.input-container > [type="text"],
 input[type="date"],
 textarea {
   flex: 1; /* Make inputs flexible to share available space */
-  padding: 5px; /* Reduce padding */
   border: 1px solid #ddd; /* Add borders to inputs */
   border-radius: 3px;
   font-size: 12px; /* Smaller font size */
@@ -77,11 +77,14 @@ textarea {
     margin: 0; /* Remove margin to utilize full screen width */
     padding: 0;
   }
-
+  
   .client-submission {
-    max-width: 100%; /* Allow form to take full screen width */
+    width: 80%; /* Allow form to take full screen width */
     padding: 10px;
     border: none; /* Remove border on smaller screens */
+    margin-top: 10rem;
+    margin-right: auto;
+    margin-left: auto;
   }
 
   /* Adjust the title font size for smaller screens */
@@ -95,7 +98,7 @@ textarea {
   }
 
   /* Adjust input font size for smaller screens */
-  input[type="text"],
+  .input-container > input[type="text"],
   input[type="date"],
   textarea {
     font-size: 12px;
@@ -105,7 +108,7 @@ textarea {
   input[type="text"],
   input[type="date"],
   textarea {
-    padding: 8px;
+    padding: 2px;
   }
 
   /* Adjust button padding for smaller screens */

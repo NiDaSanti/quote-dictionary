@@ -3,9 +3,10 @@ import { ClientContext } from '../../context/ClientProvider'
 import ClientInformation from '../ClientInformation/clientInformation'
 import '../ClientList/clientList.css'
 
-const ClientList = () => {
+const ClientList = ({searchQuery}) => {
   const { clients, setClients } = useContext(ClientContext)
   const [selectClient, setSelectClient] = useState(null)
+
   let totalOfAllQuotes = 0;
   for (let i = 0; i < clients.length; i++) {
     let convertToNum = Number(clients[i].fields.totalQuote)
@@ -42,6 +43,10 @@ const ClientList = () => {
   if (!clients || clients.length === 0) {
     return <div>Loading...</div>;
   }
+
+  const filteredClients = clients.filter((client) => 
+    client.fields.fullName.toLowerCase().includes(searchQuery.toLowerCase())
+  )
 
   const handleRowClick = (client, event) => {
     if(event.target.className === 'remove-client-submit') {
@@ -80,12 +85,12 @@ const ClientList = () => {
             </tr>
           </thead>
           <tbody>
-            {clients.map((client) => {
+            {filteredClients.map((client) => {
               const dateObj = new Date(client.createdTime)
               const dateAndTimeConvert = dateObj.toLocaleString()
 
               return (
-                <tr key={client.id} onClick={(event) => handleRowClick(client, event)}>
+                <tr className="table-row" key={client.id} onClick={(event) => handleRowClick(client, event)}>
                   <td>
                     <button className='remove-client-submit' onClick={() => handleRemoveClient(client.id)}>
                       Delete
