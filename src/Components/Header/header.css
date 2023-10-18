@@ -13,7 +13,7 @@
   width: 100px;
   height: auto;
   margin-right: 20px;
-  animation: rotate 45s linear infinite;
+  animation: rotate 360s linear infinite;
 }
 
 .header-container > .search-input {
@@ -26,6 +26,21 @@
 
 .search-input:hover {
   transform: scale(1.05);
+}
+
+div > i {
+  font-size: 18px;
+  color: #008000;
+  font-weight: 700;
+}
+
+.aside-container {
+  position: relative;
+  background: #f0f0f0;
+  padding: 8px;
+  border-radius: 5px;
+  border-style: none;
+  left: 4%;
 }
 
 @keyframes rotate {
@@ -49,6 +64,17 @@
 
   .header-container > .search-input {
     width: 80%;
+  }
+
+  .aside-container {
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+
+  .aside-container > div {
+    font-size: 12px;
   }
 
 }

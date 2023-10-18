@@ -1,11 +1,31 @@
-import React from 'react'
+import React, {useContext, useState, useEffect} from 'react'
+import { ClientContext } from '../../context/ClientProvider'
 import headLogo from '../../images/qd-logo.PNG'
 import '../Header/header.css'
 
 const Header = ({onSearch}) => {
+  const { clients } = useContext(ClientContext)
+  const [totalDollars, setTotalDollars] = useState(0)
+  const [clientCount, setClientCount] = useState(0)
+
+  const addAllQuoteTotals = () => {
+    let total = 0
+    for(let i = 0; i < clients.length; i++) {
+      let convertToNum = Number(clients[i].fields.totalQuote) 
+      total += convertToNum
+    } 
+    setTotalDollars(total)
+    return total.toString()
+  }
+
   const handleSearch = (e) => {
     onSearch(e.target.value)
   }
+  useEffect(()=> {
+    const result =  addAllQuoteTotals()
+    console.log(result)
+    setClientCount(clients.length)
+  }, [clients])
   return(
     <div className="header-container">
       <img 
@@ -19,6 +39,10 @@ const Header = ({onSearch}) => {
         placeholder="Search clients"
         onChange={handleSearch}
       />
+      <aside className="aside-container">
+        <div>Total number of clients on file: <i>{clientCount}</i></div>
+        <div>Estimated amount of total dollars: $<i>{totalDollars}</i></div>
+      </aside>
     </div>
   )
 }

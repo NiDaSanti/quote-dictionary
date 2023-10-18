@@ -7,12 +7,12 @@ const ClientList = ({searchQuery}) => {
   const { clients, setClients } = useContext(ClientContext)
   const [selectClient, setSelectClient] = useState(null)
 
-  let totalOfAllQuotes = 0;
-  for (let i = 0; i < clients.length; i++) {
-    let convertToNum = Number(clients[i].fields.totalQuote)
-    totalOfAllQuotes += convertToNum
-  }
-  const convertToStr = totalOfAllQuotes.toString()
+  // let totalOfAllQuotes = 0;
+  // for (let i = 0; i < clients.length; i++) {
+  //   let convertToNum = Number(clients[i].fields.totalQuote)
+  //   totalOfAllQuotes += convertToNum
+  // }
+  // const convertToStr = totalOfAllQuotes.toString()
 
   const handleRemoveClient = async (clientId) => {
     try {
@@ -44,9 +44,15 @@ const ClientList = ({searchQuery}) => {
     return <div>Loading...</div>;
   }
 
-  const filteredClients = clients.filter((client) => 
-    client.fields.fullName.toLowerCase().includes(searchQuery.toLowerCase())
-  )
+  const filteredClients = clients.filter((client) => {
+    const fullName = client.fields.fullName.toLowerCase()
+    const email = client.fields.email.toLowerCase()
+    const phone = client.fields.phone.toLowerCase()
+    const address = client.fields.address.toLowerCase()
+    const totalQuote = client.fields.totalQuote.toLowerCase()
+    const search = searchQuery.toLowerCase()
+    return fullName.includes(search) || email.includes(search) || phone.includes(search) || address.includes(search) || totalQuote.includes(search)
+   })
 
   const handleRowClick = (client, event) => {
     if(event.target.className === 'remove-client-submit') {
@@ -61,10 +67,10 @@ const ClientList = ({searchQuery}) => {
   
   return (
     <>
-      <div className='client-amount'>
+      {/* <div className='client-amount'>
         <p>Client count: {clients.length}</p>
         <p className="number">Total in dollars: $<i>{convertToStr}</i></p>
-      </div>
+      </div> */}
       <div className="table-container">
         <table>
           <thead>
