@@ -68,9 +68,9 @@ div > i {
 
   .aside-container {
     background: #f0f0f0;
-    padding: 10px;
     border-radius: 5px;
     margin-top: 5px;
+    margin-right: 9%;
   }
 
   .aside-container > div {

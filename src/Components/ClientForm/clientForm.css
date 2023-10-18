@@ -82,7 +82,7 @@ textarea {
     width: 80%; /* Allow form to take full screen width */
     padding: 10px;
     border: none; /* Remove border on smaller screens */
-    margin-top: 10rem;
+    margin-top: 12.5rem;
     margin-right: auto;
     margin-left: auto;
   }
