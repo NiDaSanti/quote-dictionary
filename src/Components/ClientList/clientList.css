@@ -80,7 +80,13 @@ td > div {
   outline: none; /* Remove default focus outline */
   /* You can add additional styles for the active/focus state if needed */
 }
+/* .table-row {
+  transition: transform 0.5s;
+}
 
+.table-row:hover {          not a liked animation
+  transform: scale(0.99); /* Increase the scale 
+} */
 /* Edit Button Styles */
 .edit-client-submit {
   width: 70px;
