@@ -103,7 +103,7 @@ td > div {
 
 @media screen and (max-width: 768px) {
   /* Adjust client-amount styles for mobile */
-  .client-amount {
+  /* .client-amount {
     padding: 10px;
     margin-top: 10px;
   }
@@ -111,12 +111,18 @@ td > div {
   .client-amount p {
     font-size: 16px;
     font-weight: 600;
-  }
+  } */
 
   /* Adjust table container styles for mobile */
   .table-container {
     overflow-x: auto; /* Enable horizontal scrolling */
     max-width: 100%; /* Make the table container full width */
+  }
+  .table-container-position-toggled {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    max-width: 100%; /* Make the table container full width */
+    position: absolute;
+    top: 14rem;
   }
 
   /* Adjust table styles for mobile */

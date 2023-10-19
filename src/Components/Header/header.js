@@ -3,7 +3,7 @@ import { ClientContext } from '../../context/ClientProvider'
 import headLogo from '../../images/qd-logo.PNG'
 import '../Header/header.css'
 
-const Header = ({onSearch}) => {
+const Header = ({onSearch, formToggle, formOpenAndClose}) => {
   const { clients } = useContext(ClientContext)
   const [totalDollars, setTotalDollars] = useState(0)
   const [clientCount, setClientCount] = useState(0)
@@ -21,11 +21,12 @@ const Header = ({onSearch}) => {
   const handleSearch = (e) => {
     onSearch(e.target.value)
   }
+
   useEffect(()=> {
     const result =  addAllQuoteTotals()
-    console.log(result)
     setClientCount(clients.length)
   }, [clients])
+
   return(
     <div className="header-container">
       <img 
@@ -42,6 +43,7 @@ const Header = ({onSearch}) => {
       <aside className="aside-container">
         <div>Total number of clients on file: <i>{clientCount}</i></div>
         <div>Estimated amount of total dollars: $<i>{totalDollars}</i></div>
+        <div>Client Form:<button className={formOpenAndClose ? 'form-close' : 'form-active'} onClick={formToggle}>{formOpenAndClose ? 'Close':'Open'}</button></div> 
       </aside>
     </div>
   )

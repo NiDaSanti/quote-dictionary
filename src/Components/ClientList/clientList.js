@@ -3,7 +3,7 @@ import { ClientContext } from '../../context/ClientProvider'
 import ClientInformation from '../ClientInformation/clientInformation'
 import '../ClientList/clientList.css'
 
-const ClientList = ({searchQuery}) => {
+const ClientList = ({searchQuery, formOpenAndClose}) => {
   const { clients, setClients } = useContext(ClientContext)
   const [selectClient, setSelectClient] = useState(null)
 
@@ -71,7 +71,7 @@ const ClientList = ({searchQuery}) => {
         <p>Client count: {clients.length}</p>
         <p className="number">Total in dollars: $<i>{convertToStr}</i></p>
       </div> */}
-      <div className="table-container">
+      <div className={formOpenAndClose ? 'table-container' : 'table-container-position-toggled'}>
         <table>
           <thead>
             <tr>

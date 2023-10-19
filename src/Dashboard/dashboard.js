@@ -5,17 +5,22 @@ import Header from '../Components/Header/header'
 import { ClientProvider } from '../context/ClientProvider'
 
 const Dashboard = () => {
-    const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [isOpen, setIsOpen] = useState(false)
 
-    const handleSearch = (query) => {
-      setSearchQuery(query)
-    }
+  //Handle open or close toogle
+  const toggleForm = () => {
+    setIsOpen(!isOpen)
+  }
+  const handleSearch = (query) => {
+    setSearchQuery(query)
+  }
   return(
     <>
       <ClientProvider>
-        <Header onSearch={handleSearch}/>
-        <ClientForm />
-        <ClientList searchQuery={searchQuery}/>
+        <Header onSearch={handleSearch} formToggle={toggleForm} formOpenAndClose={isOpen} />
+        <ClientForm formOpenAndClose={isOpen} formToggle={toggleForm}/>
+        <ClientList searchQuery={searchQuery} formOpenAndClose={isOpen}/>
       </ClientProvider>
     </>
   )

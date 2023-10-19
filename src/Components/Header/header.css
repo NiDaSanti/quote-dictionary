@@ -43,6 +43,26 @@ div > i {
   left: 4%;
 }
 
+.form-active {
+  background:#008000;
+  width: 70px;
+  height: 20px;
+  border-style: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.form-close {
+  background: #f44336; /* Red background color */
+  width: 70px;
+  height: 20px;
+  border-style: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 14px;
+}
+
 @keyframes rotate {
   from {
     transform: rotate(0deg);
