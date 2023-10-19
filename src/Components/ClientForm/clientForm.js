@@ -2,10 +2,9 @@ import React, { useContext, useState } from 'react'
 import { ClientContext } from '../../context/ClientProvider'
 import '../ClientForm/clientForm.css'
 
-const ClientForm = () => {
+const ClientForm = ({formToogle, formOpenAndClose}) => {
   // Use the client context to access clients and setClients
   const { clients, handleAddClient } = useContext(ClientContext)
-
   // State to hold form data
   const [formData, setFormData] = useState({
     fullName: '',
@@ -20,7 +19,6 @@ const ClientForm = () => {
     // Removed the 'image' state as it's not needed now
     totalQuote: '',
   })
-
   // State to track image uploading (removed)
   // const [isUploadingImage, setIsUploadingImage] = useState(false)
 
@@ -29,7 +27,6 @@ const ClientForm = () => {
 
   // Ref to the file input element (removed)
   // const imageInputRef = useRef(null)
-
   // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -136,56 +133,58 @@ const ClientForm = () => {
 
   return (
     <div className='client-form-container'>
-      <form className='client-submission' onSubmit={handleSubmit}>
-        <div className='title-post-form'>Client Service Request Form</div>
-        <div className='input-container'>
-          <label>Name:</label>
-          <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} />
-        </div>
-        <div className='input-container'>
-          <label>Email:</label>
-          <input type="text" name="email" value={formData.email} onChange={handleChange} />
-        </div>
-        <div className='input-container'>
-          <label>Phone:</label>
-          <input type="text" name="phone" value={formData.phone} onChange={handleChange} />
-        </div>
-        <div className='input-container'>
-          <label>Address:</label>
-          <input type="text" name="address" value={formData.address} onChange={handleChange} />
-        </div>
-        <div className='service-dates'>
+      {formOpenAndClose &&(
+        <form className='client-submission' onSubmit={handleSubmit}>
+          <div className='title-post-form'>Client Service Request Form</div>
           <div className='input-container'>
-            <label>Start Date:</label>
-            <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} />
+            <label>Name:</label>
+            <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} />
           </div>
           <div className='input-container'>
-            <label>End Date:</label>
-            <input type="date" name="endDate" value={formData.endDate} onChange={handleChange} />
+            <label>Email:</label>
+            <input type="text" name="email" value={formData.email} onChange={handleChange} />
           </div>
-        </div>
-        <div className='input-container'>
-          <label>Priority:</label>
-          <input type="text" name="priority" value={formData.priority} onChange={handleChange} />
-        </div>
-        <div className='input-container'>
-          <label>Service Type:</label>
-          <input type="text" name="serviceType" value={formData.serviceType} onChange={handleChange} />
-        </div>
-        <div className='input-container'>
-          <label>Request:</label>
-          <textarea name="request" value={formData.request} onChange={handleChange} rows="4" cols="50" />
-        </div>
-        {/* Removed the 'Upload Image' input */}
-        <div className='input-container'>
-          <label>Quote Total:</label>
-          <input type="text" name="totalQuote" value={formData.totalQuote} onChange={handleChange} />
-        </div>
-        <button className='new-client-submit' type="submit">
-          {/* Removed 'disabled' attribute */}
-          Create
-        </button>
-      </form>
+          <div className='input-container'>
+            <label>Phone:</label>
+            <input type="text" name="phone" value={formData.phone} onChange={handleChange} />
+          </div>
+          <div className='input-container'>
+            <label>Address:</label>
+            <input type="text" name="address" value={formData.address} onChange={handleChange} />
+          </div>
+          <div className='service-dates'>
+            <div className='input-container'>
+              <label>Start Date:</label>
+              <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} />
+            </div>
+            <div className='input-container'>
+              <label>End Date:</label>
+              <input type="date" name="endDate" value={formData.endDate} onChange={handleChange} />
+            </div>
+          </div>
+          <div className='input-container'>
+            <label>Priority:</label>
+            <input type="text" name="priority" value={formData.priority} onChange={handleChange} />
+          </div>
+          <div className='input-container'>
+            <label>Service Type:</label>
+            <input type="text" name="serviceType" value={formData.serviceType} onChange={handleChange} />
+          </div>
+          <div className='input-container'>
+            <label>Request:</label>
+            <textarea name="request" value={formData.request} onChange={handleChange} rows="4" cols="50" />
+          </div>
+          {/* Removed the 'Upload Image' input */}
+          <div className='input-container'>
+            <label>Quote Total:</label>
+            <input type="text" name="totalQuote" value={formData.totalQuote} onChange={handleChange} />
+          </div>
+          <button className='new-client-submit' type="submit">
+            {/* Removed 'disabled' attribute */}
+            Create
+          </button>
+        </form>
+      )}
     </div>
   );
 }
