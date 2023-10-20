@@ -43,7 +43,10 @@ const Header = ({onSearch, formToggle, formOpenAndClose}) => {
       <aside className="aside-container">
         <div>Total number of clients on file: <i>{clientCount}</i></div>
         <div>Estimated amount of total dollars: $<i>{totalDollars}</i></div>
-        <div>Client Form:<button className={formOpenAndClose ? 'form-close' : 'form-active'} onClick={formToggle}>{formOpenAndClose ? 'Close':'Open'}</button></div> 
+        <button 
+          className={formOpenAndClose ? 'form-close' : 'form-active'} 
+          onClick={formToggle}>{formOpenAndClose ? 'Close Client Form':'Open Client Form'}
+        </button> 
       </aside>
     </div>
   )
