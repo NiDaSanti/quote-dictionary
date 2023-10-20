@@ -1,7 +1,6 @@
 /* Styling file for the client form */
 .client-form-container {
-  margin: 10px;
-  margin-top: 9rem;
+ margin-top: 8em;
 }
 
 .client-submission {
@@ -11,7 +10,6 @@
   border: 1px solid #ddd; /* Add a subtle border */
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a soft shadow */
-  display: flex;
   flex-direction: column;
 }
 
@@ -76,13 +74,13 @@ textarea {
   .client-form-container {
     margin: 0; /* Remove margin to utilize full screen width */
     padding: 0;
+    margin-top: 14rem;
   }
   
   .client-submission {
     width: 80%; /* Allow form to take full screen width */
     padding: 10px;
     border: none; /* Remove border on smaller screens */
-    margin-top: 14rem;
     margin-right: auto;
     margin-left: auto;
   }

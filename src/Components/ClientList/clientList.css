@@ -12,7 +12,9 @@
   color: #008000; /* Green color */
 }
 
-
+.table-container {
+  margin-top: 8px;
+}
 
 /* Table Styles */
 table {
@@ -102,6 +104,89 @@ td > div {
 }
 
 @media screen and (max-width: 768px) {
+  /* Change the style from table to card. */
+  .mobile-card-container-close-toggle {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    /* gap: 20px; */
+    background: #f2f2f2;
+    top:13.5rem;
+  }
+  .mobile-card-container-open-toggle {
+    background: #f2f2f2;
+    margin-top: 8px;
+    overflow-y: auto;
+  }
+  .mobile-client-name {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  /* .client-card {
+    background:  #e5e5e5;
+    width:70%;
+    margin: 0 auto;
+    border-radius: 8px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+  }
+
+  .client-card:hover {
+    background: #808080;
+    cursor: pointer;
+  } */
+
+  .client-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .client-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .client-card section {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .client-card div {
+    margin-bottom: 5px;
+  }
+  
+  .remove-client-submit {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 6px; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 12px; 
+    width: 75px;
+  }
+  
+  .remove-client-submit:hover {
+    background-color: #c0392b;
+  }
+
+  .mobile-total-quote {
+    font-weight: 700;
+    font-size: 17px;
+  }
+  
+  
+  section > div {
+    text-align: left;
+  }
   /* Adjust client-amount styles for mobile */
   /* .client-amount {
     padding: 10px;
