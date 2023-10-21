@@ -21,15 +21,18 @@ const ClientProvider = ({ children }) => {
     setClients((prevClients) => [...prevClients, ...newClientRecords])
   }
 
+  const updateClient = (clientId, updatedData) => {
+    const updatedClients = clients.map((client) =>
+      client.id === clientId ? { ...client, fields: updatedData } : client
+    )
+    setClients(updatedClients)
+  }
+
   if (error) {
     return <div>Error: {error.message}</div>;
   }
 
-  return <ClientContext.Provider value={{ clients, setClients, handleAddClient }}>{children}</ClientContext.Provider>
+  return <ClientContext.Provider value={{ clients, setClients, handleAddClient, updateClient }}>{children}</ClientContext.Provider>
 };
 
 export { ClientContext, ClientProvider }
-
-
-
-
