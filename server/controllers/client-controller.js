@@ -162,13 +162,26 @@ const editClient = async (req, res) => {
   try {
     const {id} = req.params
     const updatedClient = req.body
+    const updateClientObject = {
+      fields: {
+        fullName: updatedClient.fullName,
+        email: updatedClient.email,
+        phone: updatedClient.phone,
+        address: updatedClient.address,
+        priority: updatedClient.priority,
+        serviceType: updatedClient.serviceType,
+        request: updatedClient.request,
+        totalQuote: updatedClient.totalQuote
+      }
+    }
+    
     const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}/${id}`, {
       method: 'PATCH',
       headers: {
         Authorization: `Bearer ${API_KEY}`,
         'Content-Type' : 'application/json'
       },
-      body: JSON.stringify({fields: updatedClient})
+      body: JSON.stringify(updateClientObject)
     })
     if(!response.ok) {
       const errorData = await response.json()

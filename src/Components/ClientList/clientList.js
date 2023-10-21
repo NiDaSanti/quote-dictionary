@@ -1,3 +1,4 @@
+import fetch from 'node-fetch';
 import React, { useContext, useState, useEffect } from 'react'
 import { ClientContext } from '../../context/ClientProvider'
 import ClientInformation from '../ClientInformation/clientInformation'
@@ -19,7 +20,6 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
     const handleResize = () => {
       const newInnerWidth = window.innerWidth
       setWindowWidth(newInnerWidth)
-      console.log(newInnerWidth)
     }
     window.addEventListener('resize', handleResize)
 
@@ -43,16 +43,18 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
     }
   }
 
-  // const handleUpdateClient = (updatedClient) => {
-  //   const updatedIndex = clients.findIndex((client) => client.id === updatedClient.id)
+  const handleUpdateClient = (clientId, updatedData) => {
+    setClients((prevClients) => {
+      const updatedClients = prevClients.map((client) => {
+        if(client.id === clientId) {
+          return { ...client, fields: updatedData}
+        }
+        return client
+      })
+      return updatedClients
+    })
 
-  //   if(updatedIndex !== -1) {
-  //     const updatedClients = [...clients]
-  //     updatedClients[updatedIndex] = updatedClient
-  //     setClients(updatedClients)
-  //   }
-  //   setSelectClient(null)
-  // }
+  }
 
   if (!clients || clients.length === 0) {
     return <div>Loading...</div>;
@@ -155,7 +157,12 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
           })}
         </div>
       }
-      {selectClient && (<ClientInformation client={selectClient} onClose={handleCloseModal} />)}
+      {selectClient && (
+        <ClientInformation 
+          client={selectClient} 
+          onClose={handleCloseModal} 
+        />
+      )}
     </>
   );
 };
