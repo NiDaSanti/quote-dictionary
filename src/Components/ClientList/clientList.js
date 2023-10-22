@@ -161,6 +161,7 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
         <ClientInformation 
           client={selectClient} 
           onClose={handleCloseModal} 
+          onUpdate={handleUpdateClient}
         />
       )}
     </>

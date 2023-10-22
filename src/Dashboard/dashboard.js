@@ -18,9 +18,19 @@ const Dashboard = () => {
   return(
     <>
       <ClientProvider>
-        <Header onSearch={handleSearch} formToggle={toggleForm} formOpenAndClose={isOpen} />
-        <ClientForm formOpenAndClose={isOpen} formToggle={toggleForm}/>
-        <ClientList searchQuery={searchQuery} formOpenAndClose={isOpen}/>
+        <Header 
+          onSearch={handleSearch} 
+          formToggle={toggleForm} 
+          formOpenAndClose={isOpen} 
+        />
+        <ClientForm 
+          formOpenAndClose={isOpen} 
+          formToggle={toggleForm}
+        />
+        <ClientList 
+          searchQuery={searchQuery} 
+          formOpenAndClose={isOpen}
+        />
       </ClientProvider>
     </>
   )

@@ -33,20 +33,22 @@ const User = ({setAuthenticated}) => {
   }
   return(
     <>
-      <img 
-        className="quote-dictionary" 
-        src={loginLogo} 
-        alt="Quote Dictionary" 
-        />
       <div className="login-container">
+        <img 
+          className="quote-dictionary" 
+          src={loginLogo} 
+          alt="Quote Dictionary" 
+          />
 
-        <h2><i>Login to prototype</i></h2>
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="login-input-container">
+          <label>Enter Password</label>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
         <div className="error">{message}</div>
         <button 
           className="login-button"
@@ -59,3 +61,4 @@ const User = ({setAuthenticated}) => {
 }
 
 export default User
+          
