@@ -5,16 +5,9 @@ import ClientInformation from '../ClientInformation/clientInformation'
 import '../ClientList/clientList.css'
 
 const ClientList = ({searchQuery, formOpenAndClose}) => {
-  const { clients, setClients } = useContext(ClientContext)
+  const { clients, setClients, updateClient } = useContext(ClientContext)
   const [selectClient, setSelectClient] = useState(null)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-
-  // let totalOfAllQuotes = 0;
-  // for (let i = 0; i < clients.length; i++) {
-  //   let convertToNum = Number(clients[i].fields.totalQuote)
-  //   totalOfAllQuotes += convertToNum
-  // }
-  // const convertToStr = totalOfAllQuotes.toString()
 
   useEffect(() => {
     const handleResize = () => {
@@ -44,16 +37,10 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
   }
 
   const handleUpdateClient = (clientId, updatedData) => {
-    setClients((prevClients) => {
-      const updatedClients = prevClients.map((client) => {
-        if(client.id === clientId) {
-          return { ...client, fields: updatedData}
-        }
-        return client
-      })
-      return updatedClients
+    updateClient(clientId, updatedData, () => {
+      console.log('Updated?')
+      handleCloseModal()
     })
-
   }
 
   if (!clients || clients.length === 0) {
@@ -169,5 +156,3 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
 };
 
 export default ClientList
-
-
