@@ -8,13 +8,17 @@
   margin: auto;
   width: 60%;
   max-width: 800px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 25%);
 }
 
 .quote-dictionary {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 25%;
+  width: 50%;
 }
 
 h2 {
@@ -42,6 +46,11 @@ input[type="password"] {
   border-radius: 5px;
   padding: 5px 10px;
   transition: background-color 0.3s;
+}
+
+.login-input-container > label {
+  font-size: 17px;
+  color: #ffffff;
 }
 
 .login-button:hover {

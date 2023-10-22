@@ -21,11 +21,15 @@ const ClientProvider = ({ children }) => {
     setClients((prevClients) => [...prevClients, ...newClientRecords])
   }
 
-  const updateClient = (clientId, updatedData) => {
+  const updateClient = (clientId, updatedData, callback) => {
     const updatedClients = clients.map((client) =>
       client.id === clientId ? { ...client, fields: updatedData } : client
     )
     setClients(updatedClients)
+    
+    if(callback) {
+      callback()
+    }
   }
 
   if (error) {

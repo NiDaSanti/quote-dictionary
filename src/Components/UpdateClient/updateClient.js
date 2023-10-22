@@ -52,7 +52,10 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose }) => {
         throw new Error('Failed to update client.')
       }
 
-      onUpdate(formData)
+      onUpdate(formData, () => {
+        onUpdateClose()
+      })
+
       setFormData({
         fullName: '',
         email: '',
