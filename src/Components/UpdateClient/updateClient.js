@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { ClientContext } from '../../context/ClientProvider'
 import './updateClient.css'
 
-const UpdateClient = ({ clientId, onUpdate, onUpdateClose }) => {
+const UpdateClient = ({ clientId, onUpdate, onUpdateClose, updateClientForm }) => {
   const { clients } = useContext(ClientContext)
   const [formData, setFormData] = useState({
     fullName: '',
@@ -40,20 +40,27 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose }) => {
   const handleUpdate = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch(`/api/clients/update-client/${clientId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      })
+      const updatedClientData = { ...formData };
+      updateClientForm(updatedClientData); // Update data in the parent component
+      console.log('Updated client data:', updatedClientData);
+      setFormData({});
+      onUpdateClose(); // Close the update form
+      // const response = await fetch(`/api/clients/update-client/${clientId}`, {
+      //   method: 'PUT',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify(formData)
+      // })
 
-      if (!response.ok) {
-        throw new Error('Failed to update client.')
-      }
+      // if (!response.ok) {
+      //   throw new Error('Failed to update client.')
+      // }
 
-      const updatedClientData = { ...formData }
-      onUpdate(updatedClientData)
+      // const updatedClientData = { ...formData }
+      // console.log('UpdateClient: Updated client data:', updatedClientData)
+      // updateClientForm(updatedClientData)
+   
 
       setFormData({
         fullName: '',

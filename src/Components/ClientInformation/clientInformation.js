@@ -2,16 +2,22 @@ import React, {useState} from "react"
 import UpdateClient from '../UpdateClient/updateClient'
 import '../ClientInformation/clientInformation.css'
 
-const ClientInformation = ({client, onClose}) => {
+const ClientInformation = ({client, onClose, onUpdate}) => {
   const [isSelected, setIsSelected] = useState(null)
+  const [updatedClientData, setUpdatedClientData] = useState(null)
 
-  const handleClientUpdateClick = () => {
+  const handleClientUpdateClick = (updatedData) => {
     setIsSelected(client)
+    if(updatedClientData) {
+      onUpdate(client.id, updatedClientData)
+      handleCloseUpdateForm()
+    }
   }
 
   const handleCloseUpdateForm = () => {
     setIsSelected(null)
   }
+  
   return (
     <div className={`modal ${isSelected ? 'open' : ''}`}>
       <div className='modal-content'>
@@ -37,6 +43,7 @@ const ClientInformation = ({client, onClose}) => {
               clientId={client.id} 
               onUpdate={handleClientUpdateClick} 
               onUpdateClose={handleCloseUpdateForm} 
+              updateClientForm={onUpdate}
             />
           </div>
         )}

@@ -21,16 +21,25 @@ const ClientProvider = ({ children }) => {
     setClients((prevClients) => [...prevClients, ...newClientRecords])
   }
 
-  const updateClient = (clientId, updatedData, callback) => {
+  // const updateClient = (clientId, updatedData, callback) => {
+  //   console.log('Updating client with ID:', clientId, 'updatedData:', updatedData)
+  //   const updatedClients = clients.map((client) =>
+  //     client.id === clientId ? { ...client, fields: updatedData } : client
+  //   )
+  //   setClients(updatedClients)
+    
+  //   if(callback) {
+  //     callback()
+  //   }
+  // }
+
+  const updateClient = (clientId, updatedData) => {
     const updatedClients = clients.map((client) =>
       client.id === clientId ? { ...client, fields: updatedData } : client
-    )
-    setClients(updatedClients)
-    
-    if(callback) {
-      callback()
-    }
-  }
+    );
+    console.log('Updated clients:', updatedClients);
+    setClients(updatedClients);
+  };
 
   if (error) {
     return <div>Error: {error.message}</div>;

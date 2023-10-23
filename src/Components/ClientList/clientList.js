@@ -5,6 +5,8 @@ import ClientInformation from '../ClientInformation/clientInformation'
 import '../ClientList/clientList.css'
 
 const ClientList = ({searchQuery, formOpenAndClose}) => {
+  console.log("ClientList component re-rendered");
+
   const { clients, setClients, updateClient } = useContext(ClientContext)
   const [selectClient, setSelectClient] = useState(null)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
@@ -37,10 +39,9 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
   }
 
   const handleUpdateClient = (clientId, updatedData) => {
-    updateClient(clientId, updatedData, () => {
-      console.log('Updated?')
-      handleCloseModal()
-    })
+    console.log("Updating client with ID:", clientId, "updatedData:", updatedData)
+    updateClient(clientId, updatedData)
+    console.log("After update, clients:", clients)
   }
 
   if (!clients || clients.length === 0) {
