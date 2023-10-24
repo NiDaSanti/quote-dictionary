@@ -2,13 +2,15 @@ import React, { useState, useContext, useEffect } from 'react'
 import { ClientContext } from '../../context/ClientProvider'
 import './updateClient.css'
 
-const UpdateClient = ({ clientId, onUpdate, onUpdateClose, updateClientForm }) => {
-  const { clients } = useContext(ClientContext)
+const UpdateClient = ({ clientId, onUpdate, onUpdateClose }) => {
+  const { clients, updateClient } = useContext(ClientContext)
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     phone: '',
     address: '',
+    startDate: '',
+    endDate: '',
     priority: '',
     serviceType: '',
     request: '',
@@ -24,6 +26,8 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose, updateClientForm }) =
         email: client.fields.email,
         phone: client.fields.phone,
         address: client.fields.address,
+        startDate: client.fields.startDate,
+        endDate: client.fields.endDate,
         priority: client.fields.priority,
         serviceType: client.fields.serviceType,
         request: client.fields.request,
@@ -41,25 +45,20 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose, updateClientForm }) =
     e.preventDefault()
     try {
       const updatedClientData = { ...formData };
-      updateClientForm(updatedClientData); // Update data in the parent component
-      console.log('Updated client data:', updatedClientData);
-      setFormData({});
-      onUpdateClose(); // Close the update form
-      // const response = await fetch(`/api/clients/update-client/${clientId}`, {
-      //   method: 'PUT',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify(formData)
-      // })
+      const response = await fetch(`/api/clients/update-client/${clientId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
 
-      // if (!response.ok) {
-      //   throw new Error('Failed to update client.')
-      // }
-
-      // const updatedClientData = { ...formData }
-      // console.log('UpdateClient: Updated client data:', updatedClientData)
-      // updateClientForm(updatedClientData)
+      if (!response.ok) {
+        throw new Error('Failed to update client.')
+      }
+      const responseData = await response.json()
+      updateClient(clientId, updatedClientData)
+      onUpdateClose()
    
 
       setFormData({
@@ -67,6 +66,8 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose, updateClientForm }) =
         email: '',
         phone: '',
         address: '',
+        startDate: '',
+        endDate: '',
         priority: '',
         serviceType: '',
         request: '',
@@ -118,7 +119,28 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose, updateClientForm }) =
               onChange={handleInputChange}
             />
           </div>
+          <div className='service-dates'>
+            <div className='form-field'>
+              <label>Start Date:</label>
+              <input 
+                type="date" 
+                name="startDate" 
+                value={formData.startDate} 
+                onChange={handleInputChange} 
+              />
+            </div>
+            <div className='form-field'>
+              <label>End Date:</label>
+              <input 
+                type="date" 
+                name="endDate" 
+                value={formData.endDate} 
+                onChange={handleInputChange} 
+              />
+            </div>
+          </div>
         </section>
+        
         <section className="right-side">
           <div className="form-field">
             <label>Priority:</label>

@@ -1,17 +1,14 @@
-import React, {useState} from "react"
+import React, {useState, useContext} from "react"
 import UpdateClient from '../UpdateClient/updateClient'
 import '../ClientInformation/clientInformation.css'
+import { ClientContext } from '../../context/ClientProvider'
 
-const ClientInformation = ({client, onClose, onUpdate}) => {
+const ClientInformation = ({client, onClose}) => {
   const [isSelected, setIsSelected] = useState(null)
-  const [updatedClientData, setUpdatedClientData] = useState(null)
-
-  const handleClientUpdateClick = (updatedData) => {
+  const {clients} = useContext(ClientContext)
+  
+  const handleClientUpdateClick = () => {
     setIsSelected(client)
-    if(updatedClientData) {
-      onUpdate(client.id, updatedClientData)
-      handleCloseUpdateForm()
-    }
   }
 
   const handleCloseUpdateForm = () => {
@@ -43,7 +40,6 @@ const ClientInformation = ({client, onClose, onUpdate}) => {
               clientId={client.id} 
               onUpdate={handleClientUpdateClick} 
               onUpdateClose={handleCloseUpdateForm} 
-              updateClientForm={onUpdate}
             />
           </div>
         )}

@@ -37,9 +37,8 @@ const ClientProvider = ({ children }) => {
     const updatedClients = clients.map((client) =>
       client.id === clientId ? { ...client, fields: updatedData } : client
     );
-    console.log('Updated clients:', updatedClients);
     setClients(updatedClients);
-  };
+  }
 
   if (error) {
     return <div>Error: {error.message}</div>;
