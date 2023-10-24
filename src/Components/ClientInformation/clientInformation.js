@@ -5,8 +5,6 @@ import { ClientContext } from '../../context/ClientProvider'
 
 const ClientInformation = ({client, onClose}) => {
   const [isSelected, setIsSelected] = useState(null)
-  const {clients} = useContext(ClientContext)
-  
   const handleClientUpdateClick = () => {
     setIsSelected(client)
   }
@@ -40,7 +38,6 @@ const ClientInformation = ({client, onClose}) => {
               clientId={client.id} 
               onUpdate={handleClientUpdateClick} 
               onUpdateClose={handleCloseUpdateForm} 
-              closeOnEdit={onClose}
             />
           </div>
         )}

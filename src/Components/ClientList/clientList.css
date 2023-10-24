@@ -106,11 +106,11 @@ td > div {
 @media screen and (max-width: 768px) {
   /* Change the style from table to card. */
   .mobile-card-container-close-toggle {
-    display: grid;
-    grid-template-rows: auto auto auto;
+    /* display: grid; */
+    /* grid-template-rows: auto auto auto; */
     /* gap: 20px; */
     background: #f2f2f2;
-    top:13.5rem;
+    /* top:13.5rem; */
   }
   .mobile-card-container-open-toggle {
     background: #f2f2f2;
@@ -118,9 +118,12 @@ td > div {
     overflow-y: auto;
   }
   .mobile-client-name {
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 22px;
+    font-weight: 800;
+    color: #0073e6;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
   }
+  
   /* .client-card {
     background:  #e5e5e5;
     width:70%;

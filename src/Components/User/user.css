@@ -1,8 +1,7 @@
-/* The position property is set to relative in the App.css file in this project */
 .login-container {
-  background: #008000;
-  color: #ffffff;
-  border-style: none;
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #008000;
   border-radius: 5px;
   padding: 50px;
   margin: auto;
@@ -16,8 +15,7 @@
 
 .quote-dictionary {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   width: 50%;
 }
 
@@ -26,20 +24,22 @@ h2 {
   font-weight: 400;
 }
 
+/* Input with colored border and green box shadow */
 input[type="password"] {
   width: 90%;
   padding: 10px;
   margin-bottom: 10px;
-  border-style: none;
+  border: 2px solid #0073e6; /* Colored border */
   font-size: 13px;
   border-radius: 5px;
+  box-shadow: 0 0 5px #008000; /* Green box shadow */
 }
 
 .login-button {
   width: 75px;
   height: 30px;
   background: #0073e6;
-  border-style: none;
+  border: none;
   color: #ffffff;
   font-size: 18px;
   cursor: pointer;
@@ -50,7 +50,7 @@ input[type="password"] {
 
 .login-input-container > label {
   font-size: 17px;
-  color: #ffffff;
+  color: #000000;
 }
 
 .login-button:hover {
@@ -61,23 +61,108 @@ input[type="password"] {
 @media (max-width: 768px) {
   .login-container {
     width: 85%;
-    padding: 25px; /* Reduce padding for smaller screens */
+    padding: 25px;
   }
 
   .quote-dictionary {
     width: 75%;
   }
+
   h2 {
-    font-size: 20px; /* Adjust the font size for smaller screens */
+    font-size: 20px;
   }
 
   input[type="password"] {
-    width: 80%; /* Make the input full width on mobile */
+    width: 80%;
     text-align: center;
   }
 
   .login-button {
-    width: 50%; /* Make the button full width on mobile */
-    font-size: 16px; /* Adjust the font size for smaller screens */
+    width: 50%;
+    font-size: 16px;
+  }
+}
+.login-container {
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #008000;
+  border-radius: 5px;
+  padding: 50px;
+  margin: auto;
+  width: 60%;
+  max-width: 800px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 25%);
+}
+
+.quote-dictionary {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+}
+
+h2 {
+  font-size: 25px;
+  font-weight: 400;
+}
+
+/* Input with colored border and green box shadow */
+input[type="password"] {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #0073e6; /* Colored border */
+  font-size: 13px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #008000; /* Green box shadow */
+}
+
+.login-button {
+  width: 75px;
+  height: 30px;
+  background: #0073e6;
+  border: none;
+  color: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: background-color 0.3s;
+}
+
+.login-input-container > label {
+  font-size: 17px;
+  color: #000000;
+}
+
+.login-button:hover {
+  background-color: #003366;
+}
+
+/* Mobile View Styles */
+@media (max-width: 768px) {
+  .login-container {
+    width: 85%;
+    padding: 25px;
+  }
+
+  .quote-dictionary {
+    width: 75%;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  input[type="password"] {
+    width: 80%;
+    text-align: center;
+  }
+
+  .login-button {
+    width: 50%;
+    font-size: 16px;
   }
 }

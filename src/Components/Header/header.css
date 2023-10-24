@@ -1,5 +1,5 @@
 .header-container {
-  background: #008000;
+  background: #0073e6; /* Changed to blue color */
   display: flex;
   align-items: center;
   position: fixed;
@@ -7,6 +7,11 @@
   width: 100%;
   padding: 5px;
   z-index: 1;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Subtle box shadow for 3D effect */
+}
+
+.logo-container {
+  display: block;
 }
 
 .head-logo {
@@ -52,6 +57,7 @@ div > i {
   color: #ffffff;
   font-size: 14px;
   margin-top: 5px;
+  transition: transform 0.4s;
 }
 
 .form-close {
@@ -63,6 +69,15 @@ div > i {
   color: #ffffff;
   font-size: 14px;
   margin-top: 5px;
+  transition: transform 0.4s;
+}
+
+.form-active:hover {
+  transform: scale(1.05);
+}
+
+.form-close:hover {
+  transform: scale(1.05);
 }
 
 @keyframes rotate {
@@ -75,8 +90,12 @@ div > i {
 }
 
 @media screen and (max-width: 768px) {
+  .logo-container{
+    display: none;
+  }
+
   .head-logo {
-    width: 75px;
+    width:  75px;
   }
   
   .header-container {
@@ -86,7 +105,7 @@ div > i {
   }
   
   .header-container > .search-input {
-    width: 80%;
+    width: 90%;
   }
   
   .aside-container {

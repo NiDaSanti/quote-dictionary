@@ -18,7 +18,7 @@
 
 .form > section {
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   width: 100%;
 }
 

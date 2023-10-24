@@ -29,11 +29,13 @@ const Header = ({onSearch, formToggle, formOpenAndClose}) => {
 
   return(
     <div className="header-container">
-      <img 
-        className="head-logo"
-        src={headLogo} 
-        alt="Quote dictionary head logo"
-      />
+      <div className="logo-container">
+        <img 
+          className="head-logo"
+          src={headLogo} 
+          alt="Quote dictionary head logo"
+        />
+      </div>
       <input
         className="search-input"
         type="text"
@@ -52,3 +54,4 @@ const Header = ({onSearch, formToggle, formOpenAndClose}) => {
   )
 }
 export default Header
+
