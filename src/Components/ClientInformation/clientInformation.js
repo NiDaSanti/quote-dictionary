@@ -1,16 +1,22 @@
 import React, {useState, useContext} from "react"
 import UpdateClient from '../UpdateClient/updateClient'
-import '../ClientInformation/clientInformation.css'
 import { ClientContext } from '../../context/ClientProvider'
+import '../ClientInformation/clientInformation.css'
 
 const ClientInformation = ({client, onClose}) => {
+  const {updateClient} = useContext(ClientContext)
   const [isSelected, setIsSelected] = useState(null)
+  
   const handleClientUpdateClick = () => {
     setIsSelected(client)
   }
 
   const handleCloseUpdateForm = () => {
     setIsSelected(null)
+  }
+
+  const updateClientInformation = (updatedData) => {
+    updateClient(client.id, updatedData)
   }
   
   return (
@@ -38,6 +44,8 @@ const ClientInformation = ({client, onClose}) => {
               clientId={client.id} 
               onUpdate={handleClientUpdateClick} 
               onUpdateClose={handleCloseUpdateForm} 
+              closeOnEdit={onClose}
+              clientUpdateInformation={updateClientInformation}
             />
           </div>
         )}

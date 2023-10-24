@@ -74,15 +74,18 @@ h2 {
 }
 
 @media screen and (max-width: 768px) {
+  /* Modal styles */
   .modal.open {
     display: flex;
     flex-direction: column;
   }
   .modal-content {
-    width: 95%;
-    padding: 10px;
+    width: 90%; /* Adjust width for smaller screens */
+    padding: 10px; /* Adjust padding */
     overflow-y: auto;
   }
+
+  /* Close button styles */
   .close-button {
     top: 5px;
     right: 5px;
@@ -91,12 +94,15 @@ h2 {
     padding: 5px;
     font-size: 14px;
   }
+
+  /* Update button styles */
   .update-btn {
-    font-size: 16px;
-    padding: 10px 20px;
-    margin-top: 10px;
+    font-size: 14px;
+    padding: 8px 16px;
+    margin-top: 5px;
   }
+
   .price {
-    font-size: 18px;
+    font-size: 20px; /* Adjust font size */
   }
 }
