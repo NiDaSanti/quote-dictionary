@@ -40,6 +40,7 @@ const ClientInformation = ({client, onClose}) => {
               clientId={client.id} 
               onUpdate={handleClientUpdateClick} 
               onUpdateClose={handleCloseUpdateForm} 
+              closeOnEdit={onClose}
             />
           </div>
         )}

@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { ClientContext } from '../../context/ClientProvider'
 import './updateClient.css'
 
-const UpdateClient = ({ clientId, onUpdate, onUpdateClose }) => {
+const UpdateClient = ({ clientId, onUpdate, onUpdateClose, closeOnEdit }) => {
   const { clients, updateClient } = useContext(ClientContext)
   const [formData, setFormData] = useState({
     fullName: '',
@@ -58,6 +58,7 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose }) => {
       }
       const responseData = await response.json()
       updateClient(clientId, updatedClientData)
+      closeOnEdit()
       onUpdateClose()
    
 
