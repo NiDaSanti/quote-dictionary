@@ -5,7 +5,7 @@ import ClientInformation from '../ClientInformation/clientInformation'
 import '../ClientList/clientList.css'
 
 const ClientList = ({searchQuery, formOpenAndClose}) => {
-  const { clients, setClients, updateClient } = useContext(ClientContext)
+  const { clients, setClients } = useContext(ClientContext)
   const [selectClient, setSelectClient] = useState(null)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
@@ -19,7 +19,7 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
     return() => {
       window.removeEventListener('resize', handleResize)
     }
-  },[])
+  },[clients])
   
   const handleRemoveClient = async (clientId) => {
     try {
@@ -36,12 +36,11 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
     }
   }
 
-  const handleUpdateClient = (clientId, updatedData) => {
-    updateClient(clientId, updatedData, () => {
-      console.log('Updated?')
-      handleCloseModal()
-    })
-  }
+  // const handleUpdateClient = (clientId, updatedData) => {
+  //   console.log("Updating client with ID:", clientId, "updatedData:", updatedData)
+  //   updateClient(clientId, updatedData)
+  //   console.log("After update, clients:", clients)
+  // }
 
   if (!clients || clients.length === 0) {
     return <div>Loading...</div>;
@@ -147,8 +146,9 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
       {selectClient && (
         <ClientInformation 
           client={selectClient} 
-          onClose={handleCloseModal} 
-          onUpdate={handleUpdateClient}
+          onClose={handleCloseModal}
+          // onUpdate={handleUpdateClient}
+          // clientUpdate={clients}
         />
       )}
     </>

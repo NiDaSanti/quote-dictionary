@@ -2,13 +2,15 @@ import React, { useState, useContext, useEffect } from 'react'
 import { ClientContext } from '../../context/ClientProvider'
 import './updateClient.css'
 
-const UpdateClient = ({ clientId, onUpdate, onUpdateClose }) => {
-  const { clients } = useContext(ClientContext)
+const UpdateClient = ({ clientId, onUpdate, onUpdateClose, closeOnEdit }) => {
+  const { clients, updateClient } = useContext(ClientContext)
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     phone: '',
     address: '',
+    startDate: '',
+    endDate: '',
     priority: '',
     serviceType: '',
     request: '',
@@ -24,6 +26,8 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose }) => {
         email: client.fields.email,
         phone: client.fields.phone,
         address: client.fields.address,
+        startDate: client.fields.startDate,
+        endDate: client.fields.endDate,
         priority: client.fields.priority,
         serviceType: client.fields.serviceType,
         request: client.fields.request,
@@ -40,6 +44,7 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose }) => {
   const handleUpdate = async (e) => {
     e.preventDefault()
     try {
+      const updatedClientData = { ...formData };
       const response = await fetch(`/api/clients/update-client/${clientId}`, {
         method: 'PUT',
         headers: {
@@ -51,15 +56,19 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose }) => {
       if (!response.ok) {
         throw new Error('Failed to update client.')
       }
-
-      const updatedClientData = { ...formData }
-      onUpdate(updatedClientData)
+      const responseData = await response.json()
+      updateClient(clientId, updatedClientData)
+      closeOnEdit()
+      onUpdateClose()
+   
 
       setFormData({
         fullName: '',
         email: '',
         phone: '',
         address: '',
+        startDate: '',
+        endDate: '',
         priority: '',
         serviceType: '',
         request: '',
@@ -111,7 +120,28 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose }) => {
               onChange={handleInputChange}
             />
           </div>
+          <div className='service-dates'>
+            <div className='form-field'>
+              <label>Start Date:</label>
+              <input 
+                type="date" 
+                name="startDate" 
+                value={formData.startDate} 
+                onChange={handleInputChange} 
+              />
+            </div>
+            <div className='form-field'>
+              <label>End Date:</label>
+              <input 
+                type="date" 
+                name="endDate" 
+                value={formData.endDate} 
+                onChange={handleInputChange} 
+              />
+            </div>
+          </div>
         </section>
+        
         <section className="right-side">
           <div className="form-field">
             <label>Priority:</label>
