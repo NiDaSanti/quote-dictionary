@@ -15,7 +15,7 @@
 
 /* Title Styles */
 .title-post-form {
-  color: #008000;
+  color: #0073e6;
   font-size: 20px; /* Slightly smaller title font size */
   margin-bottom: 10px; /* Reduce space between title and form */
 }
@@ -33,6 +33,30 @@ label {
   display: flex;
   justify-content: space-between;
   margin-bottom: 5px; /* Reduce spacing between input containers */
+}
+
+.input-container select {
+  width: 100%;
+  padding: 3px;
+  border: 2px solid #0073e6;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Style the options */
+.input-container select option {
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+}
+
+/* Style the select when it's focused */
+.input-container select:focus {
+  border-color: #003366;
 }
 
 .service-dates {

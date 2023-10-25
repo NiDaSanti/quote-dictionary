@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useRef } from 'react'
 import { ClientContext } from '../../context/ClientProvider'
 import '../ClientForm/clientForm.css'
 
@@ -19,6 +19,7 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
     // Removed the 'image' state as it's not needed now
     totalQuote: '',
   })
+  const selectRef = useRef(null)
   // State to track image uploading (removed)
   // const [isUploadingImage, setIsUploadingImage] = useState(false)
 
@@ -34,6 +35,11 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
       ...prevData,
       [name]: value,
     }))
+  }
+
+  const handlePriorityChange = (e) => {
+    const newPriority = e.target.value
+    setFormData({...formData, priority: newPriority})
   }
 
   // Handle image file selection (removed)
@@ -53,6 +59,7 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
   //     // ... (removed)
   //   }
   // }
+
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -112,6 +119,9 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
           totalQuote: '',
         })
 
+        if(selectRef.current) {
+          selectRef.current.value = ''
+        }
         // Check if responseData.records is an array and has at least one item
         if (responseData.records && Array.isArray(responseData.records) && responseData.records.length > 0) {
           handleAddClient(responseData.records)
@@ -164,7 +174,12 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
           </div>
           <div className='input-container'>
             <label>Priority:</label>
-            <input type="text" name="priority" value={formData.priority} onChange={handleChange} />
+            <select name="priority" id="priority" onChange={handlePriorityChange} ref={selectRef}>
+              <option value="" selected disabled>Select an option.</option>
+              <option>High</option>
+              <option>Medium</option>
+              <option>Low</option>
+            </select>
           </div>
           <div className='input-container'>
             <label>Service Type:</label>
