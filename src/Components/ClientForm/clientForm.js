@@ -104,7 +104,6 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
         }
 
         const responseData = await response.json()
-        console.log('shshshshshshshshs', responseData)
         // Only clear the form data if the request was successful
         setFormData({
           fullName: '',

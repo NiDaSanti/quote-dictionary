@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, useRef } from 'react'
 import { ClientContext } from '../../context/ClientProvider'
 import './updateClient.css'
 
@@ -17,6 +17,7 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose, closeOnEdit }) => {
     totalQuote: ''
   })
 
+  const selectRef = useRef(null)
   useEffect(() => {
     const client = clients.find(client => client.id === clientId)
 
@@ -41,6 +42,11 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose, closeOnEdit }) => {
     setFormData({ ...formData, [name]: value })
   }
 
+  const handlePriorityChange = (e) => {
+    const priorityChoice = e.target.value
+    setFormData({...formData, priority: priorityChoice})
+  }
+
   const handleUpdate = async (e) => {
     e.preventDefault()
     try {
@@ -61,7 +67,6 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose, closeOnEdit }) => {
       closeOnEdit()
       onUpdateClose()
    
-
       setFormData({
         fullName: '',
         email: '',
@@ -145,12 +150,12 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose, closeOnEdit }) => {
         <section className="right-side">
           <div className="form-field">
             <label>Priority:</label>
-            <input
-              type="text"
-              name="priority"
-              value={formData.priority}
-              onChange={handleInputChange}
-            />
+            <select name="priority" id="priority" onChange={handlePriorityChange} ref={selectRef}>
+              <option>Select an option.</option>
+              <option>High</option>
+              <option>Medium</option>
+              <option>Low</option>
+            </select>
           </div>
           <div className="form-field">
             <label>Service Type:</label>
