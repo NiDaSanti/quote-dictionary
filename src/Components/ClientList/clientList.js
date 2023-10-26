@@ -66,6 +66,10 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
   const handleCloseModal = () => {
     setSelectClient(null)
   }
+
+  // const outlinedStyles = {
+  //   border: '2px solid #FF0000',
+  // }
   
   return (
     <>
@@ -124,34 +128,42 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
         <div className={formOpenAndClose ? "mobile-card-container-open-toggle" : "mobile-card-container-close-toggle"}>
           {filteredClients.map((client) => {
            return(
-             <article className="client-card" key={client.id} onClick={(event) => handleRowClick(client, event)}>
-               <section>
+            <article className={client.fields.priority === 'High' ? "client-card-priority-high" : "client-card"} key={client.id} onClick={(event) => handleRowClick(client, event)}>
+              <div className="priority-dot-container">
+                <div className={client.fields.priority === 'High' ? 
+                  'priority-high': client.fields.priority === 'Medium' ? 
+                  'priority-medium' : 'priority-low'}>
+                </div>
+              </div>
+              <section>
                 <div className="mobile-client-name">{client.fields.fullName}</div>
                 <div>{client.fields.email}</div>
                 <div>{client.fields.phone}</div>
-               </section>
-               <section>
-                 <div>{client.fields.priority}</div>
-                 <div>{client.fields.serviceType}</div>
-                 <div className="mobile-total-quote">$ <i>{client.fields.totalQuote}</i></div>
-               </section>
+              </section>
+              <section>
+                <div>{client.fields.priority}</div>
+                <div>{client.fields.serviceType}</div>
+                <div className="mobile-total-quote">$ <i>{client.fields.totalQuote}</i></div>
+              </section>
               <button className='remove-client-submit' onClick={() => handleRemoveClient(client.id)}>
                 Delete
               </button>
-             </article>
-           )
-          })}
-        </div>
-      }
-      {selectClient && (
-        <ClientInformation 
-          client={selectClient} 
-          onClose={handleCloseModal}
-          onUpdate={handleUpdateClient}
-        />
-      )}
-    </>
-  );
-};
-
-export default ClientList
+            </article>
+            )
+           })}
+         </div>
+       }
+       {selectClient && (
+         <ClientInformation 
+           client={selectClient} 
+           onClose={handleCloseModal}
+           onUpdate={handleUpdateClient}
+         />
+       )}
+     </>
+   );
+ };
+ 
+ export default ClientList
+            
+             
