@@ -53,13 +53,46 @@ table tr:hover {
 }
 
 /* Truncate long text in table cells */
-td > div {
-  max-width: 200px; /* Reduce max width to truncate text */
-  white-space: nowrap; /* Prevent text from wrapping */
-  overflow: hidden;
-  text-overflow: ellipsis; /* Add ellipsis (...) for overflowed text */
+.desktop-priority-indicator {
+  display: flex;
+  align-items: center; /* Vertically center content */
 }
 
+.priority-dot-container {
+  width: 25px;
+  display: flex;
+  align-items: center; /* Center content vertically */
+}
+
+.priority-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 5px; /* Add spacing between dot and label */
+}
+
+.priority-high {
+  background: #FF0000;
+  border: 2px solid #FF0000;
+  box-shadow: 0 0 5px rgba(255, 0, 0.5);
+}
+
+.priority-medium {
+  background: #FFA500;
+  border: 2px solid #FFA500;
+  box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+}
+
+.priority-low {
+  background: #008000;
+  border: 2px solid #008000;
+  box-shadow: 0 0 5px rgba(0, 128, 0, 0.5);
+}
+
+.priority-label {
+  font-weight: 700;
+  color: #000; /* Set your desired text color */
+}
 /* Basic Delete Button Styles */
 .remove-client-submit {
   background-color: #f44336; /* Red background color */
