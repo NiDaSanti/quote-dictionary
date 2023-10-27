@@ -80,13 +80,13 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
             <tr>
               <th>Remove Client</th>
               <th>Date of Client Entry</th>
+              <th>Priority</th>
               <th>Name</th>
               <th>Email</th>
               <th>Phone</th>
               <th>Address</th>
               <th>Start Date</th>
               <th>End Date</th>
-              <th>Priority</th>
               <th>Service Type</th>
               <th>Request</th>
               {/* Removed the 'Image upload' header */}
@@ -106,13 +106,23 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
                     </button>
                   </td>
                   <td>{dateAndTimeConvert}</td>
+                  <div className="desktop-priority-indicator">
+                    <div className="priority-dot-container">
+                      <div className={client.fields.priority === 'High' ? 
+                        'priority-high': client.fields.priority === 'Medium' ? 
+                        'priority-medium' : 'priority-low'}>
+                      </div>
+                    </div>
+                    <td>
+                      {client.fields.priority}
+                      </td>
+                  </div>
                   <td>{client.fields.fullName}</td>
                   <td>{client.fields.email}</td>
                   <td>{client.fields.phone}</td>
                   <td>{client.fields.address}</td>
                   <td>{client.fields.startDate}</td>
                   <td>{client.fields.endDate}</td>
-                  <td>{client.fields.priority}</td>
                   <td>{client.fields.serviceType}</td>
                   <td>
                     <div>{client.fields.request}</div>
@@ -128,7 +138,9 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
         <div className={formOpenAndClose ? "mobile-card-container-open-toggle" : "mobile-card-container-close-toggle"}>
           {filteredClients.map((client) => {
            return(
-            <article className={client.fields.priority === 'High' ? "client-card-priority-high" : "client-card"} key={client.id} onClick={(event) => handleRowClick(client, event)}>
+            <article className={client.fields.priority === 'High' ? 
+              "client-card-priority-high" : 
+              "client-card"} key={client.id} onClick={(event) => handleRowClick(client, event)}>
               <div className="priority-dot-container">
                 <div className={client.fields.priority === 'High' ? 
                   'priority-high': client.fields.priority === 'Medium' ? 
@@ -166,4 +178,5 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
  
  export default ClientList
             
+
              
