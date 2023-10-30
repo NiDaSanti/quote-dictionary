@@ -56,6 +56,13 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
     return fullName.includes(search) || email.includes(search) || phone.includes(search) || address.includes(search) || totalQuote.includes(search)
    })
 
+   const filtereClientByPriority = clients.filter((clientPriority) => {
+     const priority = clientPriority.fields.priority
+     console.log(priority)
+   })
+   
+   
+
   const handleRowClick = (client, event) => {
     if(event.target.className === 'remove-client-submit') {
       return
