@@ -88,7 +88,7 @@ const TABLENAME = process.env.AIRTABLE_TABLENAME
 
 const authenticateUser = async (req, res, next) => {
   const userPass = req.body.userPass
-  const correctPass = process.env.APP_AUTHENTICATION
+  const correctPass = process.env.APP_PROTO_PRODUCTION_AUTH
 
   if(!userPass || userPass !== correctPass) {
     return res.status(401).json({message: 'Authentication failed'})
