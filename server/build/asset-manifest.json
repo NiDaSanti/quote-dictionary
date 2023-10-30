@@ -1,17 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.fccf1df4.css",
-    "main.js": "/static/js/main.837acdce.js",
+
+    "main.css": "/static/css/main.f1a18df3.css",
+    "main.js": "/static/js/main.420a8d86.js",
     "static/js/787.69c50ab4.chunk.js": "/static/js/787.69c50ab4.chunk.js",
     "static/media/qd-logo.PNG": "/static/media/qd-logo.35927afb9b65bf21f0ed.PNG",
     "static/media/image2.png": "/static/media/image2.b6fb54f297616075323d.png",
     "index.html": "/index.html",
-    "main.fccf1df4.css.map": "/static/css/main.fccf1df4.css.map",
-    "main.837acdce.js.map": "/static/js/main.837acdce.js.map",
+    "main.f1a18df3.css.map": "/static/css/main.f1a18df3.css.map",
+    "main.420a8d86.js.map": "/static/js/main.420a8d86.js.map",
     "787.69c50ab4.chunk.js.map": "/static/js/787.69c50ab4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fccf1df4.css",
-    "static/js/main.837acdce.js"
+    "static/css/main.f1a18df3.css",
+    "static/js/main.420a8d86.js"
   ]
 }

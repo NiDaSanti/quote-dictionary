@@ -150,7 +150,7 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose, closeOnEdit }) => {
         <section className="right-side">
           <div className="form-field">
             <label>Priority:</label>
-            <select name="priority" id="priority" onChange={handlePriorityChange} ref={selectRef}>
+            <select name="priority" id="priority" defaultValue={formData.priority} onChange={handlePriorityChange} ref={selectRef}>
               <option>Select an option.</option>
               <option>High</option>
               <option>Medium</option>

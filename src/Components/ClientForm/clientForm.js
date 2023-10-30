@@ -173,8 +173,8 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
           </div>
           <div className='input-container'>
             <label>Priority:</label>
-            <select name="priority" id="priority" onChange={handlePriorityChange} ref={selectRef}>
-              <option value="" selected disabled>Select an option.</option>
+            <select name="priority" id="priority" defaultValue="Select an option" onChange={handlePriorityChange} ref={selectRef}>
+              <option>Select an option.</option>
               <option>High</option>
               <option>Medium</option>
               <option>Low</option>

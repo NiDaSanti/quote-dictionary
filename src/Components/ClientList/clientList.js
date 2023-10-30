@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import React, { useContext, useState, useEffect } from 'react'
 import { ClientContext } from '../../context/ClientProvider'
 import ClientInformation from '../ClientInformation/clientInformation'
@@ -42,9 +41,9 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
     console.log("After update, clients:", clients)
   }
 
-  if (!clients || clients.length === 0) {
+  if (!clients) {
     return <div>Loading...</div>;
-  }
+  } 
 
   const filteredClients = clients.filter((client) => {
     const fullName = client.fields.fullName.toLowerCase()
@@ -55,6 +54,13 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
     const search = searchQuery.toLowerCase()
     return fullName.includes(search) || email.includes(search) || phone.includes(search) || address.includes(search) || totalQuote.includes(search)
    })
+
+   const filtereClientByPriority = clients.filter((clientPriority) => {
+     const priority = clientPriority.fields.priority
+     console.log(priority)
+   })
+   
+   
 
   const handleRowClick = (client, event) => {
     if(event.target.className === 'remove-client-submit') {
@@ -67,103 +73,105 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
     setSelectClient(null)
   }
 
-  // const outlinedStyles = {
-  //   border: '2px solid #FF0000',
-  // }
-  
   return (
     <>
-    {windowWidth > 768 ?
-      <div className={formOpenAndClose ? 'table-container' : 'table-container-position-toggled'}>
-        <table>
-          <thead>
-            <tr>
-              <th>Remove Client</th>
-              <th>Date of Client Entry</th>
-              <th>Priority</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Address</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-              <th>Service Type</th>
-              <th>Request</th>
-              {/* Removed the 'Image upload' header */}
-              <th>Quote Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredClients.map((client) => {
-              const dateObj = new Date(client.createdTime)
-              const dateAndTimeConvert = dateObj.toLocaleString()
+    {clients.length === 0 ? (
+      <div className="zero-client-container">
+        <div className="welcome">Welcome to client prototype.</div>
+        <div className="welcome-message">You currently have no clients logged. Please submit client by clicking <strong><i>"Open Client Form"</i></strong> button above.</div>
+      </div>
+    ) : 
+      windowWidth > 768 ?
+        <div className={formOpenAndClose ? 'table-container' : 'table-container-position-toggled'}>
+          <table>
+            <thead>
+              <tr>
+                <th>Remove Client</th>
+                <th>Date of Client Entry</th>
+                <th>Priority</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Service Type</th>
+                <th>Request</th>
+                {/* Removed the 'Image upload' header */}
+                <th>Quote Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredClients.map((client) => {
+                const dateObj = new Date(client.createdTime)
+                const dateAndTimeConvert = dateObj.toLocaleString()
 
-              return (
-                <tr className="table-row" key={client.id} onClick={(event) => handleRowClick(client, event)}>
-                  <td>
-                    <button className='remove-client-submit' onClick={() => handleRemoveClient(client.id)}>
-                      Delete
-                    </button>
-                  </td>
-                  <td>{dateAndTimeConvert}</td>
-                  <div className="desktop-priority-indicator">
-                    <div className="priority-dot-container">
-                      <div className={client.fields.priority === 'High' ? 
-                        'priority-high': client.fields.priority === 'Medium' ? 
-                        'priority-medium' : 'priority-low'}>
-                      </div>
-                    </div>
+                return (
+                  <tr className="table-row" key={client.id} onClick={(event) => handleRowClick(client, event)}>
                     <td>
-                      {client.fields.priority}
-                      </td>
+                      <button className='remove-client-submit' onClick={() => handleRemoveClient(client.id)}>
+                        Delete
+                      </button>
+                    </td>
+                    <td>{dateAndTimeConvert}</td>
+                    <div className="desktop-priority-indicator">
+                      <div className="priority-dot-container">
+                        <div className={client.fields.priority === 'High' ? 
+                          'priority-high': client.fields.priority === 'Medium' ? 
+                          'priority-medium' : 'priority-low'}>
+                        </div>
+                      </div>
+                      <td>
+                        {client.fields.priority}
+                        </td>
+                    </div>
+                    <td>{client.fields.fullName}</td>
+                    <td>{client.fields.email}</td>
+                    <td>{client.fields.phone}</td>
+                    <td>{client.fields.address}</td>
+                    <td>{client.fields.startDate}</td>
+                    <td>{client.fields.endDate}</td>
+                    <td>{client.fields.serviceType}</td>
+                    <td>
+                      <div>{client.fields.request}</div>
+                    </td>
+                    {/* Removed the image rendering */}
+                    <td className="quote-total"><i>${client.fields.totalQuote}</i></td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div> : 
+          <div className={formOpenAndClose ? "mobile-card-container-open-toggle" : "mobile-card-container-close-toggle"}>
+            {filteredClients.map((client) => {
+            return(
+              <article className={client.fields.priority === 'High' ? 
+                "client-card-priority-high" : 
+                "client-card"} key={client.id} onClick={(event) => handleRowClick(client, event)}>
+                <div className="priority-dot-container">
+                  <div className={client.fields.priority === 'High' ? 
+                    'priority-high': client.fields.priority === 'Medium' ? 
+                    'priority-medium' : 'priority-low'}>
                   </div>
-                  <td>{client.fields.fullName}</td>
-                  <td>{client.fields.email}</td>
-                  <td>{client.fields.phone}</td>
-                  <td>{client.fields.address}</td>
-                  <td>{client.fields.startDate}</td>
-                  <td>{client.fields.endDate}</td>
-                  <td>{client.fields.serviceType}</td>
-                  <td>
-                    <div>{client.fields.request}</div>
-                  </td>
-                  {/* Removed the image rendering */}
-                  <td className="quote-total"><i>${client.fields.totalQuote}</i></td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div> : 
-        <div className={formOpenAndClose ? "mobile-card-container-open-toggle" : "mobile-card-container-close-toggle"}>
-          {filteredClients.map((client) => {
-           return(
-            <article className={client.fields.priority === 'High' ? 
-              "client-card-priority-high" : 
-              "client-card"} key={client.id} onClick={(event) => handleRowClick(client, event)}>
-              <div className="priority-dot-container">
-                <div className={client.fields.priority === 'High' ? 
-                  'priority-high': client.fields.priority === 'Medium' ? 
-                  'priority-medium' : 'priority-low'}>
                 </div>
-              </div>
-              <section>
-                <div className="mobile-client-name">{client.fields.fullName}</div>
-                <div>{client.fields.email}</div>
-                <div>{client.fields.phone}</div>
-              </section>
-              <section>
-                <div>{client.fields.priority}</div>
-                <div>{client.fields.serviceType}</div>
-                <div className="mobile-total-quote">$ <i>{client.fields.totalQuote}</i></div>
-              </section>
-              <button className='remove-client-submit' onClick={() => handleRemoveClient(client.id)}>
-                Delete
-              </button>
-            </article>
-            )
-           })}
-         </div>
+                <section>
+                  <div className="mobile-client-name">{client.fields.fullName}</div>
+                  <div>{client.fields.email}</div>
+                  <div>{client.fields.phone}</div>
+                </section>
+                <section>
+                  <div>{client.fields.priority}</div>
+                  <div>{client.fields.serviceType}</div>
+                  <div className="mobile-total-quote">$ <i>{client.fields.totalQuote}</i></div>
+                </section>
+                <button className='remove-client-submit' onClick={() => handleRemoveClient(client.id)}>
+                  Delete
+                </button>
+              </article>
+              )
+            })}
+          </div>
        }
        {selectClient && (
          <ClientInformation 
