@@ -123,7 +123,7 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
                       </div>
                       <td>
                         {client.fields.priority}
-                        </td>
+                      </td>
                     </div>
                     <td>{client.fields.fullName}</td>
                     <td>{client.fields.email}</td>

@@ -90,6 +90,41 @@ textarea {
   text-align: center;
 }
 
+.form-validate-container {
+  background-color: #ffcccc;
+  border: 1px solid #ff6666;
+  padding: 6px;
+  text-align: center;
+  margin: 8px 0;
+  border-radius: 10px;
+}
+
+.form-validate-text {
+  color: #555;
+  font-size: 14px;
+}
+
+
+.loading-container {
+  width: 100%;
+  background-color: #f0f0f0
+}
+
+.loading-bar {
+  width: 0;
+  height: 13px;
+  border-radius: 5px;
+  background: #0073e6;
+  transition: width 0.3s linear;
+}
+
+.progress-text {
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+  color: #fff;
+}
+
 .new-client-submit:hover {
   background-color: #006400; /* Darken button color on hover */
 }
