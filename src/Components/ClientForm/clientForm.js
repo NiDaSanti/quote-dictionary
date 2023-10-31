@@ -6,6 +6,9 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
   // Use the client context to access clients and setClients
   const { clients, handleAddClient } = useContext(ClientContext)
   // State to hold form data
+  const [loadProgress, setLoadProgress] = useState(0)
+  const [isLoadInProgress, setIsLoadInProgress] = useState(false)
+  const [formValidate, setFormValidate] = useState(false)
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -76,7 +79,9 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
         formData.serviceType &&
         formData.request &&
         formData.totalQuote
-      ) {
+        ) {
+        setFormValidate(false)
+        setIsLoadInProgress(true)
         const formDataObject = {
           fullName: formData.fullName,
           email: formData.email,
@@ -101,6 +106,10 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
         if (!response.ok) {
           const errorData = await response.json()
           throw new Error(`Failed to create record: ${errorData.error}`)
+        }
+
+        if(response.ok) {
+          setLoadProgress(100)
         }
 
         const responseData = await response.json()
@@ -128,17 +137,20 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
           console.error('Invalid responseData.records:', responseData.records)
         }
       } else {
+        setFormValidate(true)
         console.error('Form validation failed. Please fill in all required fields.')
       }
     } catch (error) {
       console.error('Failed to create record', error)
+    } finally {
+      setInterval(setIsLoadInProgress(false), 2000)
     }
   }
 
   // If clients are undefined, display a loading message
-  if (clients === undefined) {
-    return <div>Loading...</div>
-  }
+  // if (clients === undefined) {
+  //   return <div>Loading...</div>
+  // }
 
   return (
     <div className='client-form-container'>
@@ -179,23 +191,33 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
               <option>Medium</option>
               <option>Low</option>
             </select>
-          </div>
-          <div className='input-container'>
-            <label>Service Type:</label>
-            <input type="text" name="serviceType" value={formData.serviceType} onChange={handleChange} />
-          </div>
-          <div className='input-container'>
-            <label>Request:</label>
-            <textarea name="request" value={formData.request} onChange={handleChange} rows="4" cols="50" />
-          </div>
-          {/* Removed the 'Upload Image' input */}
-          <div className='input-container'>
-            <label>Quote Total:</label>
-            <input type="text" name="totalQuote" value={formData.totalQuote} onChange={handleChange} />
-          </div>
-          <button className='new-client-submit' type="submit">
+            </div>
+            <div className='input-container'>
+              <label>Service Type:</label>
+              <input type="text" name="serviceType" value={formData.serviceType} onChange={handleChange} />
+            </div>
+            <div className='input-container'>
+              <label>Request:</label>
+              <textarea name="request" value={formData.request} onChange={handleChange} rows="4" cols="50" />
+            </div>
+            {/* Removed the 'Upload Image' input */}
+            <div className='input-container'>
+              <label>Quote Total:</label>
+              <input type="text" name="totalQuote" value={formData.totalQuote} onChange={handleChange} />
+            </div>
+            {formValidate ? 
+            <div className="form-validate-container">
+              <div className="form-validate-text">Please enter all input fields.</div>
+            </div> : null}
+            {isLoadInProgress ? 
+            <div className="loading-container">
+              <div className="loading-bar" style={{ width: `${loadProgress}%`}}>
+                <div className="progress-text">{loadProgress}%</div>
+              </div>
+            </div> : null}
+            <button className='new-client-submit' type="submit">
             {/* Removed 'disabled' attribute */}
-            Create
+            {isLoadInProgress ? 'Loading...' : 'Create'}
           </button>
         </form>
       )}
@@ -204,3 +226,4 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
 }
 
 export default ClientForm
+
