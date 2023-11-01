@@ -142,8 +142,6 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
       }
     } catch (error) {
       console.error('Failed to create record', error)
-    } finally {
-      setIsLoadInProgress(false)
     }
   }
 
