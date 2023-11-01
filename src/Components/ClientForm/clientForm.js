@@ -133,6 +133,7 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
         // Check if responseData.records is an array and has at least one item
         if (responseData.records && Array.isArray(responseData.records) && responseData.records.length > 0) {
           handleAddClient(responseData.records)
+          setIsLoadInProgress(false)
         } else {
           console.error('Invalid responseData.records:', responseData.records)
         }
@@ -142,8 +143,6 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
       }
     } catch (error) {
       console.error('Failed to create record', error)
-    } finally {
-      setIsLoadInProgress(false)
     }
   }
 
