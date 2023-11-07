@@ -158,19 +158,19 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
           <div className='title-post-form'>Client Service Request Form</div>
           <div className='input-container'>
             <label>Name:</label>
-            <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} />
+            <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Full Name"/>
           </div>
           <div className='input-container'>
             <label>Email:</label>
-            <input type="text" name="email" value={formData.email} onChange={handleChange} />
+            <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email"/>
           </div>
           <div className='input-container'>
             <label>Phone:</label>
-            <input type="text" name="phone" value={formData.phone} onChange={handleChange} />
+            <input type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="000-000-0000"/>
           </div>
           <div className='input-container'>
             <label>Address:</label>
-            <input type="text" name="address" value={formData.address} onChange={handleChange} />
+            <input type="text" name="address" value={formData.address} onChange={handleChange} placeholder="Work Site Address"/>
           </div>
           <div className='service-dates'>
             <div className='input-container'>
@@ -193,16 +193,16 @@ const ClientForm = ({formToogle, formOpenAndClose}) => {
             </div>
             <div className='input-container'>
               <label>Service Type:</label>
-              <input type="text" name="serviceType" value={formData.serviceType} onChange={handleChange} />
+              <input type="text" name="serviceType" value={formData.serviceType} onChange={handleChange} placeholder="What service are you providing?"/>
             </div>
             <div className='input-container'>
               <label>Request:</label>
-              <textarea name="request" value={formData.request} onChange={handleChange} rows="4" cols="50" />
+              <textarea name="request" value={formData.request} onChange={handleChange} placeholder="Describe the service objective."rows="4" cols="50" />
             </div>
             {/* Removed the 'Upload Image' input */}
             <div className='input-container'>
               <label>Quote Total:</label>
-              <input type="text" name="totalQuote" value={formData.totalQuote} onChange={handleChange} />
+              <input type="text" name="totalQuote" value={formData.totalQuote} onChange={handleChange} placeholder="Don't add $" />
             </div>
             {formValidate ? 
             <div className="form-validate-container">
