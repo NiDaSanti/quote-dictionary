@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.2683dca1.css",
-    "main.js": "/static/js/main.a1049691.js",
+    "main.js": "/static/js/main.1a5504ba.js",
     "static/js/787.69c50ab4.chunk.js": "/static/js/787.69c50ab4.chunk.js",
     "static/media/qd-logo.PNG": "/static/media/qd-logo.35927afb9b65bf21f0ed.PNG",
     "static/media/image2.png": "/static/media/image2.b6fb54f297616075323d.png",
     "index.html": "/index.html",
     "main.2683dca1.css.map": "/static/css/main.2683dca1.css.map",
-    "main.a1049691.js.map": "/static/js/main.a1049691.js.map",
+    "main.1a5504ba.js.map": "/static/js/main.1a5504ba.js.map",
     "787.69c50ab4.chunk.js.map": "/static/js/787.69c50ab4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2683dca1.css",
-    "static/js/main.a1049691.js"
+    "static/js/main.1a5504ba.js"
   ]
 }
