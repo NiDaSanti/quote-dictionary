@@ -22,14 +22,59 @@ h2 {
 
 /* Styles for the modal content */
 .modal-content {
-  background-color: #fff;
+  background-color: #f9f9f9;
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
   text-align: left;
-  width: 75%;
+  width: 80%;
   margin: 0 auto;
+}
+
+.modal-content h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.modal-content p {
+  font-size: 15px;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.modal-content strong {
+  font-weight: bold;
+}
+
+.modal-content .price {
+  color: #008000;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.modal-content button {
+  /* background-color: #4CAF50; */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.modal-content button.close-button {
+  background-color: #f44336;
+}
+
+.modal-content button:hover {
+  background-color: #e72020;
+}
+
+.modal-content .update-form-container {
+  margin-top: 20px;
 }
 
 /* Styles for the close button */
@@ -44,8 +89,6 @@ h2 {
   cursor: pointer;
   padding: 8px;
   font-size: 16px;
-  width: 37px;
-  height: 37px;
 }
 
 .close-button:hover {
@@ -89,8 +132,6 @@ h2 {
   .close-button {
     top: 5px;
     right: 5px;
-    width: 30px;
-    height: 30px;
     padding: 5px;
     font-size: 14px;
   }
