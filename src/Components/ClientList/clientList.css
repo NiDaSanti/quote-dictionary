@@ -1,3 +1,35 @@
+.control-panel {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 8px;
+}
+
+.priority-filter-label {
+  margin-right: 3px;
+}
+
+select {
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+select:hover {
+  border-color: #007bff; /* Highlight border on hover */
+}
+
+/* Style the selected option */
+select option:checked {
+  background-color: #007bff;
+  color: #fff;
+}
+
 .client-amount {
   background-color: #f0f0f0; /* Construction color background */
   padding: 20px; /* Add padding for spacing */
@@ -193,6 +225,38 @@ table tr:hover {
 }
 
 @media screen and (max-width: 768px) {
+  .control-panel {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 8px;
+  }
+
+  .priority-filter-label {
+    font-size: 12px;
+    
+  }
+
+  select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 12px;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+
+  select:hover {
+    border-color: #007bff; /* Highlight border on hover */
+  }
+
+  /* Style the selected option */
+  select option:checked {
+    background-color: #007bff;
+    color: #fff;
+  }
   /* Change the style from table to card. */
   .zero-client-container {
     padding: 20px;
@@ -219,7 +283,7 @@ table tr:hover {
   }
   .mobile-card-container-open-toggle {
     background: #f2f2f2;
-    margin-top: 8px;
+    margin-top: 10px;
     overflow-y: auto;
   }
 
@@ -235,7 +299,7 @@ table tr:hover {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    margin: 10px;
+    margin: 7px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
