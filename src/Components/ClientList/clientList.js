@@ -6,6 +6,7 @@ import '../ClientList/clientList.css'
 const ClientList = ({searchQuery, formOpenAndClose}) => {
   const { clients, setClients, updateClient } = useContext(ClientContext)
   const [selectClient, setSelectClient] = useState(null)
+  const [selectedPriority, setSelectedPriority] = useState("All")
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   useEffect(() => {
@@ -41,10 +42,6 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
     console.log("After update, clients:", clients)
   }
 
-  if (!clients) {
-    return <div>Loading...</div>;
-  } 
-
   const filteredClients = clients.filter((client) => {
     const fullName = client.fields.fullName.toLowerCase()
     const email = client.fields.email.toLowerCase()
@@ -52,16 +49,19 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
     const address = client.fields.address.toLowerCase()
     const totalQuote = client.fields.totalQuote.toLowerCase()
     const search = searchQuery.toLowerCase()
-    return fullName.includes(search) || email.includes(search) || phone.includes(search) || address.includes(search) || totalQuote.includes(search)
-   })
+    
+    const matchesSearchQuery = 
+      fullName.includes(search) ||
+      email.includes(search) ||
+      phone.includes(search) ||
+      address.includes(search) ||
+      totalQuote.includes(search) 
 
-   const filtereClientByPriority = clients.filter((clientPriority) => {
-     const priority = clientPriority.fields.priority
-     console.log(priority)
+    const matchesPriorityFilter = selectedPriority === "All" || client.fields.priority === selectedPriority
+
+    return matchesSearchQuery && matchesPriorityFilter
    })
    
-   
-
   const handleRowClick = (client, event) => {
     if(event.target.className === 'remove-client-submit') {
       return
@@ -83,6 +83,15 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
     ) : 
       windowWidth > 768 ?
         <div className={formOpenAndClose ? 'table-container' : 'table-container-position-toggled'}>
+          <aside className="control-panel">
+            <label className="priority-filter-label">Filter priority: </label>
+            <select value={selectedPriority} onChange={(e) => setSelectedPriority(e.target.value)}>
+              <option value="All">All</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </aside>
           <table>
             <thead>
               <tr>
@@ -143,35 +152,44 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
             </tbody>
           </table>
         </div> : 
-          <div className={formOpenAndClose ? "mobile-card-container-open-toggle" : "mobile-card-container-close-toggle"}>
-            {filteredClients.map((client) => {
-            return(
-              <article className={client.fields.priority === 'High' ? 
-                "client-card-priority-high" : 
-                "client-card"} key={client.id} onClick={(event) => handleRowClick(client, event)}>
-                <div className="priority-dot-container">
-                  <div className={client.fields.priority === 'High' ? 
-                    'priority-high': client.fields.priority === 'Medium' ? 
-                    'priority-medium' : 'priority-low'}>
-                  </div>
+        <div className={formOpenAndClose ? "mobile-card-container-open-toggle" : "mobile-card-container-close-toggle"}>
+          <aside className="control-panel">
+          <label className="priority-filter-label">Filter priority: </label>
+            <select value={selectedPriority} onChange={(e) => setSelectedPriority(e.target.value)}>
+              <option value="All">All</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </aside>
+          {filteredClients.map((client) => {
+          return(
+            <article className={client.fields.priority === 'High' ? 
+              "client-card-priority-high" : 
+              "client-card"} key={client.id} onClick={(event) => handleRowClick(client, event)}>
+              <div className="priority-dot-container">
+                <div className={client.fields.priority === 'High' ? 
+                  'priority-high': client.fields.priority === 'Medium' ? 
+                  'priority-medium' : 'priority-low'}>
                 </div>
-                <section>
-                  <div className="mobile-client-name">{client.fields.fullName}</div>
-                  <div>{client.fields.email}</div>
-                  <div>{client.fields.phone}</div>
-                </section>
-                <section>
-                  <div>{client.fields.priority}</div>
-                  <div>{client.fields.serviceType}</div>
-                  <div className="mobile-total-quote">$ <i>{client.fields.totalQuote}</i></div>
-                </section>
-                <button className='remove-client-submit' onClick={() => handleRemoveClient(client.id)}>
-                  Delete
-                </button>
-              </article>
-              )
-            })}
-          </div>
+              </div>
+              <section>
+                <div className="mobile-client-name">{client.fields.fullName}</div>
+                <div>{client.fields.email}</div>
+                <div>{client.fields.phone}</div>
+              </section>
+              <section>
+                <div>{client.fields.priority}</div>
+                <div>{client.fields.serviceType}</div>
+                <div className="mobile-total-quote">$ <i>{client.fields.totalQuote}</i></div>
+              </section>
+              <button className='remove-client-submit' onClick={() => handleRemoveClient(client.id)}>
+                Delete
+              </button>
+            </article>
+            )
+          })}
+        </div>
        }
        {selectClient && (
          <ClientInformation 
