@@ -8,6 +8,8 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
   const [selectClient, setSelectClient] = useState(null)
   const [selectedPriority, setSelectedPriority] = useState("All")
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  //save for a more complex solution.
+  // const [askToDelete, setAskToDelete] = useState(null)
 
   useEffect(() => {
     const handleResize = () => {
@@ -22,17 +24,20 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
   },[clients])
   
   const handleRemoveClient = async (clientId) => {
-    try {
-      const response = await fetch(`/api/clients/${clientId}`, {
-        method: 'DELETE',
-      })
-      if (!response.ok) {
-        throw new Error('Request failed with status ' + response.status)
+    const confirmDeletedClient = window.confirm("Are you sure you want to remove this client?")
+    if(confirmDeletedClient) {
+      try {
+        const response = await fetch(`/api/clients/${clientId}`, {
+          method: 'DELETE',
+        })
+        if (!response.ok) {
+          throw new Error('Request failed with status ' + response.status)
+        }
+        // After successful deletion, update the state to remove the client
+        setClients((prevClients) => prevClients.filter((client) => client.id !== clientId))
+      } catch (error) {
+        console.error('Failed to remove client: ' + error)
       }
-      // After successful deletion, update the state to remove the client
-      setClients((prevClients) => prevClients.filter((client) => client.id !== clientId))
-    } catch (error) {
-      console.error('Failed to remove client: ' + error)
     }
   }
 
