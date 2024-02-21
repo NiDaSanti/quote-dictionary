@@ -27,9 +27,8 @@
     "ws": "^8.14.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node/server/server.js",
     "build": "react-scripts build",
-    "dev": "react-scripts start",
     "test": "react-scripts test",
     "heroku-postbuild": "npm install --prefix server",
     "eject": "react-scripts eject"

@@ -10,11 +10,11 @@
 }
 
 select {
-  padding: 7px;
+  padding: 4px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #fff;
-  font-size: 16px;
+  font-size: 12px;
   color: #333;
   cursor: pointer;
   transition: border-color 0.3s;
@@ -74,7 +74,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  font-size: 13px; /* Keep the font size the same */
+  font-size: 12px; /* Keep the font size the same */
 }
 
 table th {
@@ -91,7 +91,7 @@ table tr {
 
 /* Table cell (td) styles */
 table td {
-  padding: 6px; /* Slightly reduce padding */
+  padding: 4px; /* Slightly reduce padding */
 }
 
 /* Alternate row background color for better readability */
@@ -278,11 +278,7 @@ table tr:hover {
     color: #555;
   }
 
-  .mobile-card-container-close-toggle {
-    background: #f2f2f2;
-  }
   .mobile-card-container-open-toggle {
-    background: #f2f2f2;
     margin-top: 10px;
     overflow-y: auto;
   }
@@ -295,7 +291,7 @@ table tr:hover {
   }
   
   .client-card {
-    background-color: #fff;
+    background: #f2f2f2;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
@@ -324,7 +320,7 @@ table tr:hover {
   }
 
   .client-card-priority-high {
-    background-color: #fff;
+    background: #f2f2f2;
     border-radius: 5px;
     padding: 10px;
     margin: 10px;
