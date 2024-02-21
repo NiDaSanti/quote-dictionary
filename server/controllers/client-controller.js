@@ -90,7 +90,7 @@ const STAGINGTABLENAME = process.env.AIRTABLE_TABLENAMESTAGING
 
 const authenticateUser = async (req, res, next) => {
   const userPass = req.body.userPass
-  const correctPass = process.env.APP_AUTHENTICATION
+  const correctPass = process.env.APP_PROTO_PRODUCTION_AUTH
 
   if(!userPass || userPass !== correctPass) {
     return res.status(401).json({message: 'Authentication failed'})
@@ -117,7 +117,7 @@ const createClient = async (req, res) => {
       },
     }
 
-    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${STAGINGTABLENAME}`, {
+    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
@@ -140,7 +140,7 @@ const createClient = async (req, res) => {
     // Assuming your Airtable table has an 'ID' field
     const airtableId = responseData.id; // Adjust this based on your Airtable schema
     // Fetch the newly created client using the airtableId
-    const fetchResponse = await fetch(`https://api.airtable.com/v0/${BASEID}/${STAGINGTABLENAME}/${airtableId}`, {
+    const fetchResponse = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}/${airtableId}`, {
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
@@ -177,7 +177,7 @@ const editClient = async (req, res) => {
       }
     }
     
-    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${STAGINGTABLENAME}/${id}`, {
+    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}/${id}`, {
       method: 'PATCH',
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
@@ -205,7 +205,7 @@ const editClient = async (req, res) => {
 const removeClient = async (req, res) => {
   try {
     const { clientId } = req.params
-    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${STAGINGTABLENAME}/${clientId}`, {
+    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}/${clientId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
@@ -225,7 +225,7 @@ const removeClient = async (req, res) => {
 
 const getClientsData = async (req, res) => {
   try {
-    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${STAGINGTABLENAME}`, {
+    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}`, {
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
