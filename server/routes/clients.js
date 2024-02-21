@@ -8,7 +8,7 @@ const {
   getClientsData, 
   editClient 
 } = require('../controllers/client-controller')
-// Commented out the image upload route
+
 // router.post('/upload-image', uploadImage)
 router.post('/auth',authenticateUser, (req, res) => {
   res.json({message: 'You have access to this protected route!'})

@@ -1,11 +1,14 @@
 const bodyParser = require('body-parser')
 const express = require('express')
+const http = require('http')
 const path = require('path')
 const app = express()
+const server = http.createServer(app)
 const port = process.env.PORT || 3000
 const cors = require('cors')
 const clientsRoutes = require('./routes/clients')
 const authRoute = require('./routes/clients')
+const {initWebSocket, broadcast} = require('./web-socket.js')
 const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001', 'https://quote-proto-63aa678465cd.herokuapp.com']
 
 app.use(cors({
@@ -17,6 +20,8 @@ app.use(cors({
     }
   }
 }))
+
+initWebSocket(server)
 app.use(express.static(path.join(__dirname, 'build')))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
@@ -37,6 +42,8 @@ app.use((err, req, res, next) => {
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
+
+broadcast('Hello, websocket clients')
 
 app.listen(port, () => {
   console.log(`Hello, Welcome to Quote Dictionary and I'm in port ${port}`)
