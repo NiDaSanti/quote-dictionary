@@ -8,6 +8,7 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
   const [selectClient, setSelectClient] = useState(null)
   const [selectedPriority, setSelectedPriority] = useState("All")
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const [isLoading, setIsLoading] = useState(false)
   //save for a more complex solution.
   // const [askToDelete, setAskToDelete] = useState(null)
 
@@ -80,7 +81,7 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
 
   return (
     <>
-    {clients.length === 0 ? (
+    {isLoading ? 'Loading...' : clients.length === 0 ? (
       <div className="zero-client-container">
         <div className="welcome">Welcome to client prototype.</div>
         <div className="welcome-message">You currently have no clients logged. Please submit client by clicking <strong><i>"Open Client Form"</i></strong> button above.</div>

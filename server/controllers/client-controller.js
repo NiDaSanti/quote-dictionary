@@ -2,6 +2,7 @@
 Do not remove the commented code as it will be utilized 
 for continued creation for uploading images.
 */ 
+const {nodeenv} = require('nodeenv')
 require('dotenv').config()
 const fetch = require('node-fetch')
 // const multer = require('multer')
@@ -11,14 +12,15 @@ const fetch = require('node-fetch')
 // const serviceAccount = require('../../firebase/quote-dictionary-dd591-firebase-adminsdk-oryow-de78f66265.json')
 // Firebase storage init for image storage
 // admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-//   storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-// });
-
-const ACCESS_TOKEN = process.env.AIRTABLE_ACCESS_TOKEN
-const BASEID = process.env.AIRTABLE_BASEID
-const TABLENAME = process.env.AIRTABLE_TABLENAME
-const STAGINGTABLENAME = process.env.AIRTABLE_TABLENAMESTAGING
+  //   credential: admin.credential.cert(serviceAccount),
+  //   storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  // });
+  
+  const ACCESS_TOKEN = process.env.AIRTABLE_ACCESS_TOKEN
+  const BASEID = process.env.AIRTABLE_BASEID
+  const TABLENAME = process.env.AIRTABLE_TABLENAME
+  const STAGINGTABLENAME = process.env.AIRTABLE_TABLENAMESTAGING
+  const developmentTableName = process.env.NODE_ENV === 'development' ? STAGINGTABLENAME : TABLENAME
 
 // const MAX_MB = 10
 // Middleware to handle images
@@ -89,8 +91,10 @@ const STAGINGTABLENAME = process.env.AIRTABLE_TABLENAMESTAGING
 // }
 
 const authenticateUser = async (req, res, next) => {
+  const developmentAuthPass = process.env.NODE_ENV === 'development' ? process.env.APP_AUTHENTICATION : process.env.APP_PROTO_PRODUCTION_AUTH 
   const userPass = req.body.userPass
-  const correctPass = process.env.APP_PROTO_PRODUCTION_AUTH
+  // const correctPass = process.env.APP_PROTO_PRODUCTION_AUTH
+  const correctPass = developmentAuthPass
 
   if(!userPass || userPass !== correctPass) {
     return res.status(401).json({message: 'Authentication failed'})
@@ -117,7 +121,7 @@ const createClient = async (req, res) => {
       },
     }
 
-    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}`, {
+    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${developmentTableName}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
@@ -140,7 +144,7 @@ const createClient = async (req, res) => {
     // Assuming your Airtable table has an 'ID' field
     const airtableId = responseData.id; // Adjust this based on your Airtable schema
     // Fetch the newly created client using the airtableId
-    const fetchResponse = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}/${airtableId}`, {
+    const fetchResponse = await fetch(`https://api.airtable.com/v0/${BASEID}/${developmentTableName}/${airtableId}`, {
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
@@ -177,7 +181,7 @@ const editClient = async (req, res) => {
       }
     }
     
-    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}/${id}`, {
+    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${developmentTableName}/${id}`, {
       method: 'PATCH',
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
@@ -205,7 +209,7 @@ const editClient = async (req, res) => {
 const removeClient = async (req, res) => {
   try {
     const { clientId } = req.params
-    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}/${clientId}`, {
+    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${developmentTableName}/${clientId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
@@ -225,7 +229,7 @@ const removeClient = async (req, res) => {
 
 const getClientsData = async (req, res) => {
   try {
-    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${TABLENAME}`, {
+    const response = await fetch(`https://api.airtable.com/v0/${BASEID}/${developmentTableName}`, {
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
