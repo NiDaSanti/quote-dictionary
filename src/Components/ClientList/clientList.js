@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { ClientContext } from '../../context/ClientProvider'
 import ClientInformation from '../ClientInformation/clientInformation'
-import {Accordion, AccordionDetails, AccordionSummary, Button, Card, CardContent, Container, Paper, Stack, Typography} from '@mui/material'
+import {Accordion, AccordionDetails, AccordionSummary, Alert, Button, Card, CardContent, Container, Paper, Stack, Typography} from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import {blue} from '@mui/material/colors'
 import '@fontsource/roboto/500.css';
@@ -99,7 +99,11 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
                       {filteredClients.map((client) => (
                         <Card sx={{minWidth: 50}}>
                           <CardContent>
-                            <Typography textAlign="right">{client.fields.priority}</Typography>
+                            <Typography textAlign="right">
+                              {client.fields.priority === 'High' ? (<Alert severity='error'>High</Alert>) : 
+                              client.fields.priority === 'Medium' ? (<Alert severity='warning'>Medium</Alert>) : 
+                              (<Alert severity='success'>Low</Alert>)}
+                            </Typography>
                             <Typography color={textColor} textAlign="left" variant="h6" component="div">{client.fields.fullName}</Typography>
                             <Typography textAlign="left">{client.fields.phone}</Typography>
                             <Typography textAlign="left" sx={{fontSize: 14}}>{client.fields.email}</Typography>
