@@ -9,9 +9,9 @@ import '../ClientList/clientList.css'
 import { PrintRounded } from '@mui/icons-material'
 
 const textColor = blue[600]
-const lowOutlineColor = green[100]
-const medOutlineColor = orange[100]
-const highOutlineColor = red[100]
+const lowOutlineColor = green[300]
+const medOutlineColor = orange[300]
+const highOutlineColor = red[300]
 const ClientList = ({searchQuery, formOpenAndClose}) => {
   const { clients, setClients, updateClient } = useContext(ClientContext)
   const [selectClient, setSelectClient] = useState(null)
@@ -149,7 +149,7 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
       <Paper elevation={3}>
         <Accordion style={{border: '1px solid ' + highOutlineColor}}>
           <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls="panel1-content" id="panel1-header">
-            <Typography variant="h6" color={textColor}>High Priority:</Typography>
+            <Typography variant="h6" color={highOutlineColor}>High Priority:</Typography>
             <Typography variant="h6" color="text.secondary">{filterClientsByPriority('High').length}</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -177,7 +177,7 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
       <Paper elevation={3}>
         <Accordion style={{border: '1px solid ' + medOutlineColor}}>
           <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls="panel1-content" id="panel1-header">
-            <Typography variant="h6" color={textColor}>Medium Priority:</Typography>
+            <Typography variant="h6" color={medOutlineColor}>Medium Priority:</Typography>
             <Typography variant="h6" color="text.secondary">{filterClientsByPriority('Medium').length}</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -203,9 +203,9 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
         </Accordion>
       </Paper>
       <Paper elevation={3}>
-        <Accordion style={{border: '1px solid ' + highOutlineColor}}>
+        <Accordion style={{border: '1px solid ' + lowOutlineColor}}>
           <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls="panel1-content" id="panel1-header">
-            <Typography variant="h6" color={textColor}>Low Priority:</Typography>
+            <Typography variant="h6" color={lowOutlineColor}>Low Priority:</Typography>
             <Typography variant="h6" color="text.secondary">{filterClientsByPriority('Low').length}</Typography>
           </AccordionSummary>
           <AccordionDetails>
