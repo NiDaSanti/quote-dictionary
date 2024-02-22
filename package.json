@@ -8,6 +8,10 @@
     "@testing-library/jest-dom": "^5.17.0"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "compression": "^1.7.4",
@@ -26,6 +30,10 @@
     "react-scripts": "^5.0.0",
     "web-vitals": "^2.1.4",
     "ws": "^8.14.2"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
   },
   "scripts": {
     "start": "node/server/server.js",
