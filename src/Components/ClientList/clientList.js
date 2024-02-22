@@ -4,6 +4,7 @@ import ClientInformation from '../ClientInformation/clientInformation'
 import {Accordion, AccordionDetails, AccordionSummary, Button, Card, CardContent, Container, Paper, Stack, Typography} from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import {blue} from '@mui/material/colors'
+import '@fontsource/roboto/500.css';
 import '../ClientList/clientList.css'
 
 const textColor = blue[600]
@@ -88,15 +89,18 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
     {isLoading ? ('Loading Clients...') : (
           <Paper elevation={3}>
             <Accordion>
-              <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls="panel1-content" id="panel1-header">List of Clients</AccordionSummary>
+              <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls="panel1-content" id="panel1-header">
+                <Typography variant="h6" color={textColor}>All Clients:</Typography>
+                <Typography variant="h6" color="text.secondary">{filteredClients.length}</Typography>
+              </AccordionSummary>
                 <AccordionDetails>
                   <Container maxWidth="xxl">
                     <Stack direction={{xs: 'column', sm: 'row'}} spacing={{xs: 1, sm: 2, md: 4}} useFlexGap flexWrap="wrap" justifyContent="center">
                       {filteredClients.map((client) => (
-                        <Card sx={{minWidth: 300}}>
+                        <Card sx={{minWidth: 50}}>
                           <CardContent>
                             <Typography textAlign="right">{client.fields.priority}</Typography>
-                            <Typography textAlign="left" variant="h6" component="div"><i>{client.fields.fullName}</i></Typography>
+                            <Typography color={textColor} textAlign="left" variant="h6" component="div">{client.fields.fullName}</Typography>
                             <Typography textAlign="left">{client.fields.phone}</Typography>
                             <Typography textAlign="left" sx={{fontSize: 14}}>{client.fields.email}</Typography>
                             <Typography textAlign="left">{client.fields.serviceType}</Typography>
