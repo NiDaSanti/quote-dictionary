@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import ClientForm from '../Components/ClientForm/clientForm'
 import ClientList from '../Components/ClientList/clientList'
 import Header from '../Components/Header/header'
+// import Footer from '../Components/Footer/footer.js'
 import { ClientProvider } from '../context/ClientProvider'
 
 const Dashboard = () => {
@@ -31,6 +32,7 @@ const Dashboard = () => {
           searchQuery={searchQuery} 
           formOpenAndClose={isOpen}
         />
+        {/* <Footer /> */}
       </ClientProvider>
     </>
   )

@@ -53,6 +53,12 @@
   color: #fff;
   font-weight: bold;
 }
+.start-date {
+  color: green;
+}
+.end-date {
+  color: red;
+}
 
 textarea[type="text"] {
   width: 95%;

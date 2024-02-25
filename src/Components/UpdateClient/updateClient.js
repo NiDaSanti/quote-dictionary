@@ -1,7 +1,13 @@
 import React, { useState, useContext, useEffect, useRef } from 'react'
+import { Button, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import { ClientContext } from '../../context/ClientProvider'
 import './updateClient.css'
+import {red} from '@mui/material/colors'
 
+const danger = red[500]
 const UpdateClient = ({ clientId, onUpdate, onUpdateClose, closeOnEdit }) => {
   const { clients, updateClient } = useContext(ClientContext)
   const [formData, setFormData] = useState({
@@ -86,108 +92,133 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose, closeOnEdit }) => {
 
   return (
     <>
-      <h2>Update Client Data</h2>
-      <div className="form">
-        <section className="left-side">
-          <div className="form-field">
-            <label>Name:</label>
-            <input
+      <Typography textAlign="center" variant="h5" color={danger}>Update Client Data</Typography>
+      {/* <div className="form"> */}
+        {/* <section className="left-side"> */}
+          {/* <div className="form-field"> */}
+            {/* <label>Name:</label> */}
+            <TextField
+              label="Full Name"
+              fullWidth
               type="text"
               name="fullName"
+              size="small"
               value={formData.fullName}
               onChange={handleInputChange}
+              variant="standard"
             />
-          </div>
-          <div className="form-field">
-            <label>Email:</label>
-            <input
+          {/* </div> */}
+          {/* <div className="form-field"> */}
+            {/* <label>Email:</label> */}
+            <TextField
+              label="Email Address"
+              fullWidth
               type="text"
               name="email"
               value={formData.email}
+              size="small"
               onChange={handleInputChange}
+              variant="standard"
             />
-          </div>
-          <div className="form-field">
-            <label>Phone:</label>
-            <input
+          {/* </div> */}
+          {/* <div className="form-field"> */}
+            {/* <label>Phone:</label> */}
+            <TextField
+              fullWidth
+              label="Phone number"
               type="text"
               name="phone"
               value={formData.phone}
+              size="small"
               onChange={handleInputChange}
+              variant="standard"
             />
-          </div>
-          <div className="form-field">
-            <label>Address:</label>
-            <input
+          {/* </div> */}
+          {/* <div className="form-field"> */}
+            {/* <label>Address:</label> */}
+            <TextField
+              fullWidth 
+              label="Address"
               type="text"
               name="address"
               value={formData.address}
               onChange={handleInputChange}
+              variant="standard"
             />
-          </div>
-          <div className='service-dates'>
-            <div className='form-field'>
-              <label>Start Date:</label>
+          {/* </div> */}
+          {/* <div className='service-dates'> */}
+            {/* <div className='form-field'> */}
+              <label className="start-date">Start Date:</label>
               <input 
                 type="date" 
                 name="startDate" 
                 value={formData.startDate} 
                 onChange={handleInputChange} 
               />
-            </div>
-            <div className='form-field'>
-              <label>End Date:</label>
+            {/* </div> */}
+            {/* <div className='form-field'> */}
+              <label className="end-date">End Date:</label>
               <input 
                 type="date" 
                 name="endDate" 
                 value={formData.endDate} 
                 onChange={handleInputChange} 
               />
-            </div>
-          </div>
-        </section>
+            {/* </div> */}
+          {/* </div> */}
+        {/* </section> */}
         
-        <section className="right-side">
-          <div className="form-field">
-            <label>Priority:</label>
-            <select name="priority" id="priority" defaultValue={formData.priority} onChange={handlePriorityChange} ref={selectRef}>
-              <option>Select an option.</option>
-              <option>High</option>
-              <option>Medium</option>
-              <option>Low</option>
-            </select>
-          </div>
-          <div className="form-field">
-            <label>Service Type:</label>
-            <input
+        {/* <section className="right-side"> */}
+          {/* <div className="form-field"> */}
+            {/* <label>Priority:</label> */}
+            <InputLabel>Priority</InputLabel>
+            <Select fullWidth variant="standard" name="priority" id="priority" value={formData.priority} onChange={handlePriorityChange} ref={selectRef}>
+              <MenuItem>Select an option.</MenuItem>
+              <MenuItem value="High">High</MenuItem>
+              <MenuItem value="Medium">Medium</MenuItem>
+              <MenuItem value="Low">Low</MenuItem>
+            </Select>
+          {/* </div> */}
+          {/* <div className="form-field"> */}
+            {/* <label>Service Type:</label> */}
+            <TextField
+              label="Service Type"
+              variant="standard"
+              fullWidth
               type="text"
               name="serviceType"
               value={formData.serviceType}
               onChange={handleInputChange}
+              size="small"
             />
-          </div>
-          <div className="form-field">
-            <label>Request:</label>
-            <textarea
+          {/* </div> */}
+          {/* <div className="form-field"> */}
+            {/* <label>Request:</label> */}
+            <TextField
+              label="Request Description"
+              fullWidth
+              variant="standard"
               type="text"
               name="request"
               value={formData.request}
               onChange={handleInputChange}
-              rows="4"
-              cols="10"
+              rows={4}
             />
-          </div>
-          <div className="form-field">
-            <label>Quote Total:</label>
-            <input
+          {/* </div> */}
+          {/* <div className="form-field"> */}
+            {/* <label>Quote Total:</label> */}
+            <TextField
               type="text"
+              variant="standard"
+              fullWidth
+              label="Quote Total"
               name="totalQuote"
               value={formData.totalQuote}
               onChange={handleInputChange}
             />
-          </div>
-        </section>
-      </div>
+          {/* </div> */}
+        {/* </section> */}
+      {/* </div> */}
       <button className="client-update-btn" onClick={handleUpdate}>
         Save
       </button>

@@ -98,31 +98,19 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
     setSelectClient(null)
   }
 
-  const priorityCount = {
-    high: 0,
-    medium: 0,
-    low: 0
-  }
-
-  clients.forEach(priorityCount => {
-    const priority = priorityCount.fields.priority
-    priority === 'High' ? priorityCount.high++ :
-    priority === 'Medium' ? priorityCount.medium++ :
-    priorityCount.low++
-  })
   return (
-    <>
+    <Stack spacing={1}>
     {isLoading ? ('Loading Clients...') : (
-      <Paper elevation={3}>
+      <Paper elevation={0}>
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls="panel1-content" id="panel1-header">
-            <Typography variant="h6" color={textColor}>All Clients:</Typography>
-            <Typography variant="h6" color="text.secondary">{filteredClients.length}</Typography>
+            <Typography variant="h6" color="text.secondary">All Clients:</Typography>
+            <Typography variant="h6" color={textColor}>{filteredClients.length}</Typography>
           </AccordionSummary>
             <AccordionDetails>
               <Container maxWidth="xxl">
                 <Stack direction={{xs: 'column', sm: 'row'}} spacing={{xs: 1, sm: 2, md: 4}} useFlexGap flexWrap="wrap" justifyContent="center">
-                  {clients.map((client) => (
+                  {filteredClients.map((client) => (
                     <Card sx={{minWidth: 50}}>
                       <CardContent>
                         <Typography textAlign="right">
@@ -146,11 +134,11 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
         </Accordion>
       </Paper>
       )}
-      <Paper elevation={3}>
+      <Paper elevation={0}>
         <Accordion style={{border: '1px solid ' + highOutlineColor}}>
           <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls="panel1-content" id="panel1-header">
-            <Typography variant="h6" color={highOutlineColor}>High Priority:</Typography>
-            <Typography variant="h6" color="text.secondary">{filterClientsByPriority('High').length}</Typography>
+            <Typography variant="h6" color="text.secondary">High Priority:</Typography>
+            <Typography variant="h6" color={highOutlineColor}>{filterClientsByPriority('High').length}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Container maxWidth="xxl">
@@ -174,11 +162,11 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
           </AccordionDetails>
         </Accordion>
       </Paper>
-      <Paper elevation={3}>
+      <Paper elevation={0}>
         <Accordion style={{border: '1px solid ' + medOutlineColor}}>
           <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls="panel1-content" id="panel1-header">
-            <Typography variant="h6" color={medOutlineColor}>Medium Priority:</Typography>
-            <Typography variant="h6" color="text.secondary">{filterClientsByPriority('Medium').length}</Typography>
+            <Typography variant="h6" color="text.secondary">Medium Priority:</Typography>
+            <Typography variant="h6" color={medOutlineColor}>{filterClientsByPriority('Medium').length}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Container maxWidth="xxl">
@@ -202,11 +190,11 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
           </AccordionDetails>
         </Accordion>
       </Paper>
-      <Paper elevation={3}>
+      <Paper elevation={0}>
         <Accordion style={{border: '1px solid ' + lowOutlineColor}}>
           <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls="panel1-content" id="panel1-header">
-            <Typography variant="h6" color={lowOutlineColor}>Low Priority:</Typography>
-            <Typography variant="h6" color="text.secondary">{filterClientsByPriority('Low').length}</Typography>
+            <Typography variant="h6" color="text.secondary">Low Priority:</Typography>
+            <Typography variant="h6" color={lowOutlineColor}>{filterClientsByPriority('Low').length}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Container maxWidth="xxl">
@@ -237,7 +225,7 @@ const ClientList = ({searchQuery, formOpenAndClose}) => {
            onUpdate={handleUpdateClient}
          />
          )}
-     </>
+     </Stack>
    );
  };
  

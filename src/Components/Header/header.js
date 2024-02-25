@@ -1,5 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { ClientContext } from '../../context/ClientProvider'
+import { Button, Paper, Typography } from '@mui/material'
 import headLogo from '../../images/qd-logo.PNG'
 import '../Header/header.css'
 
@@ -42,14 +43,16 @@ const Header = ({onSearch, formToggle, formOpenAndClose}) => {
         placeholder="Search clients"
         onChange={handleSearch}
       />
-      <aside className="aside-container">
-        <div>Total number of clients on file: <i>{clientCount}</i></div>
-        <div>Estimated amount of total dollars: $<i>{totalDollars}</i></div>
-        <button 
+      <Paper elevation={3} sx={{padding: 1}}>
+        <Typography textAlign="left">Total number of clients on file: <i>{clientCount}</i></Typography>
+        <Typography textAlign="left">Estimated amount of total dollars: $<i>{totalDollars}</i></Typography>
+        <Button
+          variant="outlined"
+          color="success"
           className={formOpenAndClose ? 'form-close' : 'form-active'} 
-          onClick={formToggle}>{formOpenAndClose ? 'Close Client Form':'Open Client Form'}
-        </button> 
-      </aside>
+          onClick={formToggle}>{formOpenAndClose ? 'Close Form':'Open Form'}
+        </Button> 
+      </Paper>
     </div>
   )
 }

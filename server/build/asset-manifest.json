@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.212c01a8.css",
-    "main.js": "/static/js/main.fe2bd91c.js",
+    "main.css": "/static/css/main.49c4535b.css",
+    "main.js": "/static/js/main.5057a041.js",
     "static/js/787.69c50ab4.chunk.js": "/static/js/787.69c50ab4.chunk.js",
     "static/media/qd-logo.PNG": "/static/media/qd-logo.35927afb9b65bf21f0ed.PNG",
     "static/media/image2.png": "/static/media/image2.b6fb54f297616075323d.png",
@@ -20,12 +20,12 @@
     "static/media/roboto-greek-ext-500-normal.woff2": "/static/media/roboto-greek-ext-500-normal.6fb9cffb1d3e72bf9293.woff2",
     "static/media/roboto-greek-ext-500-normal.woff": "/static/media/roboto-greek-ext-500-normal.eaa367bbd0b333a7f80b.woff",
     "index.html": "/index.html",
-    "main.212c01a8.css.map": "/static/css/main.212c01a8.css.map",
-    "main.fe2bd91c.js.map": "/static/js/main.fe2bd91c.js.map",
+    "main.49c4535b.css.map": "/static/css/main.49c4535b.css.map",
+    "main.5057a041.js.map": "/static/js/main.5057a041.js.map",
     "787.69c50ab4.chunk.js.map": "/static/js/787.69c50ab4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.212c01a8.css",
-    "static/js/main.fe2bd91c.js"
+    "static/css/main.49c4535b.css",
+    "static/js/main.5057a041.js"
   ]
 }

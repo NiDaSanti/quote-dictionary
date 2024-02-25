@@ -2,6 +2,7 @@ import React, {useState, useContext} from "react"
 import UpdateClient from '../UpdateClient/updateClient'
 import { ClientContext } from '../../context/ClientProvider'
 import '../ClientInformation/clientInformation.css'
+import { Button, Paper, Typography } from "@mui/material"
 
 const ClientInformation = ({client, onClose}) => {
   const {updateClient} = useContext(ClientContext)
@@ -20,37 +21,36 @@ const ClientInformation = ({client, onClose}) => {
   }
   
   return (
-    <div className={`modal ${isSelected ? 'open' : ''}`}>
-      <div className='modal-content'>
-        <h2>Client Information</h2>
-        <p><strong>Name:</strong> {client.fields.fullName}</p>
-        <p><strong>Address:</strong> {client.fields.address}</p>
-        <p><strong>Email:</strong> {client.fields.email}</p>
-        <p><strong>Phone Number:</strong> {client.fields.phone}</p>
-        <p><strong>Date of Start:</strong> {client.fields.startDate}</p>
-        <p><strong>Date of End:</strong> {client.fields.endDate}</p>
-        <p><strong>Service (Job) Type:</strong> {client.fields.serviceType}</p>
-        <p><strong>Importance:</strong>{client.fields.priority}</p>
-        <p><strong>Job Description:</strong> {client.fields.request}</p>
-        <p><strong>Total Amount: $<i className="price">{client.fields.totalQuote}</i></strong></p>
-        {/* Commented out the image rendering */}
-        {/* <div>Snapshots of Proof:</div>
-        <img src={client.fields.image[0].thumbnails.large.url} alt='job' /> */}
-        <button className="close-button" onClick={onClose}>X</button>
-        <button className="update-btn" onClick={handleClientUpdateClick}>Edit</button>
-        {isSelected && (
-          <div className="update-form-container">
-            <UpdateClient 
-              clientId={client.id} 
-              onUpdate={handleClientUpdateClick} 
-              onUpdateClose={handleCloseUpdateForm} 
-              closeOnEdit={onClose}
-              clientUpdateInformation={updateClientInformation}
-            />
-          </div>
-        )}
+    <Paper elevation={1}>
+      <div className={`modal ${isSelected ? 'open' : ''}`}>
+        <div className='modal-content'>
+          <Typography variant="h5" color="text.secondary" textAlign="center">Client Information</Typography> 
+          <Typography>Name: {client.fields.fullName}</Typography>
+          <Typography>Address: {client.fields.address}</Typography>
+          <Typography>Email: {client.fields.email}</Typography>
+          <Typography>Phone Number: {client.fields.phone}</Typography>
+          <Typography>Est. Job start date: {client.fields.startDate}</Typography>
+          <Typography>Est. Job end date: {client.fields.endDate}</Typography>
+          <Typography>Service (Job) Type: {client.fields.serviceType}</Typography>
+          <Typography>Priority: {client.fields.priority}</Typography>
+          <Typography>Job Description: {client.fields.request}</Typography>
+          <Typography variant="h6" color="text.secondary">Price: $ {client.fields.totalQuote}</Typography>
+          <button className="close-button" onClick={onClose}>X</button>
+          <button className="update-btn" onClick={handleClientUpdateClick}>Edit</button>
+          {isSelected && (
+            <div className="update-form-container">
+              <UpdateClient 
+                clientId={client.id} 
+                onUpdate={handleClientUpdateClick} 
+                onUpdateClose={handleCloseUpdateForm} 
+                closeOnEdit={onClose}
+                clientUpdateInformation={updateClientInformation}
+              />
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </Paper>
   )
 }
 
