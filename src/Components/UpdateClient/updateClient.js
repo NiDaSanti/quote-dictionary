@@ -148,7 +148,7 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose, closeOnEdit }) => {
           {/* </div> */}
           {/* <div className='service-dates'> */}
             {/* <div className='form-field'> */}
-              <label className="start-date">Start Date:</label>
+              <label className="start-date">Start:</label>
               <input 
                 type="date" 
                 name="startDate" 
@@ -157,7 +157,7 @@ const UpdateClient = ({ clientId, onUpdate, onUpdateClose, closeOnEdit }) => {
               />
             {/* </div> */}
             {/* <div className='form-field'> */}
-              <label className="end-date">End Date:</label>
+              <label className="end-date">End:</label>
               <input 
                 type="date" 
                 name="endDate" 
