@@ -1,5 +1,11 @@
-.header-container {
-  background: #0073e6; /* Changed to blue color */
+.head-logo {
+  width: 100px;
+  height: auto;
+  margin-right: 20px;
+  animation: rotate 360s linear infinite;
+}
+/* .header-container {
+  background: #0073e6; 
   display: flex;
   align-items: center;
   position: fixed;
@@ -7,19 +13,13 @@
   width: 100%;
   padding: 5px;
   z-index: 1;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Subtle box shadow for 3D effect */
-}
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+} */
 
-.logo-container {
+/* .logo-container {
   display: block;
 }
 
-.head-logo {
-  width: 100px;
-  height: auto;
-  margin-right: 20px;
-  animation: rotate 360s linear infinite;
-}
 
 .header-container > .search-input {
   width: 300px; 
@@ -61,7 +61,7 @@ div > i {
 }
 
 .form-close {
-  background: #f44336; /* Red background color */
+  background: #f44336;
   width: 155px;
   height: 25px;
   border-style: none;
@@ -124,4 +124,4 @@ div > i {
   }
   
 }
-
+ */

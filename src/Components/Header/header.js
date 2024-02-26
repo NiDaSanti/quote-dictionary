@@ -1,9 +1,11 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { ClientContext } from '../../context/ClientProvider'
-import { Button, Paper, Typography } from '@mui/material'
+import { AppBar, Box, Button, Paper, TextField, Toolbar, Typography } from '@mui/material'
 import headLogo from '../../images/qd-logo.PNG'
 import '../Header/header.css'
+// import {grey} from '@mui/material/colors'
 
+// const textColor = grey[50]
 const Header = ({onSearch, formToggle, formOpenAndClose}) => {
   const { clients } = useContext(ClientContext)
   const [totalDollars, setTotalDollars] = useState(0)
@@ -29,31 +31,41 @@ const Header = ({onSearch, formToggle, formOpenAndClose}) => {
   }, [clients])
 
   return(
-    <div className="header-container">
-      <div className="logo-container">
-        <img 
-          className="head-logo"
-          src={headLogo} 
-          alt="Quote dictionary head logo"
+    <Box sx={{flexGrow: 1}}>
+      <AppBar position="static">
+        <Toolbar>
+          <img 
+            className="head-logo"
+            src={headLogo} 
+            alt="Quote dictionary head logo"
+          />
+        </Toolbar>
+        <Box sx={{padding: 1}}>
+          <Typography textAlign="left">Total number of clients on file: <i>{clientCount}</i></Typography>
+          <Typography textAlign="left">Estimated amount of total dollars: $<i>{totalDollars}</i></Typography>
+          <Typography textAlign="left">
+            <Button
+              variant="contained"
+              color={formOpenAndClose ? 'error' : 'secondary'}
+              // className={formOpenAndClose ? 'form-close' : 'form-active'} 
+              onClick={formToggle}>{formOpenAndClose ? 'Close Form':'Open Form'}
+            </Button>
+          </Typography>
+        </Box>
+      </AppBar>
+      {/* <Paper elevation={1}> */}
+        <TextField
+          sx={{padding: 1, marginLeft: 1}}
+          fullWidth
+          // fullWidth
+          variant="standard"
+          label="Search Clients"
+          // className="search-input"
+          type="text"
+          onChange={handleSearch}
         />
-      </div>
-      <input
-        className="search-input"
-        type="text"
-        placeholder="Search clients"
-        onChange={handleSearch}
-      />
-      <Paper elevation={3} sx={{padding: 1}}>
-        <Typography textAlign="left">Total number of clients on file: <i>{clientCount}</i></Typography>
-        <Typography textAlign="left">Estimated amount of total dollars: $<i>{totalDollars}</i></Typography>
-        <Button
-          variant="outlined"
-          color="success"
-          className={formOpenAndClose ? 'form-close' : 'form-active'} 
-          onClick={formToggle}>{formOpenAndClose ? 'Close Form':'Open Form'}
-        </Button> 
-      </Paper>
-    </div>
+      {/* </Paper> */}
+    </Box>
   )
 }
 export default Header
