@@ -53,10 +53,10 @@ const Header = ({onSearch, formToggle, formOpenAndClose}) => {
           </Typography>
         </Box>
       </AppBar>
-      {/* <Paper elevation={1}> */}
+      <Typography textAlign="left">
         <TextField
-          sx={{padding: 1, marginLeft: 1}}
-          fullWidth
+          sx={{paddingLeft: 1}}
+          // fullWidth
           // fullWidth
           variant="standard"
           label="Search Clients"
@@ -64,7 +64,7 @@ const Header = ({onSearch, formToggle, formOpenAndClose}) => {
           type="text"
           onChange={handleSearch}
         />
-      {/* </Paper> */}
+      </Typography>
     </Box>
   )
 }
