@@ -3,6 +3,7 @@ import { ClientContext } from '../../context/ClientProvider'
 import { AppBar, Box, Button, Paper, TextField, Toolbar, Typography } from '@mui/material'
 import headLogo from '../../images/qd-logo.PNG'
 import '../Header/header.css'
+import ServicePercentage from '../ServicePercentage/servicePercentage'
 // import {grey} from '@mui/material/colors'
 
 // const textColor = grey[50]
@@ -54,9 +55,9 @@ const Header = ({onSearch, formToggle, formOpenAndClose}) => {
         </Box>
       </AppBar>
       <Typography textAlign="left">
+        <ServicePercentage />
         <TextField
-          sx={{paddingLeft: 1}}
-          // fullWidth
+          fullWidth
           // fullWidth
           variant="standard"
           label="Search Clients"

@@ -12,6 +12,7 @@ const textColor = blue[600]
 const lowOutlineColor = green[300]
 const medOutlineColor = orange[300]
 const highOutlineColor = red[300]
+
 const ClientList = ({searchQuery, formOpenAndClose}) => {
   const { clients, setClients, updateClient } = useContext(ClientContext)
   const [selectClient, setSelectClient] = useState(null)

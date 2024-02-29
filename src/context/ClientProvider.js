@@ -4,13 +4,15 @@ const ClientContext = createContext();
 
 const ClientProvider = ({ children }) => {
   const [clients, setClients] = useState([]);
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch('/api/clients')  
       .then(response => response.json())
       .then(data => {
-        setClients(data);
+        setLoading(true)
+        setClients(data)
       })
       .catch(error => {
         setError(error);
@@ -44,7 +46,7 @@ const ClientProvider = ({ children }) => {
     return <div>Error: {error.message}</div>;
   }
 
-  return <ClientContext.Provider value={{ clients, setClients, handleAddClient, updateClient }}>{children}</ClientContext.Provider>
+  return <ClientContext.Provider value={{ clients, setClients, handleAddClient, updateClient, loading }}>{children}</ClientContext.Provider>
 };
 
 export { ClientContext, ClientProvider }
